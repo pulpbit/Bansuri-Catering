@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bansuri Catering helps you plan memorable events with curated packages and menu options."
+    />
+    <title>Bansuri Catering | Start Planning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/variables.css" />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+    <link rel="stylesheet" href="./assets/css/animations.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#" class="brand" aria-label="Bansuri Catering home">
+          <span class="brand__dot"></span>
+          Bansuri Catering
+        </a>
+        <button class="btn btn--ghost" type="button" data-scroll-to-form>
+          Start Planning
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <p class="eyebrow">Premium Catering Experiences</p>
+        <h1>Craft extraordinary dining moments for every celebration.</h1>
+        <p class="hero__text">
+          From intimate gatherings to grand functions, we curate menu journeys that reflect your taste,
+          style, and occasion.
+        </p>
+        <div class="hero__cta">
+          <button class="btn btn--primary" type="button" data-scroll-to-form>Start Planning</button>
+          <button class="btn btn--secondary" type="button">View Services</button>
+        </div>
+      </section>
+
+      <section id="lead-form" class="planner container">
+        <div class="planner__intro card">
+          <p class="eyebrow">Lead Capture</p>
+          <h2>Plan your event in 5 quick steps</h2>
+          <p>Share your preferences and our team will contact you with a tailored quotation.</p>
+        </div>
+
+        <div class="wizard card" id="wizard" aria-live="polite">
+          <div class="stepper" id="stepper"></div>
+
+          <form id="planning-form" novalidate>
+            <div id="wizard-content"></div>
+            <div class="wizard__actions">
+              <button type="button" class="btn btn--ghost" id="prev-btn" disabled>Back</button>
+              <button type="button" class="btn btn--primary" id="next-btn">Continue</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <template id="thank-you-template">
+      <section class="thank-you card fade-in-up">
+        <h3>Thank you for your response.</h3>
+        <p>We have received your details and our team will contact you shortly.</p>
+        <button type="button" class="btn btn--primary" id="restart-btn">Start New Plan</button>
+      </section>
+    </template>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>
