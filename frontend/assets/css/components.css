@@ -347,6 +347,14 @@ select:focus {
   gap: 0.8rem;
 }
 
+.wizard__actions.is-sticky {
+  position: sticky;
+  bottom: 1.4rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  padding-bottom: 0.5rem;
+  margin-bottom: -0.5rem;
+}
+
 .thank-you {
   margin-top: 0.5rem;
   display: grid;
