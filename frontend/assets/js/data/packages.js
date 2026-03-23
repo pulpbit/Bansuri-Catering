@@ -277,7 +277,93 @@ export const PACKAGE_OPTIONS = [
       'Mukhvas',
       'Mini Water Bottles Included'
     ],
-    menuPlan: []
+    menuPlan: [
+      {
+        label: 'Welcome Drinks',
+        count: 2,
+        items: ['Saffron Mojito', 'Rose & Citrus Cooler']
+      },
+      {
+        label: 'Moving Starters',
+        count: 2,
+        items: ['Chilli Basil Corn Cups', 'Cheese & Cranberry Poppers']
+      },
+      {
+        label: 'Soup',
+        count: 1,
+        items: ['Roasted Pumpkin Bisque']
+      },
+      {
+        label: 'Chef’s Special Soup',
+        count: 1,
+        items: ['Miso Lemongrass Broth']
+      },
+      {
+        label: 'Chaat Counter',
+        count: 1,
+        items: ['Aam Panna Chaat']
+      },
+      {
+        label: 'Live Starters',
+        count: 1,
+        items: ['Tawa Paneer Tikka']
+      },
+      {
+        label: 'Special Counter',
+        count: 1,
+        items: ['Barbeque Platter', 'Dry Fruit Chaat Station']
+      },
+      {
+        label: 'World Cuisine Live',
+        count: 2,
+        items: ['Thai Green Curry Station', 'Italian Truffle Pasta']
+      },
+      {
+        label: 'Main Course',
+        count: 3,
+        items: ['Lucknowi Laal Maas', 'Beurre Blanc Fish', 'Paneer Angara']
+      },
+      {
+        label: 'Indian Breads',
+        count: 3,
+        items: ['Roomali Roti', 'Tandoori Laccha Paratha', 'Naan']
+      },
+      {
+        label: 'Sweets',
+        count: 3,
+        items: ['Rose Rasmalai', 'Kesar Kulfi', 'Chocolate Mousse Dome']
+      },
+      {
+        label: 'Farsan',
+        count: 2,
+        items: ['Masala Peanuts', 'Mini Gujrati Khandvi']
+      },
+      {
+        label: 'Rice',
+        count: 1,
+        items: ['Lemongrass Jasmine Rice']
+      },
+      {
+        label: 'Dal',
+        count: 1,
+        items: ['Tadka Dal']
+      },
+      {
+        label: 'Dessert (Ice Cream/Kulfi)',
+        count: 1,
+        items: ['Kulfi Shot Duo']
+      },
+      {
+        label: 'Salads',
+        count: 3,
+        items: ['Garden Greens', 'Indian Kale Salad', 'Continental Raita']
+      },
+      {
+        label: 'Accompaniments',
+        count: 2,
+        items: ['Papad & Pickle Station', 'Mint Mukhvas']
+      }
+    ]
   },
   {
     id: 'gourmet',
@@ -308,7 +394,88 @@ export const PACKAGE_OPTIONS = [
       'Mukhvas',
       'Mini Water Bottles Included'
     ],
-    menuPlan: []
+    menuPlan: [
+      {
+        label: 'Welcome Drinks',
+        count: 3,
+        items: ['Sparkling Lychee Punch', 'Smoked Cinnamon Cooler', 'Tomato Jaljeera']
+      },
+      {
+        label: 'Moving Starters',
+        count: 3,
+        items: ['Harissa Paneer & Fig Toast', 'Barbeque Pineapple Skewers', 'Crispy Duck Tacos']
+      },
+      {
+        label: 'Soup',
+        count: 1,
+        items: ['Corn & Coconut Velouté']
+      },
+      {
+        label: 'Chef’s Special Soup',
+        count: 1,
+        items: ['Chilled Beetroot Cappuccino']
+      },
+      {
+        label: 'Chaat Counter',
+        count: 2,
+        items: ['Pani Puri Shots', 'Tandoori Chaat Cups']
+      },
+      {
+        label: 'Live Starters',
+        count: 2,
+        items: ['Smoked Salmon Skewers', 'Truffle Paneer Satay']
+      },
+      {
+        label: 'Special Counter',
+        count: 2,
+        items: ['Dry Fruit Chaat', 'Hot Channa Chaat']
+      },
+      {
+        label: 'World Cuisine Live',
+        count: 2,
+        items: ['Pan-Asian Noodle Bar', 'Mediterranean Grill']
+      },
+      {
+        label: 'Main Course',
+        count: 3,
+        items: ['Ginger Garlic Pork Belly', 'Champagne Butter Chicken', 'Spinach & Ricotta Cannelloni']
+      },
+      {
+        label: 'Indian Breads',
+        count: 3,
+        items: ['Laccha Paratha', 'Focaccia', 'Rumali Roti']
+      },
+      {
+        label: 'Sweets',
+        count: 4,
+        items: ['Rasmalai', 'Dark Chocolate Tart', 'Mango Mousse', 'Kulfi Bombs']
+      },
+      {
+        label: 'Farsan',
+        count: 2,
+        items: ['Szechuan Peanuts', 'Crispy Masala Popcorn']
+      },
+      {
+        label: 'Rice & Dal',
+        count: 2,
+        items: ['Saffron Rice', 'Dal Makhani']
+      },
+      {
+        label: 'Dessert Station',
+        count: 1,
+        items: ['Waffles, Brownies & Pancakes']
+      },
+      {
+        label: 'Salads',
+        count: 3,
+        items: ['Incredibly Indian Salad', 'Greek Farro Salad', 'Continental Raita']
+      },
+      {
+        label: 'Accompaniments',
+        count: 2,
+        items: ['Papad & Pickle', 'Mint Mukhvas']
+      }
+    ]
   },
   {
     id: 'platinum',

@@ -7,6 +7,7 @@
 - Wired the onboarding flow so “View All Packages” hides the planning form slot and “Start Planning” buttons bring it back, keeping only one section visible at a time (`frontend/assets/js/app.js` and related CSS helpers).
 - Updated `frontend/assets/css/components.css` for the new layout, clean bullet styling and responsive card grid that keeps six packages in a row, with visual cues for hovered and selected cards.
 - Made the wizard action buttons sticky so “Back” and “Continue” remain visible while scrolling through the questions (`frontend/assets/css/components.css`, `frontend/index.html`).
+- Added chef menu guidance entries for the Palace Palate and Gourmet Gala packages so those cards now populate just like the other tiers (`frontend/assets/js/data/packages.js`).
 
 ## Workflow reminder
 After applying any new change, append a short summary to this README under “Recent progress” so other agents can quickly see what phases are complete and what might still be pending.
