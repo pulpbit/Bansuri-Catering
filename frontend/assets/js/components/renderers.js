@@ -71,6 +71,7 @@ export function renderStep(contentRoot, step, state) {
       card.innerHTML = `
         <h4>${pkg.name} <small>(${pkg.tier})</small></h4>
         <ul>${pkg.highlights.map((item) => `<li>${item}</li>`).join('')}</ul>
+        <p class="package-card__note">• Chef curated experience</p>
       `;
       wrap.append(card);
     });
@@ -78,21 +79,41 @@ export function renderStep(contentRoot, step, state) {
   }
 
   if (step === 3) {
-    section.append(createElement('h3', '', 'Select a menu from your package'));
+    section.append(createElement('h3', '', 'Chef curated menu for your package'));
     const selectedPackage = PACKAGE_OPTIONS.find((pkg) => pkg.id === state.packageId);
     if (!selectedPackage) {
       section.append(createElement('p', 'error-text', 'Please go back and select a package first.'));
     } else {
       const menuWrap = createElement('div', 'menu-option-wrap');
       menuWrap.append(createElement('p', '', `Package selected: ${formatPackageLabel(selectedPackage)}`));
-      const pills = createElement('div', 'pill-group');
-      selectedPackage.menus.forEach((menu) => {
-        const button = createElement('button', `pill ${state.menu === menu ? 'is-selected' : ''}`, menu);
-        button.type = 'button';
-        button.dataset.menu = menu;
-        pills.append(button);
-      });
-      menuWrap.append(pills);
+      const suggestions = selectedPackage.menuPlan || [];
+      if (suggestions.length) {
+        const suggestionGrid = createElement('div', 'menu-suggestion-grid');
+        suggestions.forEach((entry) => {
+          const options = (entry.items || []).slice(0, entry.count || entry.items?.length);
+          if (!options.length) return;
+          const card = createElement('article', 'menu-suggestion-card');
+          const titleText = `${entry.label}${entry.count ? ` (${entry.count} ${entry.count > 1 ? 'options' : 'option'})` : ''}`;
+          card.append(createElement('h4', 'menu-suggestion__title', titleText));
+          if (entry.description) {
+            card.append(createElement('p', 'menu-suggestion__description', entry.description));
+          }
+          const list = createElement('ul', 'menu-suggestion-list');
+          options.forEach((item) => {
+            const li = createElement('li');
+            li.textContent = item;
+            list.append(li);
+          });
+          card.append(list);
+          suggestionGrid.append(card);
+        });
+        if (suggestionGrid.children.length) {
+          menuWrap.append(createElement('h4', 'menu-suggestion-heading', 'Chef suggested pairings'));
+          menuWrap.append(suggestionGrid);
+        }
+      } else {
+        menuWrap.append(createElement('p', 'menu-summary-muted', 'Chef guidance is reserved for select packages.'));
+      }
       section.append(menuWrap);
     }
   }
@@ -115,6 +136,31 @@ export function renderStep(contentRoot, step, state) {
       list.append(item);
     });
     section.append(list);
+    const menuPlan = selectedPackage?.menuPlan || [];
+    const menuSummary = createElement('div', 'review-menu-summary');
+    menuSummary.append(createElement('h4', '', 'Selected menu guidance'));
+    if (menuPlan.length) {
+      const summaryList = createElement('div', 'review-menu-summary__list');
+      menuPlan.forEach((entry) => {
+        const values = (entry.items || []).slice(0, entry.count || entry.items?.length);
+        if (!values.length) return;
+        const label = createElement('div', 'review-menu-summary__item');
+        const descriptor = `${entry.label}${entry.count ? ` (${entry.count} ${entry.count > 1 ? 'choices' : 'choice'})` : ''}`;
+        const detail = createElement('p', 'review-menu-summary__detail', descriptor);
+        const itemsText = entry.count ? values.join(', ') : values.join(', ');
+        const items = createElement('p', 'review-menu-summary__items', itemsText);
+        label.append(detail, items);
+        summaryList.append(label);
+      });
+      if (summaryList.children.length) {
+        menuSummary.append(summaryList);
+      } else {
+        menuSummary.append(createElement('p', 'menu-summary-muted', 'Chef guidance will appear once the package is finalized.'));
+      }
+    } else {
+      menuSummary.append(createElement('p', 'menu-summary-muted', 'Chef guidance is reserved for select packages.'));
+    }
+    section.append(menuSummary);
   }
 
   const error = createElement('p', 'error-text');

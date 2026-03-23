@@ -22,9 +22,7 @@ export function validateStep(step, formState) {
       }
       return '';
     case 3:
-      if (!formState.menu) {
-        return 'Please select one menu option.';
-      }
+    return '';
       return '';
     default:
       return '';

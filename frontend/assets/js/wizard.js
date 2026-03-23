@@ -49,9 +49,6 @@ export function initWizard() {
         const packageId = card.dataset.packageId;
         const current = PACKAGE_OPTIONS.find((pkg) => pkg.id === packageId);
         updateField('packageId', packageId);
-        if (!current?.menus.includes(state.menu)) {
-          updateField('menu', '');
-        }
         paint();
       };
       card.addEventListener('click', selectPackage);
@@ -63,12 +60,6 @@ export function initWizard() {
       });
     });
 
-    contentRoot.querySelectorAll('[data-menu]').forEach((pill) => {
-      pill.addEventListener('click', () => {
-        updateField('menu', pill.dataset.menu);
-        paint();
-      });
-    });
   }
 
   prevBtn.addEventListener('click', () => {
