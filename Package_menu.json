@@ -1,0 +1,699 @@
+{
+    "packages": [
+        {
+            "name": "BLISS",
+            "inclusions": {
+                "Soup": "1",
+                "Main Course": "2",
+                "Indian Breads(Roti)": "2",
+                "Sweet": "1",
+                "Farsan": "1",
+                "Rice": "1",
+                "Dal": "1",
+                "Green Salad": "1",
+                "Papad - Pickle": null,
+                "Mouth Freshener": null,
+                "Water 2OL Jar": "Included"
+            }
+        },
+        {
+            "name": "EPICURE",
+            "inclusions": {
+                "Welcome Drink": "1",
+                "Soup": "1",
+                "Chaat Counter": "1",
+                "Starters(Live)": "1",
+                "Main Course": "2",
+                "Indian Breads": "2",
+                "Sweet": "2",
+                "Farsan": "1",
+                "Rice": "1",
+                "Dal": "1",
+                "Dessert (Ice Cream)": "1",
+                "Green Salad": "1",
+                "Papad - Pickle": null,
+                "Mukhuas": null,
+                "Mini Water Bottles": "Included"
+            }
+        },
+        {
+            "name": "MAHARAJA'S FEAST",
+            "inclusions": {
+                "Welcome Drink": "2",
+                "Moving Starters": "2",
+                "Soup": "2",
+                "Chaat Counter": "1",
+                "World Cuisine (Live)": "1",
+                "Starters(Live)": "1",
+                "Special Counter (Barbeque/Hot Chaat/Dry fruit Chaat)": "1",
+                "Main Course": "2",
+                "Indian Breads": "2",
+                "Sweets": "2",
+                "Farsan": "1",
+                "Rice": "1",
+                "Dal": "1",
+                "Dessert (Ice Cream | kulfi)": "1",
+                "Green Salad": "1",
+                "Salad Variety": "1",
+                "Papad - Pickle": null,
+                "mukhuas": null,
+                "Mini Water Bottles": "Included"
+            }
+        },
+        {
+            "name": "PALACE PALATE",
+            "inclusions": {
+                "Welcome Drink": "2",
+                "Moving Starters": "2",
+                "Soup": "1",
+                "Chef's Special Soup": "1",
+                "Chaat Counter": "1",
+                "World Cuisine (Live)": "2",
+                "Starters(Live)": "1",
+                "Special Counter (Barbeque/Hot Chaat/Dry fruit Chaat)": "1",
+                "Main Course": "3",
+                "Indian Breads": "3",
+                "Sweets": "3",
+                "Farsan": "2",
+                "Rice": "1",
+                "Dal": "1",
+                "Dessert (Ice Cream (2) | kulfi)": "1",
+                "Green Salad": "1",
+                "Incredibly Indian Salad": "1",
+                "Continental Salad/Raita": "1",
+                "Papad - Pickle": null,
+                "mukhuas": null
+            }
+        },
+        {
+            "name": "GOURMET GALA",
+            "inclusions": {
+                "Welcome Drink": "3",
+                "Mouing Starters": "3",
+                "Soup": "1",
+                "Chef's Special Soup": "1",
+                "Chaat Counter": "2",
+                "World Cuisine (Live)": "2",
+                "Starters(Live)": "2",
+                "Special Counter (Barbeque/Hot Chaat/Dry fruit Chaat)": "2",
+                "Main Course": "3",
+                "Indian Breads": "3",
+                "Sweets": "4",
+                "Farsan": "2",
+                "Rice": "2",
+                "Dal": "1",
+                "Dessert (Ice Cream (2) | kulfi)": "1",
+                "Hot Dessert Counter or Fruit Counter (Waffles/Pancake/Brownie)": "1",
+                "Green Salad": "1",
+                "Incredibly Indian Salad": "1",
+                "Continental Salad/Raita": "2",
+                "Papad - Pickle": null
+            }
+        },
+        {
+            "name": "PLATINUM PLATTER",
+            "inclusions": {
+                "Mocktail Bar": "1",
+                "Moving Starters": "3",
+                "Soup": "2",
+                "Chef's Special Soup": "1",
+                "Chaat Counter": "2",
+                "World Cuisine (Live)": "2",
+                "Italian Mexican Lounge": "4",
+                "Starters(Live)": "2",
+                "Special Counter (Barbeque/Hot Chaat/Dry fruit Chaat)": "2",
+                "Main Course": "4",
+                "Indian Breads": "3",
+                "Sweets Station (5 Varieties)": "1",
+                "Farsan": "2",
+                "Rice": "2",
+                "Dal": "1",
+                "Dessert (Ice Cream (2) | kulfi)": "1",
+                "Exotic Fruit Counter": "1",
+                "Green Salad": "1",
+                "Incredibly Indian Salad": "1",
+                "Continental Salad/Raita": "4"
+            }
+        }
+    ],
+    "menu_categories": {
+        "MOCKTAILS": [
+            "Sundowner (Orange & Pineapple)",
+            "Berrylicious Bliss (Strawberry & Pineapple)",
+            "Tropical Trio (Orange, Pineapple & Kiwi)",
+            "Mix Fruit Frenzy (Mixed Season Fruits blended)",
+            "Beach Paradise (Lychee & Lemon)",
+            "Hawaiian Pina Tango (Kiwi & Pineapple)",
+            "Kiwi Blossom (Kiwi Crush, Milk & Vanilla)",
+            "Pina Colada (Pineapple, Coconut, Milk & Vanilla)",
+            "Strawberry Swiss Velvet (Strawberry Crush, Milk & Vanilla)",
+            "Orange Pineapple Sunrise (Pineapple & Orange, Milk & Vanilla)"
+        ],
+        "MOJITOS": [
+            "Classic Mint Mojito (Sweet Lime & Mint topped with Soda)",
+            "Berry Bubbles Mojito (Strawberry & Mint topped with Soda)",
+            "Lychee Mint Mojito (Sweet & Sour lychee & Mint topped with soda)",
+            "Guava Mojito (Pink Guava Topped & Mint topped with soda)",
+            "Melon Mint Mojito (Watermelon & Mint topped with Soda)",
+            "Sunrise Mojito (Orange & Pineapple & Mint topped with soda)"
+        ],
+        "FIZZY COOLERS": [
+            "Berry Tropical (Strawberry & Pineapple Topped with Soda)",
+            "Fresh Fizz (Sweet & Sour lychee, Pineapple topped with Soda)",
+            "Ocean's Delight (Blue Curacao topped with Soda)",
+            "Island Escape (Orange, Pineapple & Strawberry topped with Soda)",
+            "Sunshine Punch (Orange Pineapple & Mint topped with Soda)"
+        ],
+        "CHAAT SPECIAL": [
+            "Palak Patta Crispy Chaat",
+            "Rose Dahi Bhalla",
+            "Special Dryfruit Makhana Chaat"
+        ],
+        "HOT CHAAT": [
+            "Ragda Samosa (Hot Mutter Ragda Served on top of Samosa with Spicy Chutneys)",
+            "Aloo Tikki Ragda (Hot Mutter Ragda Served on top of Aloo Tikki with Spicy Chutneys)"
+        ],
+        "BARBEQUE": [
+            "Tandoori Vegetable Seek Kabab",
+            "Hariyali Seek Kabab",
+            "Tandoori Soya Chaap with Vegetables",
+            "Hariyali Soya Chaap with Vegetables"
+        ],
+        "RABRI (COLD SWEET)": [
+            "Kesar Rabri",
+            "Sitafal Rabri",
+            "Anjeer Rabri",
+            "Angoor Rabri",
+            "Shahi Dryfruit Rabri",
+            "Walnut Rabri",
+            "Rose Rabri",
+            "Sevai Rabri"
+        ],
+        "SUMMER SPECIAL": [
+            "Kesar Aam Ras",
+            "Mix Fruit Cream",
+            "Mango Rabri"
+        ],
+        "COLD SWEET": [
+            "Shreekhand(Kesar Dry Fruit, Mango, Elaichi)",
+            "Mattha(Pineapple, Chocolate, Strawberry, Mango)",
+            "Ras Madhuri",
+            "Rasmalai"
+        ],
+        "BENGALI SWEETS GUJARATI SWEETS": [
+            "Rasgulla",
+            "Rajbhog",
+            "Rasmalai",
+            "Ras Madhuri",
+            "Kamal Bhog",
+            "Gulabi Masti",
+            "Rasmadhuri",
+            "Kacha Gola Sandesh Coconut Roll",
+            "Kheer",
+            "Kheer Kadam",
+            "Lychee Gulla",
+            "Coconut Idli",
+            "Golden Boat",
+            "Tohfa",
+            "Blueberry Blast",
+            "Indrani",
+            "Sandesh (Plain, Kesar, Rose,",
+            "Mango, Pineapple, Chocolate)",
+            "Malai Roll (Plain, Kesar, Rose,",
+            "Strawberry, Chocolate)",
+            "Cham Cham (Rose/Kesar/Malai,",
+            "Delight (Kesar, Orange, Mango,",
+            "Chocolate, Strawberry)"
+        ],
+        "SUBZ-E-PANEER": [
+            "Paneer Butter Masala",
+            "Paneer Mutter",
+            "Paneer Jalfrezi",
+            "Paneer Tufani",
+            "Paneer Lazeez",
+            "Paneer Lababdar",
+            "Paneer Afghani",
+            "Palak Paneer",
+            "Paneer Hyderabadi",
+            "Paneer Kali Mirch",
+            "Paneer Makai Makhani",
+            "Paneer Tikka Masala",
+            "Paneer Baby Corn",
+            "Paneer Angara"
+        ],
+        "GUJARAT SE": [
+            "Punchkutiyu",
+            "Mix Kathol",
+            "Bataka Chips",
+            "Bataka Capsicum",
+            "Bhindi Masala",
+            "Bhindi Capsicum",
+            "Flower Vatana Bataka"
+        ],
+        "KOFTE KA KAMAAL": [
+            "Nargis Kofta",
+            "Shahi Kofta",
+            "Harabhara Kofta",
+            "Rajdhani Kofta"
+        ],
+        "MOVING STARTERS": [
+            "Kababs",
+            "Harabhara Kabab",
+            "Pudina Kabab",
+            "Paneer Pudina Kabab",
+            "Spinach Kabab",
+            "Hyderabadi Kabab",
+            "Veg Kabab Tikki",
+            "Tikki",
+            "Mutter Palak Tikki",
+            "Aloo Tikki",
+            "Chana Tikki",
+            "Corn Tikki",
+            "Minis",
+            "Cheese Corn Balls",
+            "Spinach Cheese Balls",
+            "Mushroom Cheese Balls",
+            "Mexican Balls",
+            "Incredibly Indian",
+            "Mini Samosa (Chan Dal, Chinese, Cocktail, Mutter Paneer, Mexican)",
+            "Mini Kachori (Corn, Rataru, Mutter)",
+            "Basket Chaat",
+            "Corn Chana Chaat"
+        ],
+        "WORLD CUISINE ITALIAN CUISINE": [
+            "Cheese Garlic Bread (Sliced Garlic bread topped with Garlic-Butter & Cheese served Baked)",
+            "Bruschetta (Grilled bread topped with Garlic & Diced Veggies, Olives & Herbs on Top)",
+            "Penne Al-Arrabiata (Classic Penne Pasta - Consisting of Tomato Sauce, Olives, Onions)",
+            "Alfredo Pasta (Penne Pasta tossed in a creamy white sauce with Exotic Vegetables)",
+            "Pesto (Penne Pasta tossed in a basil pesto with Olive Oil & Herbs)",
+            "Aglio e olio (Classic Italian Pasta dish made with Spaghetti, Garlic, Olive Oil & Herbs)",
+            "Panini Sandwich (Italian sandwich stuffed with Creamy veggies, Served Grilled or Baked)",
+            "Italian Thin Crust Pizza (Thin crust pizza with an array of vegetables - Corn, Capsicums, Olives,",
+            "and Onions added as a topping covered with Cheese)",
+            "Mushroom Risotto (Creamy Rice made with Earthy Mushrooms, Onions, Garlic tossed with",
+            "Cheese sauce)",
+            "Basil Pesto Rice (An Aromatic Rice made with Chopped To"
+        ],
+        "HOT": [
+            "Gulab Jamun",
+            "Kesaria Jalebi",
+            "Jalebi Rabri"
+        ],
+        "HALWAI SE": [
+            "Lapsi",
+            "Sheera",
+            "Dudhi Ka Halwa",
+            "Moong Dal Halwa",
+            "Churma Laddu",
+            "Kala Jamun"
+        ],
+        "TAWA MITHAI": [
+            "Anjeer, Pineapple,",
+            "Badam, Milk Cake)",
+            "Kalakand (Kesar, Pinea"
+        ],
+        "GUJARATI SWEETS": [
+            "Motichoor Laddu",
+            "Dry Fruit Halwa",
+            "Royal Dryfruit Kasata",
+            "Kaju Kasata",
+            "Kaju Katri/Sangam Katri",
+            "Anjeer Roll",
+            "Kaju Anjeer Roll",
+            "Coconut Laddu",
+            "Dryfruit Paan",
+            "Kaju Paan",
+            "Anjeer Bahar"
+        ],
+        "ALOO KA KHAZANA": [
+            "Dum Aloo",
+            "Aloo Palak",
+            "Aloo Baingan Mutter",
+            "Aloo Bhindi Masala",
+            "Jodhpuri Aloo",
+            "Jeera Aloo"
+        ],
+        "SUBZIYON KA MELA": [
+            "Subzi Punchmel",
+            "Mille Julle Subzi",
+            "Navratna Korma",
+            "Veg. Kolhapuri",
+            "Veg. Hydrabadi",
+            "Veg. Angara",
+            "Corn Palak",
+            "Chhole Paneer",
+            "Palak Corn Capsicum",
+            "Baingan Bharta"
+        ],
+        "PROTEIN KA KHAZAN\u0410": [
+            "Kathol Panchmel",
+            "Chhole Masala",
+            "Moong Dal Curry",
+            "Moong Curry"
+        ],
+        "TAWA MEHFIL": [
+            "Tawa Mehfil (Bhindi, Baigan, Capsicum, Tomato, Aloo)"
+        ],
+        "(BANSURI RECOMMENDED)": [
+            "Undhiyu",
+            "Papadi Ringan",
+            "Papadi Methi Palak",
+            "Papdi Lilwa Sabji",
+            "Papdi Muthiya Sabji",
+            "Methi Mutter Malai (White Gravy)"
+        ],
+        "MONGOLIAN CUISINEMONGOLIAN CUISINE": [
+            "Veg Mongolian (Assorted Exotic Vegetables Pan Fried to a crisp with Savory Sauce)",
+            "Stir-fried Veg Mongolian Rice and Noodles (Rice & Noodles stir fried with diamond chopped vegetables such a"
+        ],
+        "MEXICAN CUISINE": [
+            "Nachos (Tortilla Corn Chips topped with melted Cheese Sauce & Salsa)",
+            "Tacos (Crispy Tortillas Filled with Mexican Beans, Vegetables & Cheese)",
+            "Quesadillas (Crispy Rolled tortilla filled with yummy Veggies, Cheese and Beans)",
+            "Pizza Mexicana (Thin Pizza bread topped with Beans, Tomatoes, Corn and Bell Peppers",
+            "along with the Cheese)",
+            "Foot Long (A Sub-Sandwich stuffed with Capsicums, Onions, Corn & Cheese &",
+            "Baked)",
+            "Mexican Rice with Curry (Long-Grain Rice Tossed in colorful Vegetables, Herbs & served with",
+            "Spicy Curry)",
+            "Burritos (Tortilla Roll filled with Mexican Beans, Vegetables, Cheese & Salsa)"
+        ],
+        "TAWA SE": [
+            "Phulka Roti"
+        ],
+        "BASMATI KI BAHAR": [
+            "Steamed Rice",
+            "Jeera Rice",
+            "Mutter Pulao",
+            "Schezuan Rice",
+            "Veg. Biryani",
+            "Hyderabadi Biryani",
+            "Dum Biryani",
+            "Nauratan Pulao",
+            "Kashmiri Pulao",
+            "Tawa Pulao",
+            "Dal Khichdi",
+            "Palak Khichdi",
+            "Subzi Parat Pulao (Vegetable Pulao)"
+        ],
+        "DAL": [
+            "Dal Fry",
+            "Dal Tadka",
+            "Dal Makhani",
+            "Dal Punchmel",
+            "Dal Palak",
+            "Gujarati Dal",
+            "Lachko Dal",
+            "Kadhi (Punjabi/Gujarati)",
+            "Pakode wali Kadhi"
+        ],
+        "INCREDIBLY INDIAN SALADS": [
+            "Green Salad",
+            "Mix Kachumber",
+            "Masala Corn",
+            "Masala Chana",
+            "Aloo Chana",
+            "Thai Raw Papaya Salad",
+            "Diced Cucumber",
+            "Diced Watermelon",
+            "Diced Papaya",
+            "Moong Chana",
+            "Chhole Chana",
+            "Potato Chana",
+            "Potato Chaat",
+            "Sliced Tomato & Mint"
+        ],
+        "CONTINENTAL SALADS": [
+            "Red Pasta",
+            "White Cream Pasta",
+            "Russian Salad",
+            "Cucumber and Dill",
+            "Mexican Three Beans",
+            "Creamy Potato",
+            "Garden Salad (Tomatoes, Cucumber, Carrot,",
+            "Sweet Corn,Olives Lemon Dressing)",
+            "Veggie Classic (Cucumber, Tomato, Carrot, Onion)"
+        ],
+        "CRUNCHY KULFIS": [
+            "Kaju Roll",
+            "Almond Pistachio Roll",
+            "Oreo Roll",
+            "KitKat Roll",
+            "Mango Cashew Roll",
+            "Rose Cashew Roll",
+            "Red Velvet Roll",
+            "Black Forest Roll",
+            "Pistachio Roll"
+        ],
+        "MITHAI FUSION": [
+            "Maua Malai",
+            "Kaju Katli",
+            "Rasgulla",
+            "Motichoor",
+            "Gulabjamun"
+        ],
+        "DRYFRUIT OVERLOAD": [
+            "Walnut Date",
+            "Kaju Anjeer",
+            "Kesar Pista",
+            "Badam Pista",
+            "Afghani Dryfruit",
+            "Anjeer",
+            "Kaju Katri"
+        ],
+        "PARTY SPECIAL": [
+            "Plain Chocolate",
+            "Chocolate Cadbury",
+            "Cashew Chocolate",
+            "KitKat Cadbury",
+            "Dairymilk Cadbury",
+            "Cookies n Cream",
+            "Strawberry",
+            "Almond Anjeer",
+            "Afghani Dryfruit",
+            "Royal Oreo",
+            "Pineapple Cadbury",
+            "Black Currant",
+            "Paan Masala",
+            "Popcorn",
+            "Cranberry",
+            "Bubblegum"
+        ],
+        "PASTRIES": [
+            "Red Velvet",
+            "Chocolate Truffle",
+            "Hazelnut Truffle",
+            "Tiramisu"
+        ],
+        "CLASSIC CAKES": [
+            "Pineapple",
+            "Strawberry",
+            "Mango",
+            "Black Forrest",
+            "Mixed Fruit",
+            "Kiwi",
+            "Orange",
+            "Cupcakes"
+        ],
+        "CHEESECAKES": [
+            "Blueberry",
+            "Mango",
+            "Oreo",
+            "Strawberry",
+            "Biscoff Cheesecake"
+        ],
+        "SOUP": [
+            "Mild & Hearty",
+            "Tomato Cream Soup (Tomatoes broth with Cream & Seasoning)",
+            "Veg. Clear Soup (Variety of Veggies simmered in clear broth)",
+            "Almond Broccoli (Creamy Broccoli Soup with Nutty Almonds)",
+            "Sweet Corn Soup (Sweet corn Kernels with Cream & Seasonings)",
+            "Green Asian Soup (Hearty Asian Soup Containing Green Veggies)",
+            "Broccoli Corn (Creamy Broccoli Soup with Corn)",
+            "Corn Spinach Soup (Sweet Corn Kernels with Spinach Leaves)",
+            "Chef\u2019s Special (Included from Packages)",
+            "Thai Tom Yum Soup (Bold & Flavorful Broth with Bell Peppers)",
+            "Khow Suey (Burmese Soup with Coconut Milk, Spices & Toppings)",
+            "Thukpa Soup (Spicy Tibetan Soup with Noodles & Vegetables)",
+            "Italian Garlic Soup (Classic Creamy Italian Soup with Herbs)",
+            "Mexican Chili Bean (Tomato Broth with Array of Veggies & Herbs)",
+            "Shroom Velvet Symphony (Cream of Mushroom Soup)",
+            "Japanese Ramen Soup (Flavorful Broth with Ramen & Veggies)",
+            "Pan Asian Tasty",
+            "Tomato Basil (Ripe Tomato Broth with Basil & Seasonings)",
+            "Manchow Soup (Spicy Soy Broth with Mixed Veggies & Herbs)",
+            "Minestrone Soup (Tomato Broth with Variety of Spices & Veggies)",
+            "Lemon Coriander (Tangy Broth with Lemon, Spices & Veggies)",
+            "Hot & Sour Soup (Spicy Sour Broth with Mixed Veggies & Herbs)",
+            "Burnt Garlic Soup (Rich-Smoky Broth with Burnt Garlic & Veggies)"
+        ],
+        "LEBANESE CUISINE": [
+            "Falafel with Hummus (Crispy Chickpea fritters served with a side of creamy & flavorful",
+            "hummus)",
+            "Falafel Pockets/Rolls (Crispy Falafel Balls stuffed in a Pita Pocket/Roll along with fresh",
+            "veggies, Pickles & variety of sauces)",
+            "Hummus with Pita Bread (Flat Pita Bread with Creamy & Flavorful Hummus made with Chickpea,"
+        ],
+        "SWISS CUISINE": [
+            "Classic Potato Rosti (Grated Potatoes seasoned with herbs shaped into patties, pan fried &",
+            "served crispy)",
+            "Rosti with a Twist (Grated Potatoes seasoned with herbs shaped into patties, pan fried &",
+            "served crispy topped with Vegetables, Cheese, Herbs & Spices)",
+            "Mashed Potatoes (Classic dish made with boiled potatoes mashed & seasoned with herbs",
+            "& butter)"
+        ],
+        "HEALTHY VARIETIES(BOILED)": [
+            "Idada",
+            "Patra",
+            "Dhokla",
+            "Corn Dhokla",
+            "Seu Khaman",
+            "Vegetable Dhokla",
+            "Spinach Dhokla"
+        ],
+        "FRIED": [
+            "Cutlet",
+            "Dal Samosa",
+            "Chinese Samosa",
+            "Russian Roll",
+            "Spring Roll",
+            "Mutter Petis",
+            "Corn Petis",
+            "Mirchi Bhajiya",
+            "Kela Methi Bhajiya",
+            "Veg Lifafa",
+            "Chinese Lifafa",
+            "Aloo Wada",
+            "Ratalu Puri",
+            "Bataka Puri",
+            "Dal Wada",
+            "Methi Gota"
+        ],
+        "SEASONAL FARSAN": [
+            "Lilwa Kachori",
+            "Lilwa Petis"
+        ],
+        "INCREDIBLY INDIAN": [
+            "Mix Vegetables Raita",
+            "Boondi Raita",
+            "Tomato Mint Raita",
+            "Cucumber Mint Raita",
+            "Pineapple Raita",
+            "Dahi Tikhara",
+            "Papad",
+            "South ka Tadka",
+            "Assorted Dosa (Mysore, Masala,",
+            "Palak Corn,Palak Paneer, Spring Roll,",
+            "Jini Roll, Sweet Corn, Ragi Dosa)",
+            "Uttapam (Onion, Tomato,",
+            "Mix Vegetables, Masala, Palak Corn)",
+            "Idli (Podi Idli, Veg Idli)",
+            "Pakoras",
+            "Pakoras (Onion, Methi, Kela Methi,",
+            "Bataka Puri, Metha Gota, Bataka Wada,",
+            "Bharela Marcha)"
+        ],
+        "CONDIMENTS": [
+            "Pickle (Mix, Mango, Lemon, Sambharia Marcha, Kacchi Keri)",
+            "Chutney (Green, Meethi, Coconut, Garlic)"
+        ],
+        "ROYAL": [
+            "Kaju Gulab Gulkand",
+            "Real Mango",
+            "Banarasi Paan",
+            "Asli Guava",
+            "Shahi Faluda",
+            "Chocolate Chips",
+            "Tender Coconut",
+            "Cookies and Cream",
+            "Chocolate Brownie",
+            "Rajbhog"
+        ],
+        "CLASSICS": [
+            "Vanilla with assorted sauces",
+            "Special Strawberry",
+            "Caramel Butterscotch",
+            "Plain Chocolate",
+            "Mango"
+        ],
+        "ALL TIME HITS": [
+            "American Nuts",
+            "Almond Carnival",
+            "Fruit Bonanza",
+            "Kaju Draksh",
+            "Swiss Cake",
+            "Kaju Anjeer"
+        ],
+        "SEASONAL": [
+            "Fresh Lychee",
+            "Fresh Guava",
+            "Fresh Muskmelon",
+            "Fresh Watermelon",
+            "Fresh Jamun",
+            "Fresh Sitafal",
+            "Fresh Mango"
+        ],
+        "SORBET - VEGAN(WITHOUT DAIRY)": [
+            "Jamun",
+            "Strawberry",
+            "Mulberry",
+            "Guava",
+            "Kiwi",
+            "Mango"
+        ],
+        "WAFFLE CORNER": [
+            "Classic American Waffles",
+            "Spreads (Classic Belgian,",
+            "White Chocolate,Nutella)",
+            "Toppings (Sprinkles, Chocolate Chips)"
+        ],
+        "PAAN CORNER": [
+            "Banarasi Paan",
+            "Banrasi Paan (Saada, Meetha,",
+            "Kalkatti, Kalkatti Meetha)",
+            "Flavored Paan (Chocolate, Butterscotch, Herbal)"
+        ],
+        "CHAAT": [
+            "Chatpata Chaat",
+            "Pani Puri",
+            "Bhel Puri",
+            "Aloo Tikki Chaat",
+            "Delhi Chaat",
+            "Papdi Chaat",
+            "Dahi Bhalla",
+            "Kachori Chaat",
+            "Samosa Chaat",
+            "Corn Tikki Chaat",
+            "Kele Ki Tikkyan",
+            "Aloo Chaat"
+        ],
+        "(NOT INCLUDED IN PACKAGES)": [
+            "Italian Baked Pasta (A comforting masterpiece, Pastas with luscious cheese and rich sauce,",
+            "baked to golden perfection)",
+            "Baked Ravioli (A savory revelation, combines tender pasta pockets filled with",
+            "delectable fillings, baked to a golden crispness that delights the senses)",
+            "Lasagna (Classic Italian dish consisting layers of Flat Pasta Sheets with Bechamel",
+            "Sauce, Exotic Vegetables, Beans & Baked with Cheese)",
+            "Cannelloni (Pasta Pillows, cradle delightful surprises within their tender embrace,",
+            "with yummy fillings of exotic veggies & cheese & baked perfection)",
+            "Au Gratin (A decadent delight, presents a golden-brown crust atop with creamy",
+            "mixed vegetables covered in white sauce base)",
+            "Enchiladas/Pesto Enchiladas (Rolled tortillas filled with beans, cheese, and veggies, covered in sauce,",
+            "and baked. It's a flavorful and satisfying dish)"
+        ],
+        "CHINESE": [
+            "Mains",
+            "Dry Manchurian",
+            "Bombay Bhel",
+            "Gravy Manchurian",
+            "Vegetable Crispy",
+            "Green Manchurian",
+            "Vegetable Lollipop",
+            "Chinese Bhel",
+            "Vegetable 65",
+            "Vegetables in Hunan Sauce",
+            "Honey Chili Potatoes",
+            "Paneer Manchurian"
+        ]
+    }
+}

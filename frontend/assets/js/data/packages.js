@@ -13,56 +13,20 @@ export const PACKAGE_OPTIONS = [
       'Rice 1',
       'Dal 1',
       'Green Salad 1',
-      'Papad – Pickle',
+      'Papad - Pickle',
       'Mukhvas',
       'Water 20L Jar Included'
     ],
     menuPlan: [
-      {
-        label: 'Soup',
-        count: 1,
-        items: ['Tomato Shorba', 'Methi Dal Shorba']
-      },
-      {
-        label: 'Main Course',
-        count: 2,
-        items: ['Shahi Paneer', 'Dal Makhani', 'Jeera Aloo']
-      },
-      {
-        label: 'Indian Breads',
-        count: 2,
-        items: ['Tandoori Roti', 'Missi Roti', 'Butter Naan']
-      },
-      {
-        label: 'Sweet',
-        count: 1,
-        items: ['Gajar Halwa']
-      },
-      {
-        label: 'Farsan',
-        count: 1,
-        items: ['Khandvi with sesame tempering']
-      },
-      {
-        label: 'Rice',
-        count: 1,
-        items: ['Steamed Basmati Rice']
-      },
-      {
-        label: 'Dal',
-        count: 1,
-        items: ['Dal Tadka']
-      },
-      {
-        label: 'Green Salad',
-        count: 1,
-        items: ['Lime-Dressed Garden Greens']
-      },
-      {
-        label: 'Accompaniments',
-        count: 3,
-        items: ['Roasted Papad', 'Mango Pickle', 'Mint Mukhvas']
-      }
+      { label: 'Soup', category: 'SOUPS', count: 1 },
+      { label: 'Main Course', category: 'MAIN_COURSE', count: 2 },
+      { label: 'Indian Breads (Roti)', category: 'INDIAN_BREADS', count: 2 },
+      { label: 'Sweet', category: 'SWEETS', count: 1 },
+      { label: 'Farsan', category: 'FARSAN', count: 1 },
+      { label: 'Rice', category: 'RICE', count: 1 },
+      { label: 'Dal', category: 'DAL', count: 1 },
+      { label: 'Green Salad', category: 'GREEN_SALAD', count: 1 },
+      { label: 'Accompaniments', category: 'ACCOMPANIMENTS', count: 2 }
     ]
   },
   {
@@ -83,66 +47,24 @@ export const PACKAGE_OPTIONS = [
       'Dal 1',
       'Dessert (Ice Cream) 1',
       'Green Salad 1',
-      'Papad – Pickle',
+      'Papad - Pickle',
       'Mukhvas',
       'Mini Water Bottles Included'
     ],
     menuPlan: [
-      {
-        label: 'Welcome Drink',
-        count: 1,
-        items: ['Mango Lassi Cooler', 'Pomegranate Spritz']
-      },
-      {
-        label: 'Soup',
-        count: 1,
-        items: ['Roasted Pumpkin Velouté']
-      },
-      {
-        label: 'Chaat Counter',
-        count: 1,
-        items: ['Papdi Chaat', 'Bhel Puri Cones']
-      },
-      {
-        label: 'Live Starters',
-        count: 1,
-        items: ['Paneer Tikka Sliders', 'Garlic Butter Prawns']
-      },
-      {
-        label: 'Main Course',
-        count: 2,
-        items: ['Dum Biryani', 'Paneer Lababdar', 'Kerala Fish Curry']
-      },
-      {
-        label: 'Indian Breads',
-        count: 2,
-        items: ['Soft Laccha Paratha', 'Tandoori Roti', 'Butter Naan']
-      },
-      {
-        label: 'Sweets',
-        count: 2,
-        items: ['Rasmalai', 'Chocolate Mousse', 'Mango Mousse']
-      },
-      {
-        label: 'Farsan',
-        count: 1,
-        items: ['Masala Sev Puri']
-      },
-      {
-        label: 'Rice & Dal',
-        count: 2,
-        items: ['Steamed Rice', 'Dal Tadka']
-      },
-      {
-        label: 'Dessert',
-        count: 1,
-        items: ['Kulfi Falooda']
-      },
-      {
-        label: 'Salad & Accompaniments',
-        count: 3,
-        items: ['Garden Greens', 'Roasted Papad', 'Pickle Trio']
-      }
+      { label: 'Welcome Drink', category: 'WELCOME_DRINKS', count: 1 },
+      { label: 'Soup', category: 'SOUPS', count: 1 },
+      { label: 'Chaat Counter', category: 'CHAAT_COUNTER', count: 1 },
+      { label: 'Live Starters', category: 'LIVE_STARTERS', count: 1 },
+      { label: 'Main Course', category: 'MAIN_COURSE', count: 2 },
+      { label: 'Indian Breads', category: 'INDIAN_BREADS', count: 2 },
+      { label: 'Sweets', category: 'SWEETS', count: 2 },
+      { label: 'Farsan', category: 'FARSAN', count: 1 },
+      { label: 'Rice', category: 'RICE', count: 1 },
+      { label: 'Dal', category: 'DAL', count: 1 },
+      { label: 'Dessert (Ice Cream)', category: 'DESSERTS', count: 1 },
+      { label: 'Green Salad', category: 'GREEN_SALAD', count: 1 },
+      { label: 'Accompaniments', category: 'ACCOMPANIMENTS', count: 2 }
     ]
   },
   {
@@ -167,86 +89,27 @@ export const PACKAGE_OPTIONS = [
       'Dessert (Ice Cream/Kulfi) 1',
       'Green Salad 1',
       'Salad Variety 1',
-      'Papad – Pickle',
+      'Papad - Pickle',
       'Mukhvas',
       'Mini Water Bottles Included'
     ],
     menuPlan: [
-      {
-        label: 'Welcome Drinks',
-        count: 2,
-        items: ['Saffron Mojito', 'Cucumber Mint Cooler', 'Lychee Fizz']
-      },
-      {
-        label: 'Moving Starters',
-        count: 2,
-        items: ['Cheese Stuffed Baby Potato', 'Pistachio Kulchette', 'Smoked Salmon Canapé']
-      },
-      {
-        label: 'Soup',
-        count: 2,
-        items: ['Thai Tom Yum', 'Wild Mushroom Cappuccino']
-      },
-      {
-        label: 'Chaat Counter',
-        count: 1,
-        items: ['Tandoori Chaat Shots']
-      },
-      {
-        label: 'Live Starters',
-        count: 1,
-        items: ['Paneer Lababdar Skewers']
-      },
-      {
-        label: 'Special Counter',
-        count: 1,
-        items: ['Barbeque Platter', 'Hot Chaat Station', 'Dry Fruit Chaat']
-      },
-      {
-        label: 'World Cuisine Live',
-        count: 1,
-        items: ['Chef’s Stir Fry', 'Truffle Makhani']
-      },
-      {
-        label: 'Main Course',
-        count: 2,
-        items: ['Roasted Paprika Chicken', 'Paneer Pasanda', 'Daal Makhani']
-      },
-      {
-        label: 'Indian Breads',
-        count: 2,
-        items: ['Laccha Paratha', 'Phulkas', 'Butter Naan']
-      },
-      {
-        label: 'Sweets',
-        count: 2,
-        items: ['Rasmalai', 'Rose Kulfi', 'Chocolate Fondant']
-      },
-      {
-        label: 'Farsan',
-        count: 1,
-        items: ['Sabudana Vada']
-      },
-      {
-        label: 'Rice & Dal',
-        count: 2,
-        items: ['Steamed Rice', 'Dal Makhani']
-      },
-      {
-        label: 'Dessert',
-        count: 1,
-        items: ['Ice Cream Sundae Bar', 'Rose Kulfi']
-      },
-      {
-        label: 'Salads',
-        count: 2,
-        items: ['Garden Greens', 'Spiced Quinoa Salad']
-      },
-      {
-        label: 'Accompaniments',
-        count: 2,
-        items: ['Papad & Pickle', 'Mint Mukhvas']
-      }
+      { label: 'Welcome Drinks', category: 'WELCOME_DRINKS', count: 2 },
+      { label: 'Moving Starters', category: 'MOVING_STARTERS', count: 2 },
+      { label: 'Soup', category: 'SOUPS', count: 2 },
+      { label: 'Chaat Counter', category: 'CHAAT_COUNTER', count: 1 },
+      { label: 'Live Starters', category: 'LIVE_STARTERS', count: 1 },
+      { label: 'Special Counter', category: 'SPECIAL_COUNTER', count: 1 },
+      { label: 'World Cuisine - Live', category: 'WORLD_CUISINE', count: 1 },
+      { label: 'Main Course', category: 'MAIN_COURSE', count: 2 },
+      { label: 'Indian Breads', category: 'INDIAN_BREADS', count: 2 },
+      { label: 'Sweets', category: 'SWEETS', count: 2 },
+      { label: 'Farsan', category: 'FARSAN', count: 1 },
+      { label: 'Rice', category: 'RICE', count: 1 },
+      { label: 'Dal', category: 'DAL', count: 1 },
+      { label: 'Dessert (Ice Cream/Kulfi)', category: 'DESSERTS', count: 1 },
+      { label: 'Salad Variety', category: 'SALADS', count: 2 },
+      { label: 'Accompaniments', category: 'ACCOMPANIMENTS', count: 2 }
     ]
   },
   {
@@ -258,7 +121,7 @@ export const PACKAGE_OPTIONS = [
       'Welcome Drinks 2',
       'Moving Starters 2',
       'Soup 1',
-      'Chef’s Special Soup 1',
+      "Chef's Special Soup 1",
       'Chaat Counter 1',
       'Starters (Live Counters) 1',
       'Special Counter (Barbeque/Hot Chaat/Dry fruit Chaat) 1',
@@ -273,96 +136,29 @@ export const PACKAGE_OPTIONS = [
       'Green Salad 1',
       'Incredibly Indian Salad 1',
       'Continental Salad/Raita 1',
-      'Papad – Pickle',
+      'Papad - Pickle',
       'Mukhvas',
       'Mini Water Bottles Included'
     ],
     menuPlan: [
-      {
-        label: 'Welcome Drinks',
-        count: 2,
-        items: ['Saffron Mojito', 'Rose & Citrus Cooler']
-      },
-      {
-        label: 'Moving Starters',
-        count: 2,
-        items: ['Chilli Basil Corn Cups', 'Cheese & Cranberry Poppers']
-      },
-      {
-        label: 'Soup',
-        count: 1,
-        items: ['Roasted Pumpkin Bisque']
-      },
-      {
-        label: 'Chef’s Special Soup',
-        count: 1,
-        items: ['Miso Lemongrass Broth']
-      },
-      {
-        label: 'Chaat Counter',
-        count: 1,
-        items: ['Aam Panna Chaat']
-      },
-      {
-        label: 'Live Starters',
-        count: 1,
-        items: ['Tawa Paneer Tikka']
-      },
-      {
-        label: 'Special Counter',
-        count: 1,
-        items: ['Barbeque Platter', 'Dry Fruit Chaat Station']
-      },
-      {
-        label: 'World Cuisine Live',
-        count: 2,
-        items: ['Thai Green Curry Station', 'Italian Truffle Pasta']
-      },
-      {
-        label: 'Main Course',
-        count: 3,
-        items: ['Lucknowi Laal Maas', 'Beurre Blanc Fish', 'Paneer Angara']
-      },
-      {
-        label: 'Indian Breads',
-        count: 3,
-        items: ['Roomali Roti', 'Tandoori Laccha Paratha', 'Naan']
-      },
-      {
-        label: 'Sweets',
-        count: 3,
-        items: ['Rose Rasmalai', 'Kesar Kulfi', 'Chocolate Mousse Dome']
-      },
-      {
-        label: 'Farsan',
-        count: 2,
-        items: ['Masala Peanuts', 'Mini Gujrati Khandvi']
-      },
-      {
-        label: 'Rice',
-        count: 1,
-        items: ['Lemongrass Jasmine Rice']
-      },
-      {
-        label: 'Dal',
-        count: 1,
-        items: ['Tadka Dal']
-      },
-      {
-        label: 'Dessert (Ice Cream/Kulfi)',
-        count: 1,
-        items: ['Kulfi Shot Duo']
-      },
-      {
-        label: 'Salads',
-        count: 3,
-        items: ['Garden Greens', 'Indian Kale Salad', 'Continental Raita']
-      },
-      {
-        label: 'Accompaniments',
-        count: 2,
-        items: ['Papad & Pickle Station', 'Mint Mukhvas']
-      }
+      { label: 'Welcome Drinks', category: 'WELCOME_DRINKS', count: 2 },
+      { label: 'Moving Starters', category: 'MOVING_STARTERS', count: 2 },
+      { label: 'Soup', category: 'SOUPS', count: 1 },
+      { label: "Chef's Special Soup", category: 'SOUP_SPECIALS', count: 1 },
+      { label: 'Chaat Counter', category: 'CHAAT_COUNTER', count: 1 },
+      { label: 'Live Starters', category: 'LIVE_STARTERS', count: 1 },
+      { label: 'Special Counter', category: 'SPECIAL_COUNTER', count: 1 },
+      { label: 'World Cuisine - Live', category: 'WORLD_CUISINE', count: 2 },
+      { label: 'Main Course', category: 'MAIN_COURSE', count: 3 },
+      { label: 'Indian Breads', category: 'INDIAN_BREADS', count: 3 },
+      { label: 'Sweets', category: 'SWEETS', count: 3 },
+      { label: 'Farsan', category: 'FARSAN', count: 2 },
+      { label: 'Rice', category: 'RICE', count: 1 },
+      { label: 'Dal', category: 'DAL', count: 1 },
+      { label: 'Dessert (2 Flavors of Ice Cream/Kulfi)', category: 'DESSERTS', count: 2 },
+      { label: 'Incredibly Indian Salad', category: 'SALADS', count: 2 },
+      { label: 'Continental Salad/Raita', category: 'SALADS', count: 1 },
+      { label: 'Accompaniments', category: 'ACCOMPANIMENTS', count: 2 }
     ]
   },
   {
@@ -374,7 +170,7 @@ export const PACKAGE_OPTIONS = [
       'Welcome Drinks 3',
       'Moving Starters 3',
       'Soup 1',
-      'Chef’s Special Soup 1',
+      "Chef's Special Soup 1",
       'Chaat Counter 2',
       'Starters (Live Counters) 2',
       'Special Counter (Barbeque/Hot Chaat/Dry fruit Chaat) 2',
@@ -386,95 +182,35 @@ export const PACKAGE_OPTIONS = [
       'Rice 2',
       'Dal 1',
       'Dessert (2 Flavors of Ice Cream/Kulfi) 1',
-      'Hot Dessert Counter or Fruit Counter 1',
+      'Hot Dessert Counter or Fruit Counter (Waffles/Pancake/Brownie) 1',
       'Green Salad 1',
       'Incredibly Indian Salad 1',
       'Continental Salad/Raita 2',
-      'Papad – Pickle',
+      'Papad - Pickle',
       'Mukhvas',
       'Mini Water Bottles Included'
     ],
     menuPlan: [
-      {
-        label: 'Welcome Drinks',
-        count: 3,
-        items: ['Sparkling Lychee Punch', 'Smoked Cinnamon Cooler', 'Tomato Jaljeera']
-      },
-      {
-        label: 'Moving Starters',
-        count: 3,
-        items: ['Harissa Paneer & Fig Toast', 'Barbeque Pineapple Skewers', 'Crispy Duck Tacos']
-      },
-      {
-        label: 'Soup',
-        count: 1,
-        items: ['Corn & Coconut Velouté']
-      },
-      {
-        label: 'Chef’s Special Soup',
-        count: 1,
-        items: ['Chilled Beetroot Cappuccino']
-      },
-      {
-        label: 'Chaat Counter',
-        count: 2,
-        items: ['Pani Puri Shots', 'Tandoori Chaat Cups']
-      },
-      {
-        label: 'Live Starters',
-        count: 2,
-        items: ['Smoked Salmon Skewers', 'Truffle Paneer Satay']
-      },
-      {
-        label: 'Special Counter',
-        count: 2,
-        items: ['Dry Fruit Chaat', 'Hot Channa Chaat']
-      },
-      {
-        label: 'World Cuisine Live',
-        count: 2,
-        items: ['Pan-Asian Noodle Bar', 'Mediterranean Grill']
-      },
-      {
-        label: 'Main Course',
-        count: 3,
-        items: ['Ginger Garlic Pork Belly', 'Champagne Butter Chicken', 'Spinach & Ricotta Cannelloni']
-      },
-      {
-        label: 'Indian Breads',
-        count: 3,
-        items: ['Laccha Paratha', 'Focaccia', 'Rumali Roti']
-      },
-      {
-        label: 'Sweets',
-        count: 4,
-        items: ['Rasmalai', 'Dark Chocolate Tart', 'Mango Mousse', 'Kulfi Bombs']
-      },
-      {
-        label: 'Farsan',
-        count: 2,
-        items: ['Szechuan Peanuts', 'Crispy Masala Popcorn']
-      },
-      {
-        label: 'Rice & Dal',
-        count: 2,
-        items: ['Saffron Rice', 'Dal Makhani']
-      },
-      {
-        label: 'Dessert Station',
-        count: 1,
-        items: ['Waffles, Brownies & Pancakes']
-      },
-      {
-        label: 'Salads',
-        count: 3,
-        items: ['Incredibly Indian Salad', 'Greek Farro Salad', 'Continental Raita']
-      },
-      {
-        label: 'Accompaniments',
-        count: 2,
-        items: ['Papad & Pickle', 'Mint Mukhvas']
-      }
+      { label: 'Welcome Drinks', category: 'WELCOME_DRINKS', count: 3 },
+      { label: 'Moving Starters', category: 'MOVING_STARTERS', count: 3 },
+      { label: 'Soup', category: 'SOUPS', count: 1 },
+      { label: "Chef's Special Soup", category: 'SOUP_SPECIALS', count: 1 },
+      { label: 'Chaat Counter', category: 'CHAAT_COUNTER', count: 2 },
+      { label: 'Live Starters', category: 'LIVE_STARTERS', count: 2 },
+      { label: 'Special Counter', category: 'SPECIAL_COUNTER', count: 2 },
+      { label: 'World Cuisine - Live', category: 'WORLD_CUISINE', count: 2 },
+      { label: 'Italian Mexican Lounge', category: 'ITALIAN_MEXICAN_LOUNGE', count: 4 },
+      { label: 'Main Course', category: 'MAIN_COURSE', count: 3 },
+      { label: 'Indian Breads', category: 'INDIAN_BREADS', count: 3 },
+      { label: 'Sweets', category: 'SWEETS', count: 4 },
+      { label: 'Farsan', category: 'FARSAN', count: 2 },
+      { label: 'Rice', category: 'RICE', count: 2 },
+      { label: 'Dal', category: 'DAL', count: 1 },
+      { label: 'Dessert (Ice Cream/Kulfi)', category: 'DESSERTS', count: 2 },
+      { label: 'Hot Dessert or Fruit Counter', category: 'HOT_DESSERT_COUNTER', count: 1 },
+      { label: 'Exotic Fruit Counter', category: 'EXOTIC_FRUIT_COUNTER', count: 1 },
+      { label: 'Salad Variety', category: 'SALADS', count: 3 },
+      { label: 'Accompaniments', category: 'ACCOMPANIMENTS', count: 2 }
     ]
   },
   {
@@ -486,7 +222,7 @@ export const PACKAGE_OPTIONS = [
       'Mocktail Bar 1',
       'Moving Starters 3',
       'Soup 2',
-      'Chef’s Special Soup 1',
+      "Chef's Special Soup 1",
       'Chaat Counter 2',
       'Starters (Live Counters) 2',
       'Special Counter (Barbeque/Hot Chaat/Dry fruit Chaat) 2',
@@ -504,106 +240,31 @@ export const PACKAGE_OPTIONS = [
       'Green Salad 1',
       'Incredibly Indian Salad 1',
       'Continental Salad/Raita 4',
-      'Papad – Pickle',
+      'Papad - Pickle',
       'Mukhvas',
       'Mini Water Bottles Included'
     ],
     menuPlan: [
-      {
-        label: 'Mocktail Bar',
-        count: 1,
-        items: ['Citrus Basil Mocktail', 'Berry Mint Cooler', 'Tropical Ginger Fizz']
-      },
-      {
-        label: 'Moving Starters',
-        count: 3,
-        items: ['Mini Paneer Tikka Pockets', 'Barbeque Pineapple Skewers', 'Duck Confit Rolls']
-      },
-      {
-        label: 'Soup',
-        count: 2,
-        items: ['Roasted Tomato Velouté', 'Thai Coconut Broth']
-      },
-      {
-        label: 'Chef’s Special Soup',
-        count: 1,
-        items: ['Lobster Bisque']
-      },
-      {
-        label: 'Chaat Counter',
-        count: 2,
-        items: ['Anardana Chaat Cups', 'Smoked Papdi Chaat']
-      },
-      {
-        label: 'Live Starters',
-        count: 2,
-        items: ['Harissa Paneer Skewers', 'Spiced Grilled Prawns']
-      },
-      {
-        label: 'Special Counter',
-        count: 2,
-        items: ['Barbeque Grill', 'Kesar Dry Fruit Chaat', 'Hot Channa Chaat']
-      },
-      {
-        label: 'World Cuisine',
-        count: 2,
-        items: ['Italian Herb Salmon', 'Mexican Mole Chicken']
-      },
-      {
-        label: 'Italian & Mexican Lounge',
-        count: 4,
-        items: ['Pesto Flatbread', 'Mini Tacos', 'Truffle Quesadilla', 'Cheese Fondue']
-      },
-      {
-        label: 'Main Course',
-        count: 4,
-        items: ['Roasted Herb Chicken', 'Coconut Fish Curry', 'Bhuna Gosht', 'Paneer Tikka Masala']
-      },
-      {
-        label: 'Indian Breads',
-        count: 3,
-        items: ['Naan', 'Tandoori Roti', 'Butter Paratha']
-      },
-      {
-        label: 'Sweets Station',
-        count: 1,
-        items: ['5 Varieties of Mini Desserts']
-      },
-      {
-        label: 'Farsan',
-        count: 2,
-        items: ['Chili Cheese Bombs', 'Masala Peanuts']
-      },
-      {
-        label: 'Rice & Dal',
-        count: 2,
-        items: ['Steamed Basmati Rice', 'Dal Tadka']
-      },
-      {
-        label: 'Dessert',
-        count: 1,
-        items: ['Kulfi Trio']
-      },
-      {
-        label: 'Exotic Fruit Counter',
-        count: 1,
-        items: ['Dragon Fruit Platter', 'Berry Coulis']
-      },
-      {
-        label: 'Banarasi Paan Corner',
-        count: 1,
-        items: ['Classic Paan', 'Mango Paan']
-      },
-      {
-        label: 'Salad Spread',
-        count: 6,
-        items: ['Green Salad', 'Incredibly Indian Salad', 'Continental Raita', 'Micro Herb Mix']
-      },
-      {
-        label: 'Accompaniments',
-        count: 3,
-        items: ['Papad', 'Pickles', 'Mint Mukhvas']
-      }
+      { label: 'Mocktail Bar', category: 'MOCKTAIL_BAR', count: 1 },
+      { label: 'Moving Starters', category: 'MOVING_STARTERS', count: 3 },
+      { label: 'Soup', category: 'SOUPS', count: 2 },
+      { label: "Chef's Special Soup", category: 'SOUP_SPECIALS', count: 1 },
+      { label: 'Chaat Counter', category: 'CHAAT_COUNTER', count: 2 },
+      { label: 'Live Starters', category: 'LIVE_STARTERS', count: 2 },
+      { label: 'Special Counter', category: 'SPECIAL_COUNTER', count: 2 },
+      { label: 'World Cuisine - Live', category: 'WORLD_CUISINE', count: 2 },
+      { label: 'Italian Mexican Lounge', category: 'ITALIAN_MEXICAN_LOUNGE', count: 4 },
+      { label: 'Main Course', category: 'MAIN_COURSE', count: 4 },
+      { label: 'Indian Breads', category: 'INDIAN_BREADS', count: 3 },
+      { label: 'Sweets Station (5 Varieties)', category: 'SWEETS', count: 5 },
+      { label: 'Farsan', category: 'FARSAN', count: 2 },
+      { label: 'Rice', category: 'RICE', count: 2 },
+      { label: 'Dal', category: 'DAL', count: 1 },
+      { label: 'Dessert (Ice Cream/Kulfi)', category: 'DESSERTS', count: 2 },
+      { label: 'Exotic Fruit Counter', category: 'EXOTIC_FRUIT_COUNTER', count: 1 },
+      { label: 'Banarasi Paan Corner', category: 'BANARASI_PAAN_CORNER', count: 1 },
+      { label: 'Salad Variety', category: 'SALADS', count: 4 },
+      { label: 'Accompaniments', category: 'ACCOMPANIMENTS', count: 3 }
     ]
   }
 ];

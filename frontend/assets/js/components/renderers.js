@@ -1,5 +1,6 @@
 import { EVENT_TYPES, PACKAGE_OPTIONS } from '../data/packages.js';
 import { createElement, formatPackageLabel } from '../utils/helpers.js';
+import { getMenuItems } from '../data/menus.js';
 
 function inputGroup(labelText, field) {
   const label = createElement('label', '', labelText);
@@ -90,7 +91,8 @@ export function renderStep(contentRoot, step, state) {
       if (suggestions.length) {
         const suggestionGrid = createElement('div', 'menu-suggestion-grid');
         suggestions.forEach((entry) => {
-          const options = (entry.items || []).slice(0, entry.count || entry.items?.length);
+          const menuItems = entry.category ? getMenuItems(entry.category) : entry.items || [];
+          const options = menuItems.slice(0, entry.count || menuItems.length);
           if (!options.length) return;
           const card = createElement('article', 'menu-suggestion-card');
           const titleText = `${entry.label}${entry.count ? ` (${entry.count} ${entry.count > 1 ? 'options' : 'option'})` : ''}`;
@@ -142,7 +144,8 @@ export function renderStep(contentRoot, step, state) {
     if (menuPlan.length) {
       const summaryList = createElement('div', 'review-menu-summary__list');
       menuPlan.forEach((entry) => {
-        const values = (entry.items || []).slice(0, entry.count || entry.items?.length);
+        const menuItems = entry.category ? getMenuItems(entry.category) : entry.items || [];
+        const values = menuItems.slice(0, entry.count || menuItems.length);
         if (!values.length) return;
         const label = createElement('div', 'review-menu-summary__item');
         const descriptor = `${entry.label}${entry.count ? ` (${entry.count} ${entry.count > 1 ? 'choices' : 'choice'})` : ''}`;
