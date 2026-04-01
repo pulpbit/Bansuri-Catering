@@ -963,7 +963,14 @@ export const MENU_CATALOG = {
   INDIAN_BREADS: {
     label: "indian breads",
     items:     [
-        "Phulka Roti"
+        "Phulka Roti",
+        "Butter Naan",
+        "Garlic Naan",
+        "Tandoori Roti",
+        "Lachha Paratha",
+        "Missi Roti",
+        "Butter Kulcha",
+        "Garlic Puda"
     ]
   },
   SWEETS: {

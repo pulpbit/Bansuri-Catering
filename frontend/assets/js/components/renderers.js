@@ -27,13 +27,13 @@ export function renderStep(contentRoot, step, state) {
     const name = createElement('input');
     name.type = 'text';
     name.placeholder = 'Your full name';
-    name.value = state.name;
+    name.value = state.name || '';
     name.dataset.field = 'name';
 
     const phone = createElement('input');
     phone.type = 'tel';
     phone.placeholder = 'Phone number';
-    phone.value = state.phone;
+    phone.value = state.phone || '';
     phone.dataset.field = 'phone';
 
     const eventType = createElement('select');
@@ -46,23 +46,24 @@ export function renderStep(contentRoot, step, state) {
       eventType.append(option);
     });
 
-    grid.append(inputGroup('Name', name), inputGroup('Phone', phone), inputGroup('Event Type', eventType));
-    section.append(grid);
-  }
-
-  if (step === 1) {
-    section.append(createElement('h3', '', 'How many guests are expected?'));
     const guests = createElement('input');
     guests.type = 'number';
     guests.min = '20';
     guests.step = '1';
     guests.placeholder = 'e.g. 150';
-    guests.value = state.guests;
+    guests.value = state.guests || '';
     guests.dataset.field = 'guests';
-    section.append(inputGroup('Number of Guests', guests));
+
+    grid.append(
+      inputGroup('Name', name), 
+      inputGroup('Phone', phone), 
+      inputGroup('Event Type', eventType),
+      inputGroup('Number of Guests', guests)
+    );
+    section.append(grid);
   }
 
-  if (step === 2) {
+  if (step === 1) {
     section.append(createElement('h3', '', 'Choose one package'));
     const wrap = createElement('div', 'package-grid');
     PACKAGE_OPTIONS.forEach((pkg) => {
@@ -79,7 +80,7 @@ export function renderStep(contentRoot, step, state) {
     section.append(wrap);
   }
 
-  if (step === 3) {
+  if (step === 2) {
     section.append(createElement('h3', '', 'Chef curated menu for your package'));
     const selectedPackage = PACKAGE_OPTIONS.find((pkg) => pkg.id === state.packageId);
     if (!selectedPackage) {
@@ -87,12 +88,18 @@ export function renderStep(contentRoot, step, state) {
     } else {
       const menuWrap = createElement('div', 'menu-option-wrap');
       menuWrap.append(createElement('p', '', `Package selected: ${formatPackageLabel(selectedPackage)}`));
+      
       const suggestions = selectedPackage.menuPlan || [];
       if (suggestions.length) {
         const suggestionGrid = createElement('div', 'menu-suggestion-grid');
         suggestions.forEach((entry) => {
           const menuItems = entry.category ? getMenuItems(entry.category) : entry.items || [];
-          const options = menuItems.slice(0, entry.count || menuItems.length);
+          
+          // Use shuffled selections from state if they exist, otherwise fallback
+          const options = (state.selectedMenuItems && state.selectedMenuItems[entry.label]) 
+            ? state.selectedMenuItems[entry.label]
+            : menuItems.slice(0, entry.count || menuItems.length);
+          
           if (!options.length) return;
           const card = createElement('article', 'menu-suggestion-card');
           const titleText = `${entry.label}${entry.count ? ` (${entry.count} ${entry.count > 1 ? 'options' : 'option'})` : ''}`;
@@ -120,7 +127,7 @@ export function renderStep(contentRoot, step, state) {
     }
   }
 
-  if (step === 4) {
+  if (step === 3) {
     section.append(createElement('h3', '', 'Review details before submit'));
     const selectedPackage = PACKAGE_OPTIONS.find((pkg) => pkg.id === state.packageId);
     const list = createElement('div', 'review-list');
@@ -129,8 +136,7 @@ export function renderStep(contentRoot, step, state) {
       ['Phone', state.phone || '-'],
       ['Event Type', state.eventType || '-'],
       ['Guests', state.guests || '-'],
-      ['Package', formatPackageLabel(selectedPackage)],
-      ['Menu', state.menu || '-']
+      ['Package', formatPackageLabel(selectedPackage) || '-']
     ];
     rows.forEach(([label, value]) => {
       const item = createElement('div', 'review-item');
@@ -138,6 +144,7 @@ export function renderStep(contentRoot, step, state) {
       list.append(item);
     });
     section.append(list);
+    
     const menuPlan = selectedPackage?.menuPlan || [];
     const menuSummary = createElement('div', 'review-menu-summary');
     menuSummary.append(createElement('h4', '', 'Selected menu guidance'));
@@ -145,12 +152,17 @@ export function renderStep(contentRoot, step, state) {
       const summaryList = createElement('div', 'review-menu-summary__list');
       menuPlan.forEach((entry) => {
         const menuItems = entry.category ? getMenuItems(entry.category) : entry.items || [];
-        const values = menuItems.slice(0, entry.count || menuItems.length);
+        
+        // Use shuffled selections from state if they exist, otherwise fallback
+        const values = (state.selectedMenuItems && state.selectedMenuItems[entry.label])
+          ? state.selectedMenuItems[entry.label]
+          : menuItems.slice(0, entry.count || menuItems.length);
+
         if (!values.length) return;
         const label = createElement('div', 'review-menu-summary__item');
         const descriptor = `${entry.label}${entry.count ? ` (${entry.count} ${entry.count > 1 ? 'choices' : 'choice'})` : ''}`;
         const detail = createElement('p', 'review-menu-summary__detail', descriptor);
-        const itemsText = entry.count ? values.join(', ') : values.join(', ');
+        const itemsText = values.join(', ');
         const items = createElement('p', 'review-menu-summary__items', itemsText);
         label.append(detail, items);
         summaryList.append(label);

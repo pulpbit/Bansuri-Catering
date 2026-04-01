@@ -1,6 +1,6 @@
 export function validateStep(step, formState) {
   switch (step) {
-    case 0:
+    case 0: // Basics + Guests
       if (!formState.name || formState.name.trim().length < 2) {
         return 'Please enter a valid name.';
       }
@@ -10,19 +10,18 @@ export function validateStep(step, formState) {
       if (!formState.eventType) {
         return 'Please select an event type.';
       }
-      return '';
-    case 1:
       if (!Number.isFinite(Number(formState.guests)) || Number(formState.guests) < 20) {
         return 'Please enter expected guests (minimum 20).';
       }
       return '';
-    case 2:
+    case 1: // Package
       if (!formState.packageId) {
         return 'Please select one package.';
       }
       return '';
-    case 3:
-    return '';
+    case 2: // Menu Guidance (No validation needed usually)
+      return '';
+    case 3: // Review (No validation needed)
       return '';
     default:
       return '';

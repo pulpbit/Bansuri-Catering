@@ -59,18 +59,16 @@
 
       <section id="lead-form" class="planner container">
         <div class="planner__intro card">
-          <p class="eyebrow">Desire Capture</p>
-          <h2>Plan your event in 5 quick steps</h2>
-          <p>Share your preferences and our team will contact you with a tailored quotation.</p>
+          <div class="stepper" id="stepper"></div>
+          <div id="step-error" class="error-text"></div>
         </div>
 
-        <div class="wizard card" id="wizard" aria-live="polite">
-          <div class="stepper" id="stepper"></div>
-
+        <div id="wizard" class="planner__wizard">
           <form id="planning-form" novalidate>
             <div id="wizard-content"></div>
-            <div class="wizard__actions is-sticky">
+            <div class="wizard__actions">
               <button type="button" class="btn btn--ghost" id="prev-btn" disabled>Back</button>
+              <button type="button" class="btn btn--secondary" id="shuffle-menu-btn">Generate another menu</button>
               <button type="button" class="btn btn--primary" id="next-btn">Continue</button>
             </div>
           </form>
