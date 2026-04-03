@@ -6,6 +6,32 @@ let currentQuoteUrl = '';
 let currentPdfBlobUrl = '';
 let currentPdfFile = null;
 let currentPdfFileName = 'bansuri-quote.pdf';
+let rupeeFontReady = false;
+
+async function ensureRupeeFont(doc) {
+  if (rupeeFontReady) {
+    doc.setFont('NotoSans');
+    return;
+  }
+  try {
+    const res = await fetch('https://fonts.gstatic.com/s/notosans/v30/o-0IIpQlx3QUlC5A4PNb4j5Ba_2c7A.ttf');
+    const buf = await res.arrayBuffer();
+    const uint8 = new Uint8Array(buf);
+    let binary = '';
+    const chunk = 8192;
+    for (let i = 0; i < uint8.length; i += chunk) {
+      binary += String.fromCharCode.apply(null, uint8.subarray(i, i + chunk));
+    }
+    const base64 = btoa(binary);
+    doc.addFileToVFS('NotoSans-Regular.ttf', base64);
+    doc.addFont('NotoSans-Regular.ttf', 'NotoSans', 'normal');
+    doc.setFont('NotoSans');
+    rupeeFontReady = true;
+  } catch (e) {
+    // Fallback to default font; rupee glyph may not render correctly.
+    doc.setFont('helvetica', 'normal');
+  }
+}
 
 function triggerQuotePrint() {
   if (!currentQuoteLead) return;
@@ -98,6 +124,7 @@ async function generatePdfAndDownload() {
     const jsPDF = window.jspdf?.jsPDF || window.jsPDF;
     if (!jsPDF) throw new Error('jsPDF not loaded');
     const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    await ensureRupeeFont(doc);
     const pad = 32;
     let y = 50;
 
