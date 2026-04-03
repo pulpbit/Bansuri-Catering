@@ -47,12 +47,18 @@ function attachLeadModal(lead) {
   if (!leadModal) return;
   leadModal.classList.add('is-open');
   (leadModal.querySelector('[data-lead-name]') || {}).textContent = lead?.name || '-';
+  (leadModal.querySelector('[data-lead-id]') || {}).textContent = lead?.id || '-';
   (leadModal.querySelector('[data-lead-phone]') || {}).textContent = lead?.phone || '-';
   (leadModal.querySelector('[data-lead-type]') || {}).textContent = lead?.eventType || '-';
   (leadModal.querySelector('[data-lead-date]') || {}).textContent = lead?.eventDate || '-';
   (leadModal.querySelector('[data-lead-guests]') || {}).textContent = lead?.guests || '-';
   (leadModal.querySelector('[data-lead-package]') || {}).textContent = lead?.package || '-';
-  (leadModal.querySelector('[data-lead-status]') || {}).textContent = lead?.status || '-';
+  const statusEl = leadModal.querySelector('[data-lead-status]');
+  if (statusEl) {
+    statusEl.textContent = renderStatusPill(lead?.status).replace(/<[^>]+>/g, '');
+    statusEl.className = `status-pill ${lead?.status || 'new'}`;
+  }
+  (leadModal.querySelector('[data-lead-created]') || {}).textContent = lead?.created_at || '-';
   const menuList = leadModal.querySelector('[data-lead-menu]');
   if (menuList) {
     menuList.innerHTML = '';
