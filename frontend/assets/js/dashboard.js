@@ -42,6 +42,35 @@ function formatMenu(selectedMenu) {
   return String(data);
 }
 
+function attachLeadModal(lead) {
+  const leadModal = document.getElementById('lead-modal');
+  if (!leadModal) return;
+  leadModal.classList.add('is-open');
+  (leadModal.querySelector('[data-lead-name]') || {}).textContent = lead?.name || '-';
+  (leadModal.querySelector('[data-lead-phone]') || {}).textContent = lead?.phone || '-';
+  (leadModal.querySelector('[data-lead-type]') || {}).textContent = lead?.eventType || '-';
+  (leadModal.querySelector('[data-lead-date]') || {}).textContent = lead?.eventDate || '-';
+  (leadModal.querySelector('[data-lead-guests]') || {}).textContent = lead?.guests || '-';
+  (leadModal.querySelector('[data-lead-package]') || {}).textContent = lead?.package || '-';
+  (leadModal.querySelector('[data-lead-status]') || {}).textContent = lead?.status || '-';
+  const menuList = leadModal.querySelector('[data-lead-menu]');
+  if (menuList) {
+    menuList.innerHTML = '';
+    const menuText = formatMenu(lead?.selectedMenu);
+    if (menuText && menuText !== '-') {
+      menuText.split('|').forEach((segment) => {
+        const li = document.createElement('li');
+        li.textContent = segment.trim();
+        menuList.appendChild(li);
+      });
+    } else {
+      const li = document.createElement('li');
+      li.textContent = 'No guidance available';
+      menuList.appendChild(li);
+    }
+  }
+}
+
 function leadsTable(leads = []) {
   if (!leads.length) return '<p class="menu-summary-muted">No leads yet.</p>';
   const rows = leads.map((lead) => `
@@ -178,17 +207,7 @@ export function initDashboard(options = {}) {
           const row = e.target.closest('tr');
           const id = row?.dataset.leadId;
           const lead = leads.find((l) => l.id === id);
-          const menuText = formatMenu(lead?.selectedMenu);
-          const detail = [
-            `Name: ${lead?.name || '-'}`,
-            `Phone: ${lead?.phone || '-'}`,
-            `Event Type: ${lead?.eventType || '-'}`,
-            `Event Date: ${lead?.eventDate || '-'}`,
-            `Guests: ${lead?.guests || '-'}`,
-            `Package: ${lead?.package || '-'}`,
-            `Menu: ${menuText}`
-          ].join('\n');
-          alert(detail);
+          attachLeadModal(lead);
         });
       });
     } catch {
@@ -241,4 +260,11 @@ export function initDashboard(options = {}) {
     showDashboard();
     loadAll();
   }
+
+  document.querySelectorAll('[data-close-lead]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const leadModal = document.getElementById('lead-modal');
+      leadModal?.classList.remove('is-open');
+    });
+  });
 }

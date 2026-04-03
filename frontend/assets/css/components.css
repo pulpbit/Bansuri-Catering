@@ -203,6 +203,10 @@
   z-index: 1;
 }
 
+.modal__card--wide {
+  width: min(640px, 94vw);
+}
+
 .modal__head {
   display: flex;
   justify-content: space-between;
@@ -221,6 +225,21 @@
   justify-content: flex-end;
   gap: 0.6rem;
   margin-top: 0.8rem;
+}
+
+.lead-detail-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.lead-menu-list {
+  margin: 0.3rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.lead-menu-list li {
+  margin-bottom: 0.25rem;
 }
 
 .planner__intro.card {

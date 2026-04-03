@@ -165,6 +165,34 @@
       </div>
     </div>
 
+    <div class="modal" id="lead-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-lead></div>
+      <div class="modal__card modal__card--wide">
+        <header class="modal__head">
+          <h3>Lead details</h3>
+          <button class="modal__close" type="button" data-close-lead>&times;</button>
+        </header>
+        <div class="lead-detail-grid">
+          <div>
+            <p><strong>Name:</strong> <span data-lead-name>-</span></p>
+            <p><strong>Phone:</strong> <span data-lead-phone>-</span></p>
+            <p><strong>Event Type:</strong> <span data-lead-type>-</span></p>
+            <p><strong>Event Date:</strong> <span data-lead-date>-</span></p>
+            <p><strong>Guests:</strong> <span data-lead-guests>-</span></p>
+            <p><strong>Package:</strong> <span data-lead-package>-</span></p>
+            <p><strong>Status:</strong> <span data-lead-status>-</span></p>
+          </div>
+          <div>
+            <p><strong>Menu guidance</strong></p>
+            <ul class="lead-menu-list" data-lead-menu></ul>
+          </div>
+        </div>
+        <div class="modal__actions">
+          <button class="btn btn--ghost" type="button" data-close-lead>Close</button>
+        </div>
+      </div>
+    </div>
+
     <template id="thank-you-template">
       <section class="thank-you card fade-in-up">
         <h3>Thank you for your response.</h3>
