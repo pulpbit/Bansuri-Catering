@@ -73,6 +73,21 @@ export const menuApi = {
   deleteItem: (id) => sendJSON(`/menu/items/${id}`, 'DELETE', {}),
 };
 
+export const quoteApi = {
+  upload: async (file, token) => {
+    const res = await fetch(`${API_BASE}/quotes/upload`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/pdf'
+      },
+      body: file
+    });
+    if (!res.ok) throw new Error('Upload failed');
+    return res.json();
+  }
+};
+
 export function getToken() {
   return token;
 }

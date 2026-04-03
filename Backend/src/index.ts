@@ -154,4 +154,23 @@ app.delete('/api/menu/items/:id', async (c) => {
   return c.json({ ok: true });
 });
 
+app.post('/api/quotes/upload', async (c) => {
+  const key = nanoid();
+  const array = await c.req.arrayBuffer();
+  await c.env.DB.prepare('INSERT INTO quotes (id, pdf) VALUES (?, ?)').bind(key, new Uint8Array(array)).run();
+  const url = `${new URL(c.req.url).origin}/api/quotes/${key}`;
+  return c.json({ url, key });
+});
+
+app.get('/api/quotes/:key', async (c) => {
+  const key = c.req.param('key');
+  const row: any = await c.env.DB.prepare('SELECT pdf FROM quotes WHERE id = ?').bind(key).first();
+  if (!row?.pdf) return c.json({ message: 'Not found' }, 404);
+  const bytes = row.pdf instanceof ArrayBuffer ? row.pdf : new Uint8Array(row.pdf);
+  const headers = new Headers();
+  headers.set('Content-Type', 'application/pdf');
+  headers.set('Content-Disposition', `inline; filename="${key}.pdf"`);
+  return new Response(bytes, { headers });
+});
+
 export default app;

@@ -1,9 +1,11 @@
-import { login, logout, leadsApi, packagesApi, menuApi, getToken } from './api.js';
+import { login, logout, leadsApi, packagesApi, menuApi, getToken, quoteApi } from './api.js';
 import { $ } from './utils/helpers.js';
 
 let currentQuoteLead = null;
 let currentQuoteUrl = '';
 let currentPdfBlobUrl = '';
+let currentPdfFile = null;
+let uploadedQuoteUrl = '';
 
 function triggerQuotePrint() {
   if (!currentQuoteLead) return;
@@ -162,9 +164,29 @@ async function generatePdfAndDownload() {
 
     const blob = doc.output('blob');
     currentPdfBlobUrl = URL.createObjectURL(blob);
+    currentPdfFile = new File([blob], 'bansuri-quote.pdf', { type: 'application/pdf' });
     doc.save('bansuri-quote.pdf');
   } catch (e) {
     triggerQuotePrint(); // fallback
+  }
+}
+
+async function ensurePdfReady() {
+  if (currentPdfFile && currentPdfBlobUrl) return;
+  await generatePdfAndDownload();
+}
+
+async function ensurePdfUploaded() {
+  await ensurePdfReady();
+  if (uploadedQuoteUrl) return uploadedQuoteUrl;
+  const token = getToken();
+  if (!token) return currentPdfBlobUrl;
+  try {
+    const { url } = await quoteApi.upload(currentPdfFile, token);
+    uploadedQuoteUrl = url;
+    return url;
+  } catch {
+    return currentPdfBlobUrl;
   }
 }
 
@@ -325,17 +347,37 @@ function attachQuoteModal({ lead, pdfUrl }) {
   }
   const emailBtn = quoteModal.querySelector('[data-quote-email]');
   if (emailBtn) {
-    emailBtn.onclick = () => {
+    emailBtn.onclick = async () => {
+      const link = await ensurePdfUploaded();
       const subject = encodeURIComponent('Your Bansuri Catering quote');
-      const link = currentPdfBlobUrl || currentQuoteUrl || '';
-      const body = encodeURIComponent(`Hi,\n\nHere is your catering quote.\n${link ? `Download: ${link}` : 'Please see attached PDF.'}\n\nThank you!`);
+      const body = encodeURIComponent(`Hi,\n\nHere is your catering quote.\n${link ? `Download: ${link}` : ''}\n\nThank you!`);
+      if (navigator.canShare && currentPdfFile && navigator.canShare({ files: [currentPdfFile] })) {
+        try {
+          await navigator.share({
+            title: 'Bansuri Catering Quote',
+            text: 'Your catering quote is attached.',
+            files: [currentPdfFile]
+          });
+          return;
+        } catch (_) { /* fall back */ }
+      }
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     };
   }
   const waBtn = quoteModal.querySelector('[data-quote-whatsapp]');
   if (waBtn) {
-    waBtn.onclick = () => {
-      const link = currentPdfBlobUrl || currentQuoteUrl || '';
+    waBtn.onclick = async () => {
+      const link = await ensurePdfUploaded();
+      if (navigator.canShare && currentPdfFile && navigator.canShare({ files: [currentPdfFile] })) {
+        try {
+          await navigator.share({
+            title: 'Bansuri Catering Quote',
+            text: 'Your catering quote is attached.',
+            files: [currentPdfFile]
+          });
+          return;
+        } catch (_) { /* fall back */ }
+      }
       const text = encodeURIComponent(`Here is your catering quote${link ? ': ' + link : ''}`);
       window.open(`https://wa.me/?text=${text}`, '_blank');
     };
