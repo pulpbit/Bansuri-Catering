@@ -14,13 +14,32 @@ function renderStatusPill(status) {
 
 function formatMenu(selectedMenu) {
   if (!selectedMenu) return '-';
-  try {
-    const parsed = typeof selectedMenu === 'string' ? JSON.parse(selectedMenu) : selectedMenu;
-    const parts = Object.entries(parsed).map(([label, items]) => `${label}: ${items.join(', ')}`);
-    return parts.join(' | ') || '-';
-  } catch {
-    return selectedMenu;
+  let data = selectedMenu;
+  // First parse if it's a stringified JSON
+  if (typeof data === 'string') {
+    const trimmed = data.trim();
+    try {
+      data = JSON.parse(trimmed);
+    } catch {
+      // Sometimes we get a JSON string inside a string, try one more level
+      if ((trimmed.startsWith('"') && trimmed.endsWith('"')) || trimmed.startsWith('{')) {
+        try { data = JSON.parse(JSON.parse(trimmed)); } catch { return trimmed; }
+      } else {
+        return trimmed;
+      }
+    }
   }
+  if (Array.isArray(data)) {
+    return data.join(', ') || '-';
+  }
+  if (data && typeof data === 'object') {
+    const parts = Object.entries(data).map(([label, items]) => {
+      const list = Array.isArray(items) ? items.join(', ') : String(items);
+      return `${label}: ${list}`;
+    });
+    return parts.join(' | ') || '-';
+  }
+  return String(data);
 }
 
 function leadsTable(leads = []) {
