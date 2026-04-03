@@ -367,37 +367,37 @@
 
 .stepper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.8rem;
-  align-items: center;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+  justify-items: stretch;
 }
 
 .stepper__item {
   text-align: center;
   background: #fff;
   border: 1.5px solid rgba(231, 215, 226, 0.8);
-  border-radius: 20px;
-  padding: 0.6rem 0.75rem 0.9rem;
+  border-radius: 18px;
+  padding: 0.75rem 0.85rem 1rem;
   font-weight: 700;
   color: var(--muted);
-  min-height: 110px;
+  min-height: 100px;
   display: grid;
   justify-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   transition: all 0.25s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
 }
 
 .stepper__bullet {
-  width: 72px;
-  height: 72px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   border: 2px solid rgba(214, 41, 118, 0.14);
   display: grid;
   place-items: center;
   font-weight: 900;
-  font-size: 1.05rem;
+  font-size: 1rem;
   background: #fff;
   color: #6c6f81;
   transition: all 0.25s ease;
@@ -415,16 +415,16 @@
   box-shadow: 0 12px 28px rgba(214, 41, 118, 0.12);
 }
 
-.stepper__item.is-active .stepper__bullet {
-  background: var(--insta-gradient);
-  color: #fff;
-  border: none;
-  box-shadow: 0 10px 25px rgba(214, 41, 118, 0.35);
-}
+  .stepper__item.is-active .stepper__bullet {
+    background: var(--insta-gradient);
+    color: #fff;
+    border: none;
+    box-shadow: 0 10px 25px rgba(214, 41, 118, 0.35);
+  }
 
-.stepper__item.is-active .stepper__label {
-  color: #1a1a2e;
-}
+  .stepper__item.is-active .stepper__label {
+    color: #1a1a2e;
+  }
 
 .chat-intake {
   display: grid;
@@ -700,6 +700,26 @@ select:focus {
   .stepper-panel {
     grid-template-columns: 1fr 1.05fr;
     align-items: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .stepper {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+  .stepper__item {
+    padding: 0.7rem 0.75rem 0.9rem;
+    min-height: 92px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+  }
+  .stepper__bullet {
+    width: 52px;
+    height: 52px;
+    font-size: 0.95rem;
+  }
+  .stepper-copy h2 {
+    font-size: 1.3rem;
   }
 }
 
