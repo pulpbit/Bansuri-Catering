@@ -140,6 +140,11 @@
   flex-wrap: wrap;
 }
 
+.btn.danger {
+  color: #c0392b;
+  border: 1px solid rgba(192, 57, 43, 0.2);
+}
+
 .dash-table th {
   font-weight: 800;
   color: #1f2130;

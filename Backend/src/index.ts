@@ -68,6 +68,12 @@ app.patch('/api/leads/:id/status', async (c) => {
   return c.json({ ok: true });
 });
 
+app.delete('/api/leads/:id', async (c) => {
+  const id = c.req.param('id');
+  await c.env.DB.prepare('DELETE FROM leads WHERE id = ?').bind(id).run();
+  return c.json({ ok: true });
+});
+
 app.get('/api/leads/:id/quote', async (c) => {
   const id = c.req.param('id');
   const lead = await c.env.DB.prepare('SELECT * FROM leads WHERE id = ?').bind(id).first();

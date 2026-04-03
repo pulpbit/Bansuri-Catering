@@ -44,6 +44,7 @@ export const leadsApi = {
   list: () => getJSON('/leads'),
   updateStatus: (id, status) => sendJSON(`/leads/${id}/status`, 'PATCH', { status }),
   createQuote: (id) => getJSON(`/leads/${id}/quote`),
+  remove: (id) => sendJSON(`/leads/${id}`, 'DELETE', {})
 };
 
 export async function createLeadPublic(payload) {

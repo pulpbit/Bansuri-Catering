@@ -397,6 +397,7 @@ function leadsTable(leads = []) {
       <td class="action-cell">
         <button class="btn btn--ghost btn--compact" data-view>View</button>
         <button class="btn btn--secondary btn--compact" data-quote>Generate Quote</button>
+        <button class="btn btn--ghost btn--compact danger" data-delete>Delete Lead</button>
       </td>
     </tr>
   `);
@@ -502,6 +503,16 @@ export function initDashboard(options = {}) {
           const lead = leads.find((l) => l.id === id);
           const quote = await leadsApi.createQuote(id);
           attachQuoteModal({ lead, pdfUrl: quote.pdfUrl });
+        });
+      });
+      leadsTableEl.querySelectorAll('[data-delete]').forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+          const row = e.target.closest('tr');
+          const id = row?.dataset.leadId;
+          if (confirm('Delete this lead?')) {
+            await leadsApi.remove(id);
+            await loadLeads();
+          }
         });
       });
       leadsTableEl.querySelectorAll('[data-view]').forEach((btn) => {
