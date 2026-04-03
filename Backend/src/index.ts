@@ -78,8 +78,8 @@ app.patch('/api/leads/:id/status', async (c) => {
 app.get('/api/leads/:id/quote', async (c) => {
   const id = c.req.param('id');
   const lead = await c.env.DB.prepare('SELECT * FROM leads WHERE id = ?').bind(id).first();
-  const pdfUrl = `https://example.com/quotes/${id}.pdf`;
-  return c.json({ lead, pdfUrl });
+  // No remote PDF generation yet; frontend will generate locally.
+  return c.json({ lead, pdfUrl: '' });
 });
 
 app.get('/api/packages', async (c) => {
