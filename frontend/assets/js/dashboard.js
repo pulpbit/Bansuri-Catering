@@ -95,7 +95,8 @@ async function generatePdfAndDownload() {
   const menuText = formatMenu(currentQuoteLead.selectedMenu);
 
   try {
-    const { jsPDF } = await import('jspdf');
+    const jsPDF = window.jspdf?.jsPDF || window.jsPDF;
+    if (!jsPDF) throw new Error('jsPDF not loaded');
     const doc = new jsPDF({ unit: 'pt', format: 'a4' });
     const pad = 32;
     let y = 50;
