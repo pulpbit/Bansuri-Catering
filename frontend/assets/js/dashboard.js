@@ -1,11 +1,10 @@
-import { login, logout, leadsApi, packagesApi, menuApi, getToken, quoteApi } from './api.js';
+import { login, logout, leadsApi, packagesApi, menuApi } from './api.js';
 import { $ } from './utils/helpers.js';
 
 let currentQuoteLead = null;
 let currentQuoteUrl = '';
 let currentPdfBlobUrl = '';
 let currentPdfFile = null;
-let uploadedQuoteUrl = '';
 
 function triggerQuotePrint() {
   if (!currentQuoteLead) return;
@@ -177,20 +176,6 @@ async function ensurePdfReady() {
   await generatePdfAndDownload();
 }
 
-async function ensurePdfUploaded() {
-  await ensurePdfReady();
-  if (uploadedQuoteUrl) return uploadedQuoteUrl;
-  const token = getToken();
-  if (!token) return currentPdfBlobUrl;
-  try {
-    const { url } = await quoteApi.upload(currentPdfFile, token);
-    uploadedQuoteUrl = url;
-    return url;
-  } catch {
-    return currentPdfBlobUrl;
-  }
-}
-
 function renderStatusPill(status) {
   const map = {
     new: 'New lead',
@@ -349,8 +334,9 @@ function attachQuoteModal({ lead, pdfUrl }) {
   const emailBtn = quoteModal.querySelector('[data-quote-email]');
   if (emailBtn) {
     emailBtn.onclick = async () => {
-      const link = await ensurePdfUploaded();
+      await ensurePdfReady();
       const subject = encodeURIComponent('Your Bansuri Catering quote');
+      const link = currentPdfBlobUrl || '';
       const body = encodeURIComponent(`Hi,\n\nHere is your catering quote.\n${link ? `Download: ${link}` : ''}\n\nThank you!`);
       if (navigator.canShare && currentPdfFile && navigator.canShare({ files: [currentPdfFile] })) {
         try {
@@ -368,7 +354,8 @@ function attachQuoteModal({ lead, pdfUrl }) {
   const waBtn = quoteModal.querySelector('[data-quote-whatsapp]');
   if (waBtn) {
     waBtn.onclick = async () => {
-      const link = await ensurePdfUploaded();
+      await ensurePdfReady();
+      const link = currentPdfBlobUrl || '';
       if (navigator.canShare && currentPdfFile && navigator.canShare({ files: [currentPdfFile] })) {
         try {
           await navigator.share({
