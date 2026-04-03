@@ -71,6 +71,46 @@ function attachLeadModal(lead) {
   }
 }
 
+function attachQuoteModal({ lead, pdfUrl }) {
+  const quoteModal = document.getElementById('quote-modal');
+  if (!quoteModal) return;
+  quoteModal.classList.add('is-open');
+  (quoteModal.querySelector('[data-quote-lead-name]') || {}).textContent = lead?.name || '-';
+  const linkEl = quoteModal.querySelector('[data-quote-link]');
+  if (linkEl) {
+    linkEl.href = pdfUrl || '#';
+  }
+  const downloadBtn = quoteModal.querySelector('[data-quote-download]');
+  if (downloadBtn) {
+    downloadBtn.onclick = () => { if (pdfUrl) window.open(pdfUrl, '_blank'); };
+  }
+  const copyBtn = quoteModal.querySelector('[data-copy-quote-link]');
+  if (copyBtn) {
+    copyBtn.onclick = async () => {
+      if (pdfUrl && navigator.clipboard) {
+        await navigator.clipboard.writeText(pdfUrl);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = 'Copy Link'; }, 1200);
+      }
+    };
+  }
+  const emailBtn = quoteModal.querySelector('[data-quote-email]');
+  if (emailBtn) {
+    emailBtn.onclick = () => {
+      const subject = encodeURIComponent('Your Bansuri Catering quote');
+      const body = encodeURIComponent(`Hi,\n\nHere is your catering quote:\n${pdfUrl}\n\nThank you!`);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    };
+  }
+  const waBtn = quoteModal.querySelector('[data-quote-whatsapp]');
+  if (waBtn) {
+    waBtn.onclick = () => {
+      const text = encodeURIComponent(`Here is your catering quote: ${pdfUrl}`);
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    };
+  }
+}
+
 function leadsTable(leads = []) {
   if (!leads.length) return '<p class="menu-summary-muted">No leads yet.</p>';
   const rows = leads.map((lead) => `
@@ -198,8 +238,9 @@ export function initDashboard(options = {}) {
         btn.addEventListener('click', async (e) => {
           const row = e.target.closest('tr');
           const id = row?.dataset.leadId;
+          const lead = leads.find((l) => l.id === id);
           const quote = await leadsApi.createQuote(id);
-          alert(`Quote ready. PDF URL: ${quote.pdfUrl}`);
+          attachQuoteModal({ lead, pdfUrl: quote.pdfUrl });
         });
       });
       leadsTableEl.querySelectorAll('[data-view]').forEach((btn) => {
@@ -265,6 +306,13 @@ export function initDashboard(options = {}) {
     btn.addEventListener('click', () => {
       const leadModal = document.getElementById('lead-modal');
       leadModal?.classList.remove('is-open');
+    });
+  });
+
+  document.querySelectorAll('[data-close-quote]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const quoteModal = document.getElementById('quote-modal');
+      quoteModal?.classList.remove('is-open');
     });
   });
 }

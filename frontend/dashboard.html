@@ -123,6 +123,27 @@
       </div>
     </div>
 
+    <div class="modal" id="quote-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-quote></div>
+      <div class="modal__card modal__card--wide">
+        <header class="modal__head">
+          <h3>Quote ready</h3>
+          <button class="modal__close" type="button" data-close-quote>&times;</button>
+        </header>
+        <div class="quote-body">
+          <p><strong>Lead:</strong> <span data-quote-lead-name>-</span></p>
+          <p><strong>PDF URL:</strong> <a href="#" target="_blank" rel="noopener" data-quote-link>Download</a></p>
+          <div class="quote-actions">
+            <button class="btn btn--primary btn--compact" type="button" data-quote-download>Download PDF</button>
+            <button class="btn btn--secondary btn--compact" type="button" data-quote-email>Email Link</button>
+            <button class="btn btn--secondary btn--compact" type="button" data-quote-whatsapp>Share via WhatsApp</button>
+            <button class="btn btn--ghost btn--compact" type="button" data-copy-quote-link>Copy Link</button>
+          </div>
+          <p class="quote-hint">Links use the generated PDF URL; email/WhatsApp open your default client.</p>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="./assets/js/dashboard-page.js"></script>
   </body>
 </html>
