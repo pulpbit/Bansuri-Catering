@@ -261,6 +261,10 @@
   margin: 0 0 0.3rem;
 }
 
+.quote-menu-block {
+  margin-top: 0.5rem;
+}
+
 .quote-grid {
   display: grid;
   gap: 0.6rem;
