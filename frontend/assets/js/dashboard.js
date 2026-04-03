@@ -87,7 +87,7 @@ export function initDashboard() {
     try {
       await login(email, password);
       closeModal();
-      showDashboard();
+      showDashboard(true);
       await loadAll();
     } catch (err) {
       loginError.textContent = err?.message || 'Login failed. Please try again.';
@@ -180,8 +180,11 @@ export function initDashboard() {
     await Promise.all([loadLeads(), loadPackages(), loadMenu()]);
   }
 
-  function showDashboard() {
+  function showDashboard(shouldScroll = false) {
     dashboard?.classList.remove('is-hidden');
+    if (shouldScroll && dashboard) {
+      dashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // Auto show if token already exists
