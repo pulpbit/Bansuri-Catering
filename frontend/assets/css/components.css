@@ -313,6 +313,15 @@
   text-decoration: none;
 }
 
+.quote-actions-bar {
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), #fff);
+  padding: 0.8rem 0 0.2rem;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.06);
+}
+
 .planner__intro.card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 252, 0.96));
   box-shadow: 0 20px 50px rgba(150, 93, 146, 0.08);
