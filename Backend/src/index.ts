@@ -13,14 +13,17 @@ const app = new Hono<{ Bindings: Bindings }>();
 app.use(
   '*',
   cors({
-    origin: [
-      'https://bansuri-catering.pages.dev',
-      'http://127.0.0.1:5500',
-      'http://localhost:5173',
-      'http://127.0.0.1:5173',
-      'http://localhost:8080',
-      'http://127.0.0.1:8080'
-    ],
+    origin: (origin) => {
+      if (!origin) return true; // allow file:// or null for local previews
+      return [
+        'https://bansuri-catering.pages.dev',
+        'http://127.0.0.1:5500',
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
+        'http://localhost:8080',
+        'http://127.0.0.1:8080'
+      ].includes(origin);
+    },
     allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
     maxAge: 86400
