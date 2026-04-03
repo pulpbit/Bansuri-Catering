@@ -12,26 +12,7 @@ function triggerQuotePrint() {
   const service = quoteModal?.querySelector('[data-quote-service-total]')?.textContent || '₹0';
   const transport = quoteModal?.querySelector('[data-quote-transport-total]')?.textContent || '₹0';
   const grand = quoteModal?.querySelector('[data-quote-grand]')?.textContent || '₹0';
-  const menuItems = (() => {
-    const raw = currentQuoteLead.selectedMenu;
-    if (!raw) return [];
-    let data = raw;
-    if (typeof data === 'string') {
-      const trimmed = data.trim();
-      try { data = JSON.parse(trimmed); } catch { data = trimmed.split('|'); }
-    }
-    if (Array.isArray(data)) return data;
-    if (data && typeof data === 'object') {
-      return Object.entries(data).map(([label, items]) => {
-        const list = Array.isArray(items) ? items.join(', ') : String(items);
-        return `${label}: ${list}`;
-      });
-    }
-    return [String(data)];
-  })();
-  const menuListHtml = menuItems.length
-    ? menuItems.map((item) => `<li>${item}</li>`).join('')
-    : '<li>-</li>';
+  const menuText = formatMenu(currentQuoteLead.selectedMenu);
   const win = window.open('', '_blank');
   if (!win) return;
   const styles = `
@@ -73,7 +54,7 @@ function triggerQuotePrint() {
 
         <div class="card">
           <h2>Menu guidance</h2>
-          <ul class="menu">${menuListHtml}</ul>
+          <p class="menu">${menuText || '-'}</p>
         </div>
 
         <div class="card">
@@ -109,7 +90,7 @@ async function generatePdfAndDownload() {
   const service = quoteModal?.querySelector('[data-quote-service-total]')?.textContent || '₹0';
   const transport = quoteModal?.querySelector('[data-quote-transport-total]')?.textContent || '₹0';
   const grand = quoteModal?.querySelector('[data-quote-grand]')?.textContent || '₹0';
-  const menuItems = Array.from(quoteModal?.querySelectorAll('[data-quote-menu] li') || []).map((li) => li.textContent || '');
+  const menuText = formatMenu(currentQuoteLead.selectedMenu);
 
   try {
     const { jsPDF } = await import('jspdf');
@@ -122,10 +103,7 @@ async function generatePdfAndDownload() {
     doc.setFontSize(20);
     doc.setTextColor(29, 29, 46);
     doc.text('Bansuri Catering', pad, y);
-    doc.setFontSize(11);
-    y += 18;
-    doc.text(`PDF Link: ${currentQuoteUrl || 'Generated locally'}`, pad, y);
-    y += 24;
+    y += 28;
 
     doc.setFontSize(13);
     const metaLeft = [
@@ -146,12 +124,9 @@ async function generatePdfAndDownload() {
     doc.text('Menu guidance', pad, y);
     y += 14;
     doc.setFontSize(11);
-    const list = menuItems.length ? menuItems : ['-'];
-    list.forEach((item) => {
-      const lines = doc.splitTextToSize(`• ${item}`, 530);
-      doc.text(lines, pad, y);
-      y += lines.length * 14;
-    });
+    const menuLines = doc.splitTextToSize(menuText || '-', 530);
+    doc.text(menuLines, pad, y);
+    y += menuLines.length * 14 + 6;
 
     y += 10;
     doc.setFontSize(14);
@@ -185,7 +160,8 @@ async function generatePdfAndDownload() {
       y
     );
 
-    currentPdfBlobUrl = doc.output('bloburl');
+    const blob = doc.output('blob');
+    currentPdfBlobUrl = URL.createObjectURL(blob);
     doc.save('bansuri-quote.pdf');
   } catch (e) {
     triggerQuotePrint(); // fallback
