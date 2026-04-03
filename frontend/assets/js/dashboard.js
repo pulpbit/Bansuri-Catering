@@ -3,6 +3,7 @@ import { $ } from './utils/helpers.js';
 
 let currentQuoteLead = null;
 let currentQuoteUrl = '';
+let currentPdfBlobUrl = '';
 
 function triggerQuotePrint() {
   if (!currentQuoteLead) return;
@@ -101,6 +102,96 @@ function triggerQuotePrint() {
   setTimeout(() => win.print(), 200);
 }
 
+async function generatePdfAndDownload() {
+  if (!currentQuoteLead) return;
+  const quoteModal = document.getElementById('quote-modal');
+  const food = quoteModal?.querySelector('[data-quote-food-total]')?.textContent || '₹0';
+  const service = quoteModal?.querySelector('[data-quote-service-total]')?.textContent || '₹0';
+  const transport = quoteModal?.querySelector('[data-quote-transport-total]')?.textContent || '₹0';
+  const grand = quoteModal?.querySelector('[data-quote-grand]')?.textContent || '₹0';
+  const menuItems = Array.from(quoteModal?.querySelectorAll('[data-quote-menu] li') || []).map((li) => li.textContent || '');
+
+  try {
+    const { jsPDF } = await import('jspdf');
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    const pad = 32;
+    let y = 50;
+
+    doc.setFillColor(253, 234, 238);
+    doc.rect(0, 0, doc.internal.pageSize.getWidth(), 120, 'F');
+    doc.setFontSize(20);
+    doc.setTextColor(29, 29, 46);
+    doc.text('Bansuri Catering', pad, y);
+    doc.setFontSize(11);
+    y += 18;
+    doc.text(`PDF Link: ${currentQuoteUrl || 'Generated locally'}`, pad, y);
+    y += 24;
+
+    doc.setFontSize(13);
+    const metaLeft = [
+      `Name: ${currentQuoteLead.name || '-'}`,
+      `Phone: ${currentQuoteLead.phone || '-'}`,
+      `Event Type: ${currentQuoteLead.eventType || '-'}`
+    ];
+    const metaRight = [
+      `Event Date: ${currentQuoteLead.eventDate || '-'}`,
+      `Guests: ${currentQuoteLead.guests || '-'}`,
+      `Package: ${currentQuoteLead.package || '-'}`
+    ];
+    metaLeft.forEach((t, i) => doc.text(t, pad, y + i * 16));
+    metaRight.forEach((t, i) => doc.text(t, pad + 250, y + i * 16));
+    y += 70;
+
+    doc.setFontSize(14);
+    doc.text('Menu guidance', pad, y);
+    y += 14;
+    doc.setFontSize(11);
+    const list = menuItems.length ? menuItems : ['-'];
+    list.forEach((item) => {
+      const lines = doc.splitTextToSize(`• ${item}`, 530);
+      doc.text(lines, pad, y);
+      y += lines.length * 14;
+    });
+
+    y += 10;
+    doc.setFontSize(14);
+    doc.text('Totals', pad, y);
+    y += 14;
+    doc.setFontSize(12);
+    const totals = [
+      ['Food total', food],
+      ['Service fee', service],
+      ['Transport', transport],
+      ['Grand Total', grand]
+    ];
+    totals.forEach(([label, val], idx) => {
+      doc.text(label, pad, y + idx * 16);
+      doc.text(String(val), pad + 400, y + idx * 16, { align: 'right' });
+    });
+    y += totals.length * 16 + 20;
+
+    doc.setFontSize(11);
+    doc.setTextColor(94, 98, 115);
+    doc.text(
+      [
+        'Bansuri Catering',
+        '+91-70464 45444',
+        'bansuricatering@gmail.com',
+        'SHOP NO 50, THIRD FLOOR, AAKASH BUSINESS CENTER,',
+        'OPP. BHAGYALAXMI SOCIETY, PIPLOD',
+        'Surat – 395007, Gujarat'
+      ],
+      pad,
+      y
+    );
+
+    currentPdfBlobUrl = doc.output('bloburl');
+    doc.save('bansuri-quote.pdf');
+  } catch (e) {
+    triggerQuotePrint(); // fallback
+  }
+}
+
 function renderStatusPill(status) {
   const map = {
     new: 'New lead',
@@ -182,7 +273,7 @@ function attachQuoteModal({ lead, pdfUrl }) {
   if (!quoteModal) return;
   quoteModal.classList.add('is-open');
   currentQuoteLead = lead;
-  currentQuoteUrl = pdfUrl;
+  currentQuoteUrl = pdfUrl || '';
   (quoteModal.querySelector('[data-quote-lead-name]') || {}).textContent = lead?.name || '-';
   (quoteModal.querySelector('[data-quote-lead-phone]') || {}).textContent = lead?.phone || '-';
   (quoteModal.querySelector('[data-quote-lead-type]') || {}).textContent = lead?.eventType || '-';
@@ -244,7 +335,7 @@ function attachQuoteModal({ lead, pdfUrl }) {
 
   const downloadBtn = quoteModal.querySelector('[data-quote-download]');
   if (downloadBtn) {
-    downloadBtn.onclick = () => triggerQuotePrint();
+    downloadBtn.onclick = () => generatePdfAndDownload();
   }
   const copyBtn = quoteModal.querySelector('[data-copy-quote-link]');
   if (copyBtn) {
@@ -260,14 +351,16 @@ function attachQuoteModal({ lead, pdfUrl }) {
   if (emailBtn) {
     emailBtn.onclick = () => {
       const subject = encodeURIComponent('Your Bansuri Catering quote');
-      const body = encodeURIComponent(`Hi,\n\nHere is your catering quote:\n${pdfUrl}\n\nThank you!`);
+      const link = currentPdfBlobUrl || currentQuoteUrl || '';
+      const body = encodeURIComponent(`Hi,\n\nHere is your catering quote.\n${link ? `Download: ${link}` : 'Please see attached PDF.'}\n\nThank you!`);
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     };
   }
   const waBtn = quoteModal.querySelector('[data-quote-whatsapp]');
   if (waBtn) {
     waBtn.onclick = () => {
-      const text = encodeURIComponent(`Here is your catering quote: ${pdfUrl}`);
+      const link = currentPdfBlobUrl || currentQuoteUrl || '';
+      const text = encodeURIComponent(`Here is your catering quote${link ? ': ' + link : ''}`);
       window.open(`https://wa.me/?text=${text}`, '_blank');
     };
   }
