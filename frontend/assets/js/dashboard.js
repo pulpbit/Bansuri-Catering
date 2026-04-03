@@ -165,7 +165,10 @@ async function generatePdfAndDownload() {
     const blob = doc.output('blob');
     currentPdfBlobUrl = URL.createObjectURL(blob);
     currentPdfFile = new File([blob], 'bansuri-quote.pdf', { type: 'application/pdf' });
-    doc.save('bansuri-quote.pdf', { returnPromise: true });
+    const safeName = (currentQuoteLead.name || 'quote').replace(/[^a-z0-9_\-]+/gi, '-');
+    const safeEvent = (currentQuoteLead.eventType || 'event').replace(/[^a-z0-9_\-]+/gi, '-');
+    const filename = `${safeName}-${safeEvent}-quote.pdf`;
+    doc.save(filename, { returnPromise: true });
   } catch (e) {
     triggerQuotePrint(); // fallback
   }
