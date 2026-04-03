@@ -4,6 +4,7 @@ import { validateStep } from './utils/validators.js';
 import { $, formatPackageLabel } from './utils/helpers.js';
 import { clearLeadDraft, loadLeadDraft, saveLeadDraft } from './services/store.js';
 import { getMenuItems } from './data/menus.js';
+import { createLeadPublic } from './api.js';
 
 const STEP_LABELS = ['Basics', 'Package', 'Menu', 'Review'];
 const BASICS_ORDER = ['name', 'phone', 'eventType', 'eventDate', 'guests'];
@@ -147,8 +148,28 @@ export function initWizard() {
       return;
     }
 
-    state = saveLeadDraft({ completed: true });
-    renderThankYou();
+    submitLead();
+  }
+
+  async function submitLead() {
+    try {
+      const selectedPackage = PACKAGE_OPTIONS.find((pkg) => pkg.id === state.packageId);
+      const payload = {
+        name: state.name,
+        phone: state.phone,
+        eventType: state.eventType,
+        eventDate: state.eventDate,
+        guests: Number(state.guests),
+        package: formatPackageLabel(selectedPackage),
+        selectedMenu: state.selectedMenuItems ? JSON.stringify(state.selectedMenuItems) : '',
+        status: 'new',
+      };
+      await createLeadPublic(payload);
+      state = saveLeadDraft({ completed: true });
+      renderThankYou();
+    } catch (err) {
+      setError('Unable to submit right now. Please try again.');
+    }
   }
 
   function updateField(field, value) {

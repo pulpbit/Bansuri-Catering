@@ -21,7 +21,32 @@ app.post('/api/login', async (c) => {
   return c.json({ message: 'Unauthorized' }, 401);
 });
 
-app.use('/api/*', bearerAuth({ token: 'static-admin-token' }));
+// Public lead submission
+app.post('/api/leads', async (c) => {
+  const body = await c.req.json();
+  const id = nanoid();
+  await c.env.DB.prepare(
+    'INSERT INTO leads (id, name, phone, eventType, eventDate, guests, package, selectedMenu, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)'
+  ).bind(
+    id,
+    body.name || '',
+    body.phone || '',
+    body.eventType || '',
+    body.eventDate || '',
+    body.guests || 0,
+    body.package || '',
+    body.selectedMenu || '',
+    'new'
+  ).run();
+  return c.json({ id });
+});
+
+// Protect everything else
+app.use('/api/*', async (c, next) => {
+  // allow the public POST we already handled
+  if (c.req.method === 'POST' && c.req.path === '/api/leads') return next();
+  return bearerAuth({ token: 'static-admin-token' })(c, next);
+});
 
 app.get('/api/leads', async (c) => {
   const { results } = await c.env.DB.prepare('SELECT * FROM leads ORDER BY created_at DESC').all();

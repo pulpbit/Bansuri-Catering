@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = 'https://bansuri-api.pulpbit.workers.dev/api';
 
 let token = localStorage.getItem('authToken') || '';
 
@@ -45,6 +45,16 @@ export const leadsApi = {
   updateStatus: (id, status) => sendJSON(`/leads/${id}/status`, 'PATCH', { status }),
   createQuote: (id) => getJSON(`/leads/${id}/quote`),
 };
+
+export async function createLeadPublic(payload) {
+  const res = await fetch(`${API_BASE}/leads`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error('Failed to submit lead');
+  return res.json();
+}
 
 export const packagesApi = {
   list: () => getJSON('/packages'),
