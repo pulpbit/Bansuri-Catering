@@ -250,6 +250,11 @@
   gap: 0.6rem;
 }
 
+.quote-lead-info {
+  display: grid;
+  gap: 0.25rem;
+}
+
 .quote-grid {
   display: grid;
   gap: 0.6rem;

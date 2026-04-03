@@ -82,7 +82,27 @@ function attachQuoteModal({ lead, pdfUrl }) {
   if (!quoteModal) return;
   quoteModal.classList.add('is-open');
   (quoteModal.querySelector('[data-quote-lead-name]') || {}).textContent = lead?.name || '-';
+  (quoteModal.querySelector('[data-quote-lead-phone]') || {}).textContent = lead?.phone || '-';
+  (quoteModal.querySelector('[data-quote-lead-type]') || {}).textContent = lead?.eventType || '-';
+  (quoteModal.querySelector('[data-quote-lead-date]') || {}).textContent = lead?.eventDate || '-';
+  (quoteModal.querySelector('[data-quote-lead-package]') || {}).textContent = lead?.package || '-';
   (quoteModal.querySelector('[data-quote-guests]') || {}).textContent = lead?.guests || '-';
+  const menuList = quoteModal.querySelector('[data-quote-menu]');
+  if (menuList) {
+    menuList.innerHTML = '';
+    const menuText = formatMenu(lead?.selectedMenu);
+    if (menuText && menuText !== '-') {
+      menuText.split('|').forEach((segment) => {
+        const li = document.createElement('li');
+        li.textContent = segment.trim();
+        menuList.appendChild(li);
+      });
+    } else {
+      const li = document.createElement('li');
+      li.textContent = 'No guidance available';
+      menuList.appendChild(li);
+    }
+  }
   const linkEl = quoteModal.querySelector('[data-quote-link]');
   if (linkEl) {
     linkEl.href = pdfUrl || '#';
