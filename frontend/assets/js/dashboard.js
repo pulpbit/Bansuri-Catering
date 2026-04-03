@@ -428,6 +428,7 @@ export function initDashboard(options = {}) {
   const loginModal = $('#login-modal');
   const leadsTableEl = $('#leads-table');
   const loginError = $('#login-error');
+  const statusFilter = document.getElementById('lead-status-filter');
 
   function openModal() {
     loginModal?.classList.add('is-open');
@@ -488,7 +489,9 @@ export function initDashboard(options = {}) {
   async function loadLeads() {
     try {
       const leads = await leadsApi.list();
-      leadsTableEl.innerHTML = leadsTable(leads);
+      const filterVal = statusFilter?.value || '';
+      const filtered = filterVal ? leads.filter((l) => l.status === filterVal) : leads;
+      leadsTableEl.innerHTML = leadsTable(filtered);
       leadsTableEl.querySelectorAll('select[data-status]').forEach((select) => {
         select.addEventListener('change', async (e) => {
           const row = e.target.closest('tr');
@@ -532,6 +535,13 @@ export function initDashboard(options = {}) {
 
   async function loadAll() {
     await Promise.all([loadLeads()]);
+  }
+
+  // Filter leads by status without reloading the page
+  if (statusFilter) {
+    statusFilter.addEventListener('change', () => {
+      loadLeads();
+    });
   }
 
   function showDashboard(shouldScroll = false) {
