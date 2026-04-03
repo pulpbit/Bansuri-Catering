@@ -292,6 +292,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+  justify-content: flex-start;
 }
 
 .quote-hint {
@@ -320,6 +321,16 @@
   padding: 0.8rem 0 0.2rem;
   border-top: 1px solid var(--border);
   box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 640px) {
+  .quote-actions {
+    flex-direction: column;
+  }
+  .quote-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .planner__intro.card {
