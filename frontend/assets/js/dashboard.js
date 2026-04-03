@@ -423,8 +423,6 @@ export function initDashboard(options = {}) {
   const dashboard = $('#dashboard');
   const loginModal = $('#login-modal');
   const leadsTableEl = $('#leads-table');
-  const packagesTableEl = $('#packages-table');
-  const menuTableEl = $('#menu-table');
   const loginError = $('#login-error');
 
   function openModal() {
@@ -528,37 +526,8 @@ export function initDashboard(options = {}) {
     }
   }
 
-  async function loadPackages() {
-    try {
-      const list = await packagesApi.list();
-      packagesTableEl.innerHTML = simpleTable(list, [
-        { key: 'name', label: 'Name' },
-        { key: 'tier', label: 'Tier' },
-        { key: 'price', label: 'Price' }
-      ]);
-    } catch {
-      packagesTableEl.innerHTML = '<p class="error-text">Failed to load packages.</p>';
-    }
-  }
-
-  async function loadMenu() {
-    try {
-      const list = await menuApi.list();
-      const rows = list.map((cat) => ({
-        name: cat.name,
-        items: (cat.items || []).join(', ')
-      }));
-      menuTableEl.innerHTML = simpleTable(rows, [
-        { key: 'name', label: 'Category' },
-        { key: 'items', label: 'Items' }
-      ]);
-    } catch {
-      menuTableEl.innerHTML = '<p class="error-text">Failed to load menu.</p>';
-    }
-  }
-
   async function loadAll() {
-    await Promise.all([loadLeads(), loadPackages(), loadMenu()]);
+    await Promise.all([loadLeads()]);
   }
 
   function showDashboard(shouldScroll = false) {
