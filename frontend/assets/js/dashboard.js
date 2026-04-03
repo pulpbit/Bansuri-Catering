@@ -166,7 +166,7 @@ async function generatePdfAndDownload() {
     const blob = doc.output('blob');
     currentPdfBlobUrl = URL.createObjectURL(blob);
     currentPdfFile = new File([blob], 'bansuri-quote.pdf', { type: 'application/pdf' });
-    doc.save('bansuri-quote.pdf');
+    doc.save('bansuri-quote.pdf', { returnPromise: true });
   } catch (e) {
     triggerQuotePrint(); // fallback
   }
