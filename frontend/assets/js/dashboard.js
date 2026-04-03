@@ -15,43 +15,65 @@ function triggerQuotePrint() {
   const win = window.open('', '_blank');
   if (!win) return;
   const styles = `
-    body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
-    h1 { margin-bottom: 6px; }
-    h2 { margin-top: 24px; }
-    .grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .summary { border: 1px solid #ddd; border-radius: 10px; padding: 12px; margin-top: 12px; }
-    .summary div { display: flex; justify-content: space-between; margin: 4px 0; }
-    .grand { border-top: 1px solid #ddd; padding-top: 6px; font-weight: bold; }
-    .branding { margin-top: 24px; }
+    :root { --primary:#d62976; --accent:#f49b38; --bg:#fdf7fb; --card:#ffffff; --muted:#5e6173; }
+    body { font-family: 'Inter', Arial, sans-serif; margin: 0; background: var(--bg); color: #1e1f2b; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 28px; }
+    .hero { background: linear-gradient(120deg, #fdeaee, #fff5f7); border-radius: 18px; padding: 22px; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .hero h1 { margin: 0; font-size: 1.9rem; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #fff; color: var(--primary); font-weight: 700; border: 1px solid rgba(0,0,0,0.05); }
+    .meta { margin: 18px 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card { background: var(--card); border-radius: 14px; padding: 14px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 12px 30px rgba(0,0,0,0.05); }
+    .card h2 { margin: 0 0 10px; }
+    .menu { line-height: 1.6; color: var(--muted); }
+    .summary { display: grid; gap: 8px; }
+    .summary div { display: flex; justify-content: space-between; font-size: 1rem; }
+    .summary div span:last-child { font-weight: 700; }
+    .grand { border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 8px; font-size: 1.1rem; }
+    .branding { margin-top: 18px; color: var(--muted); line-height: 1.5; }
+    a { color: var(--primary); text-decoration: none; }
+    @media print { body { background: #fff; } .hero, .card { box-shadow: none; } }
   `;
   win.document.write(`
     <html><head><title>Quote</title><style>${styles}</style></head><body>
-      <h1>Bansuri Catering</h1>
-      <p><strong>PDF Link:</strong> ${currentQuoteUrl || 'Generated locally'}</p>
-      <div class="grid">
-        <div><strong>Name:</strong> ${currentQuoteLead.name || '-'}</div>
-        <div><strong>Phone:</strong> ${currentQuoteLead.phone || '-'}</div>
-        <div><strong>Event Type:</strong> ${currentQuoteLead.eventType || '-'}</div>
-        <div><strong>Event Date:</strong> ${currentQuoteLead.eventDate || '-'}</div>
-        <div><strong>Guests:</strong> ${currentQuoteLead.guests || '-'}</div>
-        <div><strong>Package:</strong> ${currentQuoteLead.package || '-'}</div>
-      </div>
-      <h2>Menu guidance</h2>
-      <p>${menuText || '-'}</p>
-      <h2>Totals</h2>
-      <div class="summary">
-        <div><span>Food total</span><span>${food}</span></div>
-        <div><span>Service fee</span><span>${service}</span></div>
-        <div><span>Transport</span><span>${transport}</span></div>
-        <div class="grand"><span>Grand Total</span><span>${grand}</span></div>
-      </div>
-      <div class="branding">
-        <p><strong>Bansuri Catering</strong><br/>
-        +91-70464 45444<br/>
-        bansuricatering@gmail.com<br/>
-        SHOP NO 50, THIRD FLOOR, AAKASH BUSINESS CENTER,<br/>
-        OPP. BHAGYALAXMI SOCIETY, PIPLOD<br/>
-        Surat – 395007, Gujarat</p>
+      <div class="wrap">
+        <div class="hero">
+          <div>
+            <h1>Bansuri Catering</h1>
+            <div class="pill">PDF Link</div>
+            <p style="margin:6px 0 0;color:var(--muted);">${currentQuoteUrl || 'Generated locally'}</p>
+          </div>
+          <div class="pill">Guests: ${currentQuoteLead.guests || '-'}</div>
+        </div>
+
+        <div class="meta">
+          <div class="card"><strong>Name:</strong> ${currentQuoteLead.name || '-'}<br/><strong>Phone:</strong> ${currentQuoteLead.phone || '-'}</div>
+          <div class="card"><strong>Event Type:</strong> ${currentQuoteLead.eventType || '-'}<br/><strong>Event Date:</strong> ${currentQuoteLead.eventDate || '-'}</div>
+          <div class="card"><strong>Package:</strong> ${currentQuoteLead.package || '-'}</div>
+        </div>
+
+        <div class="card">
+          <h2>Menu guidance</h2>
+          <p class="menu">${menuText || '-'}</p>
+        </div>
+
+        <div class="card">
+          <h2>Totals</h2>
+          <div class="summary">
+            <div><span>Food total</span><span>${food}</span></div>
+            <div><span>Service fee</span><span>${service}</span></div>
+            <div><span>Transport</span><span>${transport}</span></div>
+            <div class="grand"><span>Grand Total</span><span>${grand}</span></div>
+          </div>
+        </div>
+
+        <div class="branding">
+          <p><strong>Bansuri Catering</strong><br/>
+          +91-70464 45444<br/>
+          bansuricatering@gmail.com<br/>
+          SHOP NO 50, THIRD FLOOR, AAKASH BUSINESS CENTER,<br/>
+          OPP. BHAGYALAXMI SOCIETY, PIPLOD<br/>
+          Surat – 395007, Gujarat</p>
+        </div>
       </div>
     </body></html>
   `);
