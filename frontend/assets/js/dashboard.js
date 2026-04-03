@@ -152,11 +152,15 @@ async function generatePdfAndDownload() {
 
     doc.setFontSize(14);
     doc.text('Menu guidance', pad, y);
-    y += 14;
-    doc.setFontSize(11);
-    const menuLines = doc.splitTextToSize(menuText || '-', 530);
-    doc.text(menuLines, pad, y);
-    y += menuLines.length * 14 + 6;
+    y += 16;
+    doc.setFontSize(11.5);
+    const menuLines = buildMenuLines(currentQuoteLead.selectedMenu);
+    menuLines.forEach((line) => {
+      const wrapped = doc.splitTextToSize(`• ${line}`, 520);
+      doc.text(wrapped, pad, y);
+      y += wrapped.length * 14;
+    });
+    y += 10;
 
     y += 10;
     doc.setFontSize(14);
@@ -246,6 +250,33 @@ function formatMenu(selectedMenu) {
     return parts.join(' | ') || '-';
   }
   return String(data);
+}
+
+function buildMenuLines(selectedMenu) {
+  if (!selectedMenu) return ['No guidance available'];
+  let data = selectedMenu;
+  if (typeof data === 'string') {
+    const trimmed = data.trim();
+    // If it's a JSON-ish string, reuse formatMenu parsing
+    try {
+      data = JSON.parse(trimmed);
+    } catch {
+      // split pipe-delimited strings into lines
+      const parts = trimmed.split('|').map((p) => p.trim()).filter(Boolean);
+      return parts.length ? parts : [trimmed];
+    }
+  }
+  if (Array.isArray(data)) {
+    return data.length ? data.map((item) => String(item)) : ['No guidance available'];
+  }
+  if (data && typeof data === 'object') {
+    const parts = Object.entries(data).map(([label, items]) => {
+      const list = Array.isArray(items) ? items.join(', ') : String(items);
+      return `${label}: ${list}`;
+    });
+    return parts.length ? parts : ['No guidance available'];
+  }
+  return [String(data)];
 }
 
 function attachLeadModal(lead) {
