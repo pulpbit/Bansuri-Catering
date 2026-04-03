@@ -9,23 +9,18 @@ type Bindings = {
   ADMIN_PASSWORD: string;
 };
 
-const devOrigins = [
-  'http://127.0.0.1:5500',
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  'http://localhost:8080',
-  'http://127.0.0.1:8080'
-];
-const prodOrigins = ['https://bansuri-catering.pages.dev'];
-
 const app = new Hono<{ Bindings: Bindings }>();
 app.use(
   '*',
   cors({
-    origin: (origin) => {
-      if (!origin) return true; // allow file:// / null for local file previews
-      return [...prodOrigins, ...devOrigins].includes(origin);
-    },
+    origin: [
+      'https://bansuri-catering.pages.dev',
+      'http://127.0.0.1:5500',
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
+      'http://localhost:8080',
+      'http://127.0.0.1:8080'
+    ],
     allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
     maxAge: 86400
