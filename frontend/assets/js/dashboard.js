@@ -52,7 +52,7 @@ function leadsTable(leads = []) {
       <td>${lead.eventDate || '-'}</td>
       <td>${lead.guests || '-'}</td>
       <td>${lead.package || '-'}</td>
-      <td>${formatMenu(lead.selectedMenu)}</td>
+      <td class="text-muted">See “View”</td>
       <td>${renderStatusPill(lead.status)}</td>
       <td>
         <div class="dash-actions">
@@ -174,7 +174,19 @@ export function initDashboard(options = {}) {
       leadsTableEl.querySelectorAll('[data-view]').forEach((btn) => {
         btn.addEventListener('click', (e) => {
           const row = e.target.closest('tr');
-          alert(`Lead details:\n${row.innerText}`);
+          const id = row?.dataset.leadId;
+          const lead = leads.find((l) => l.id === id);
+          const menuText = formatMenu(lead?.selectedMenu);
+          const detail = [
+            `Name: ${lead?.name || '-'}`,
+            `Phone: ${lead?.phone || '-'}`,
+            `Event Type: ${lead?.eventType || '-'}`,
+            `Event Date: ${lead?.eventDate || '-'}`,
+            `Guests: ${lead?.guests || '-'}`,
+            `Package: ${lead?.package || '-'}`,
+            `Menu: ${menuText}`
+          ].join('\n');
+          alert(detail);
         });
       });
     } catch {
