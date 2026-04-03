@@ -78,13 +78,24 @@ export function initDashboard() {
     e.preventDefault();
     const email = $('#login-email').value;
     const password = $('#login-password').value;
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const prevText = submitBtn?.textContent;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Logging in...';
+    }
     try {
       await login(email, password);
       closeModal();
       showDashboard();
       await loadAll();
     } catch (err) {
-      loginError.textContent = 'Invalid credentials';
+      loginError.textContent = err?.message || 'Login failed. Please try again.';
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = prevText;
+      }
     }
   });
 
