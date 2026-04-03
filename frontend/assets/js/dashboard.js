@@ -5,6 +5,7 @@ let currentQuoteLead = null;
 let currentQuoteUrl = '';
 let currentPdfBlobUrl = '';
 let currentPdfFile = null;
+let currentPdfFileName = 'bansuri-quote.pdf';
 
 function triggerQuotePrint() {
   if (!currentQuoteLead) return;
@@ -163,12 +164,12 @@ async function generatePdfAndDownload() {
     );
 
     const blob = doc.output('blob');
-    currentPdfBlobUrl = URL.createObjectURL(blob);
-    currentPdfFile = new File([blob], 'bansuri-quote.pdf', { type: 'application/pdf' });
     const safeName = (currentQuoteLead.name || 'quote').replace(/[^a-z0-9_\-]+/gi, '-');
     const safeEvent = (currentQuoteLead.eventType || 'event').replace(/[^a-z0-9_\-]+/gi, '-');
-    const filename = `${safeName}-${safeEvent}-quote.pdf`;
-    doc.save(filename, { returnPromise: true });
+    currentPdfFileName = `${safeName}-${safeEvent}-quote.pdf`;
+    currentPdfBlobUrl = URL.createObjectURL(blob);
+    currentPdfFile = new File([blob], currentPdfFileName, { type: 'application/pdf' });
+    doc.save(currentPdfFileName, { returnPromise: true });
   } catch (e) {
     triggerQuotePrint(); // fallback
   }
