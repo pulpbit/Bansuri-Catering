@@ -10,7 +10,20 @@ type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
-app.use('*', cors());
+app.use(
+  '*',
+  cors({
+    origin: [
+      'https://bansuri-catering.pages.dev',
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
+      'http://localhost:8080'
+    ],
+    allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+    maxAge: 86400
+  })
+);
 
 app.post('/api/login', async (c) => {
   const { email, password } = await c.req.json();
