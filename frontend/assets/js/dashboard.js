@@ -11,7 +11,26 @@ function triggerQuotePrint() {
   const service = quoteModal?.querySelector('[data-quote-service-total]')?.textContent || '₹0';
   const transport = quoteModal?.querySelector('[data-quote-transport-total]')?.textContent || '₹0';
   const grand = quoteModal?.querySelector('[data-quote-grand]')?.textContent || '₹0';
-  const menuText = formatMenu(currentQuoteLead.selectedMenu);
+  const menuItems = (() => {
+    const raw = currentQuoteLead.selectedMenu;
+    if (!raw) return [];
+    let data = raw;
+    if (typeof data === 'string') {
+      const trimmed = data.trim();
+      try { data = JSON.parse(trimmed); } catch { data = trimmed.split('|'); }
+    }
+    if (Array.isArray(data)) return data;
+    if (data && typeof data === 'object') {
+      return Object.entries(data).map(([label, items]) => {
+        const list = Array.isArray(items) ? items.join(', ') : String(items);
+        return `${label}: ${list}`;
+      });
+    }
+    return [String(data)];
+  })();
+  const menuListHtml = menuItems.length
+    ? menuItems.map((item) => `<li>${item}</li>`).join('')
+    : '<li>-</li>';
   const win = window.open('', '_blank');
   if (!win) return;
   const styles = `
@@ -53,7 +72,7 @@ function triggerQuotePrint() {
 
         <div class="card">
           <h2>Menu guidance</h2>
-          <p class="menu">${menuText || '-'}</p>
+          <ul class="menu">${menuListHtml}</ul>
         </div>
 
         <div class="card">
