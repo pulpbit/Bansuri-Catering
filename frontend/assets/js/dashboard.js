@@ -1,4 +1,4 @@
-import { login, logout, leadsApi, packagesApi, menuApi } from './api.js';
+import { login, logout, leadsApi, packagesApi, menuApi, getToken } from './api.js';
 import { $ } from './utils/helpers.js';
 
 let currentQuoteLead = null;
