@@ -76,10 +76,44 @@ function attachQuoteModal({ lead, pdfUrl }) {
   if (!quoteModal) return;
   quoteModal.classList.add('is-open');
   (quoteModal.querySelector('[data-quote-lead-name]') || {}).textContent = lead?.name || '-';
+  (quoteModal.querySelector('[data-quote-guests]') || {}).textContent = lead?.guests || '-';
   const linkEl = quoteModal.querySelector('[data-quote-link]');
   if (linkEl) {
     linkEl.href = pdfUrl || '#';
   }
+  // Prefill calculators
+  const priceInput = quoteModal.querySelector('[data-quote-price]');
+  const serviceInput = quoteModal.querySelector('[data-quote-service]');
+  const transportInput = quoteModal.querySelector('[data-quote-transport]');
+
+  const foodTotalEl = quoteModal.querySelector('[data-quote-food-total]');
+  const serviceTotalEl = quoteModal.querySelector('[data-quote-service-total]');
+  const transportTotalEl = quoteModal.querySelector('[data-quote-transport-total]');
+  const grandEl = quoteModal.querySelector('[data-quote-grand]');
+
+  const guests = Number(lead?.guests || 0);
+
+  function recalc() {
+    const price = Number(priceInput?.value || 0);
+    const service = Number(serviceInput?.value || 0);
+    const transport = Number(transportInput?.value || 0);
+    const foodTotal = price * guests;
+    const grand = foodTotal + service + transport;
+    if (foodTotalEl) foodTotalEl.textContent = `₹${foodTotal.toLocaleString('en-IN')}`;
+    if (serviceTotalEl) serviceTotalEl.textContent = `₹${service.toLocaleString('en-IN')}`;
+    if (transportTotalEl) transportTotalEl.textContent = `₹${transport.toLocaleString('en-IN')}`;
+    if (grandEl) grandEl.textContent = `₹${grand.toLocaleString('en-IN')}`;
+  }
+
+  [priceInput, serviceInput, transportInput].forEach((input) => {
+    if (input) {
+      input.value = input.value || 0;
+      input.oninput = recalc;
+      input.onchange = recalc;
+    }
+  });
+  recalc();
+
   const downloadBtn = quoteModal.querySelector('[data-quote-download]');
   if (downloadBtn) {
     downloadBtn.onclick = () => { if (pdfUrl) window.open(pdfUrl, '_blank'); };

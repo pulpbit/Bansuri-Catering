@@ -132,6 +132,27 @@
         </header>
         <div class="quote-body">
           <p><strong>Lead:</strong> <span data-quote-lead-name>-</span></p>
+          <p><strong>Guests:</strong> <span data-quote-guests>-</span></p>
+
+          <div class="quote-grid">
+            <label>Price per plate
+              <input type="number" min="0" step="1" value="0" data-quote-price />
+            </label>
+            <label>Service fee
+              <input type="number" min="0" step="1" value="0" data-quote-service />
+            </label>
+            <label>Transport / logistics
+              <input type="number" min="0" step="1" value="0" data-quote-transport />
+            </label>
+          </div>
+
+          <div class="quote-summary">
+            <div><span>Food total</span><strong data-quote-food-total>₹0</strong></div>
+            <div><span>Service fee</span><strong data-quote-service-total>₹0</strong></div>
+            <div><span>Transport</span><strong data-quote-transport-total>₹0</strong></div>
+            <div class="quote-summary__grand"><span>Grand Total</span><strong data-quote-grand>₹0</strong></div>
+          </div>
+
           <p><strong>PDF URL:</strong> <a href="#" target="_blank" rel="noopener" data-quote-link>Download</a></p>
           <div class="quote-actions">
             <button class="btn btn--primary btn--compact" type="button" data-quote-download>Download PDF</button>
@@ -139,7 +160,7 @@
             <button class="btn btn--secondary btn--compact" type="button" data-quote-whatsapp>Share via WhatsApp</button>
             <button class="btn btn--ghost btn--compact" type="button" data-copy-quote-link>Copy Link</button>
           </div>
-          <p class="quote-hint">Links use the generated PDF URL; email/WhatsApp open your default client.</p>
+          <p class="quote-hint">Totals update live; links use the generated PDF URL.</p>
         </div>
       </div>
     </div>

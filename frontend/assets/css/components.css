@@ -250,6 +250,33 @@
   gap: 0.6rem;
 }
 
+.quote-grid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.quote-summary {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.8rem;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.quote-summary div {
+  display: flex;
+  justify-content: space-between;
+  color: #3b3e51;
+}
+
+.quote-summary__grand {
+  border-top: 1px solid var(--border);
+  padding-top: 0.35rem;
+  font-size: 1.05rem;
+}
+
 .quote-actions {
   display: flex;
   flex-wrap: wrap;
