@@ -12,6 +12,17 @@ function renderStatusPill(status) {
   return `<span class="status-pill ${cls}">${map[cls] || 'New lead'}</span>`;
 }
 
+function formatMenu(selectedMenu) {
+  if (!selectedMenu) return '-';
+  try {
+    const parsed = typeof selectedMenu === 'string' ? JSON.parse(selectedMenu) : selectedMenu;
+    const parts = Object.entries(parsed).map(([label, items]) => `${label}: ${items.join(', ')}`);
+    return parts.join(' | ') || '-';
+  } catch {
+    return selectedMenu;
+  }
+}
+
 function leadsTable(leads = []) {
   if (!leads.length) return '<p class="menu-summary-muted">No leads yet.</p>';
   const rows = leads.map((lead) => `
@@ -22,7 +33,7 @@ function leadsTable(leads = []) {
       <td>${lead.eventDate || '-'}</td>
       <td>${lead.guests || '-'}</td>
       <td>${lead.package || '-'}</td>
-      <td>${lead.selectedMenu || '-'}</td>
+      <td>${formatMenu(lead.selectedMenu)}</td>
       <td>${renderStatusPill(lead.status)}</td>
       <td>
         <div class="dash-actions">
@@ -55,7 +66,8 @@ function simpleTable(items = [], cols = []) {
   return `<table><thead><tr>${header}</tr></thead><tbody>${body}</tbody></table>`;
 }
 
-export function initDashboard() {
+export function initDashboard(options = {}) {
+  const { redirectAfterLogin = false, scrollOnShow = false } = options;
   const dashboard = $('#dashboard');
   const loginModal = $('#login-modal');
   const leadsTableEl = $('#leads-table');
@@ -87,6 +99,10 @@ export function initDashboard() {
     try {
       await login(email, password);
       closeModal();
+      if (redirectAfterLogin) {
+        window.location.href = '/dashboard.html';
+        return;
+      }
       showDashboard(true);
       await loadAll();
     } catch (err) {
@@ -182,7 +198,7 @@ export function initDashboard() {
 
   function showDashboard(shouldScroll = false) {
     dashboard?.classList.remove('is-hidden');
-    if (shouldScroll && dashboard) {
+    if ((shouldScroll || scrollOnShow) && dashboard) {
       dashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }

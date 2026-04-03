@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bansuri Catering | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/variables.css" />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+    <link rel="stylesheet" href="./assets/css/animations.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="/" class="brand" aria-label="Bansuri Catering home">
+          <span class="brand__dot"></span>
+          Bansuri Catering
+        </a>
+        <button class="btn btn--ghost" type="button" onclick="window.location.href='/'">
+          Back to site
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="dashboard container" id="dashboard">
+        <div class="dashboard__header">
+          <div>
+            <p class="eyebrow">Ops console</p>
+            <h2>Dashboard</h2>
+          </div>
+          <div class="dashboard__actions">
+            <button class="btn btn--ghost" type="button" data-logout>Logout</button>
+          </div>
+        </div>
+        <div class="dashboard__tabs">
+          <button class="dash-tab is-active" data-dash-tab="leads">Leads</button>
+          <button class="dash-tab" data-dash-tab="packages">Packages</button>
+          <button class="dash-tab" data-dash-tab="menu">Menu</button>
+        </div>
+
+        <div class="dashboard__panel" data-dash-panel="leads">
+          <div class="dash-panel__head">
+            <h3>Leads</h3>
+            <div class="dash-filter">
+              <label>Status</label>
+              <select id="lead-status-filter" disabled>
+                <option value="">All</option>
+              </select>
+            </div>
+          </div>
+          <div id="leads-table" class="dash-table"></div>
+        </div>
+
+        <div class="dashboard__panel is-hidden" data-dash-panel="packages">
+          <div class="dash-panel__head">
+            <h3>Packages</h3>
+            <button class="btn btn--primary btn--compact" type="button" disabled>Add package</button>
+          </div>
+          <div id="packages-table" class="dash-table"></div>
+        </div>
+
+        <div class="dashboard__panel is-hidden" data-dash-panel="menu">
+          <div class="dash-panel__head">
+            <h3>Menu Categories & Items</h3>
+            <button class="btn btn--primary btn--compact" type="button" disabled>Add category</button>
+          </div>
+          <div id="menu-table" class="dash-table"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal is-open" id="login-modal" aria-hidden="false">
+      <div class="modal__backdrop"></div>
+      <div class="modal__card">
+        <header class="modal__head">
+          <h3>Sign in</h3>
+        </header>
+        <form id="login-form">
+          <label>Email
+            <input type="email" id="login-email" value="bansuricatering@gmail.com" required />
+          </label>
+          <label>Password
+            <input type="password" id="login-password" value="Bansuri@2026" required />
+          </label>
+          <p id="login-error" class="error-text"></p>
+          <div class="modal__actions">
+            <button class="btn btn--ghost" type="button" onclick="window.location.href='/'">Cancel</button>
+            <button class="btn btn--primary" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./assets/js/dashboard-page.js"></script>
+  </body>
+</html>

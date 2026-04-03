@@ -18,7 +18,7 @@ function bootstrap() {
   initScrollTriggers();
   initWizard();
   initPackageShowcase();
-  initDashboard();
+  initDashboard({ redirectAfterLogin: true });
 }
 
 document.addEventListener('DOMContentLoaded', bootstrap);
