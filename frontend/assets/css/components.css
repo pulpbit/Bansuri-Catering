@@ -55,6 +55,158 @@
   gap: 1.5rem;
 }
 
+.dashboard {
+  display: grid;
+  gap: 1.4rem;
+  margin-bottom: 4rem;
+}
+
+.dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard__tabs {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.dash-tab {
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #4a4d61;
+  cursor: pointer;
+}
+
+.dash-tab.is-active {
+  border-color: transparent;
+  background: var(--insta-gradient);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(214, 41, 118, 0.18);
+}
+
+.dashboard__panel {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: var(--shadow);
+}
+
+.dash-panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+.dash-table {
+  overflow: auto;
+}
+
+.dash-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.dash-table th,
+.dash-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #f0ecf2;
+  text-align: left;
+}
+
+.dash-table th {
+  font-weight: 800;
+  color: #1f2130;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.status-pill.new { background: #fef3f8; color: #b31269; }
+.status-pill.quote { background: #f1f6ff; color: #1f6feb; }
+.status-pill.follow { background: #fff9e6; color: #9a6b00; }
+.status-pill.closed { background: #eefaf1; color: #1a7f3d; }
+
+.dash-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.modal.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(4px);
+}
+
+.modal__card {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.2rem;
+  width: min(420px, 92vw);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  z-index: 1;
+}
+
+.modal__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__close {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
 .planner__intro.card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 252, 0.96));
   box-shadow: 0 20px 50px rgba(150, 93, 146, 0.08);

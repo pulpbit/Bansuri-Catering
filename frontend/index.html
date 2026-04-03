@@ -29,6 +29,9 @@
         <button class="btn btn--ghost" type="button" data-scroll-to-form>
           Start Planning
         </button>
+        <button class="btn btn--secondary" type="button" data-open-login>
+          Login
+        </button>
       </div>
     </header>
 
@@ -87,7 +90,80 @@
           </form>
         </div>
       </section>
+
+      <section id="dashboard" class="dashboard container is-hidden">
+        <div class="dashboard__header">
+          <div>
+            <p class="eyebrow">Ops console</p>
+            <h2>Dashboard</h2>
+          </div>
+          <div class="dashboard__actions">
+            <button class="btn btn--ghost" type="button" data-logout>Logout</button>
+          </div>
+        </div>
+        <div class="dashboard__tabs">
+          <button class="dash-tab is-active" data-dash-tab="leads">Leads</button>
+          <button class="dash-tab" data-dash-tab="packages">Packages</button>
+          <button class="dash-tab" data-dash-tab="menu">Menu</button>
+        </div>
+
+        <div class="dashboard__panel" data-dash-panel="leads">
+          <div class="dash-panel__head">
+            <h3>Leads</h3>
+            <div class="dash-filter">
+              <label>Status</label>
+              <select id="lead-status-filter">
+                <option value="">All</option>
+                <option value="new">New lead</option>
+                <option value="quote">Quote Sent</option>
+                <option value="follow">Follow Up</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+          </div>
+          <div id="leads-table" class="dash-table"></div>
+        </div>
+
+        <div class="dashboard__panel is-hidden" data-dash-panel="packages">
+          <div class="dash-panel__head">
+            <h3>Packages</h3>
+            <button class="btn btn--primary btn--compact" type="button" data-open-package-form>Add package</button>
+          </div>
+          <div id="packages-table" class="dash-table"></div>
+        </div>
+
+        <div class="dashboard__panel is-hidden" data-dash-panel="menu">
+          <div class="dash-panel__head">
+            <h3>Menu Categories & Items</h3>
+            <button class="btn btn--primary btn--compact" type="button" data-open-menu-form>Add category</button>
+          </div>
+          <div id="menu-table" class="dash-table"></div>
+        </div>
+      </section>
     </main>
+
+    <div class="modal" id="login-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-login></div>
+      <div class="modal__card">
+        <header class="modal__head">
+          <h3>Sign in</h3>
+          <button class="modal__close" type="button" data-close-login>&times;</button>
+        </header>
+        <form id="login-form">
+          <label>Email
+            <input type="email" id="login-email" value="bansuricatering@gmail.com" required />
+          </label>
+          <label>Password
+            <input type="password" id="login-password" value="Bansuri@2026" required />
+          </label>
+          <p id="login-error" class="error-text"></p>
+          <div class="modal__actions">
+            <button class="btn btn--ghost" type="button" data-close-login>Cancel</button>
+            <button class="btn btn--primary" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <template id="thank-you-template">
       <section class="thank-you card fade-in-up">

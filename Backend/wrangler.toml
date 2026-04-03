@@ -1,0 +1,13 @@
+name = "bansuri-api"
+main = "src/index.ts"
+compatibility_date = "2024-10-01"
+
+[vars]
+ADMIN_EMAIL = "bansuricatering@gmail.com"
+ADMIN_PASSWORD = "Bansuri@2026"
+
+[d1_databases]
+[[d1_databases]]
+binding = "DB"
+database_name = "bansuri_db"
+database_id = "replace-with-your-d1-id"

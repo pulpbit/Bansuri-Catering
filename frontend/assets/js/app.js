@@ -1,5 +1,6 @@
 import { hidePackageShowcase, initPackageShowcase } from './components/package-showcase.js';
 import { initWizard, resetWizardState } from './wizard.js';
+import { initDashboard } from './dashboard.js';
 
 function initScrollTriggers() {
   const plannerSection = document.getElementById('lead-form');
@@ -17,6 +18,7 @@ function bootstrap() {
   initScrollTriggers();
   initWizard();
   initPackageShowcase();
+  initDashboard();
 }
 
 document.addEventListener('DOMContentLoaded', bootstrap);
