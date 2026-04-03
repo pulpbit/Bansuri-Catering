@@ -53,18 +53,20 @@ function leadsTable(leads = []) {
       <td>${lead.guests || '-'}</td>
       <td>${lead.package || '-'}</td>
       <td class="text-muted">See “View”</td>
-      <td>${renderStatusPill(lead.status)}</td>
       <td>
-        <div class="dash-actions">
+        <div class="status-cell">
+          ${renderStatusPill(lead.status)}
           <select data-status>
             <option value="new" ${lead.status === 'new' ? 'selected' : ''}>New lead</option>
             <option value="quote" ${lead.status === 'quote' ? 'selected' : ''}>Quote Sent</option>
             <option value="follow" ${lead.status === 'follow' ? 'selected' : ''}>Follow Up</option>
             <option value="closed" ${lead.status === 'closed' ? 'selected' : ''}>Closed</option>
           </select>
-          <button class="btn btn--ghost btn--compact" data-view>View</button>
-          <button class="btn btn--secondary btn--compact" data-quote>Generate Quote</button>
         </div>
+      </td>
+      <td class="action-cell">
+        <button class="btn btn--ghost btn--compact" data-view>View</button>
+        <button class="btn btn--secondary btn--compact" data-quote>Generate Quote</button>
       </td>
     </tr>
   `);

@@ -124,6 +124,22 @@
   text-align: left;
 }
 
+.status-cell {
+  display: grid;
+  gap: 0.35rem;
+  align-items: start;
+}
+
+.status-cell select {
+  max-width: 160px;
+}
+
+.action-cell {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .dash-table th {
   font-weight: 800;
   color: #1f2130;
