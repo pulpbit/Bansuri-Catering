@@ -1,6 +1,9 @@
 import { login, logout, leadsApi, packagesApi, menuApi, getToken } from './api.js';
 import { $ } from './utils/helpers.js';
 
+let currentQuoteLead = null;
+let currentQuoteUrl = '';
+
 function renderStatusPill(status) {
   const map = {
     new: 'New lead',
@@ -81,6 +84,8 @@ function attachQuoteModal({ lead, pdfUrl }) {
   const quoteModal = document.getElementById('quote-modal');
   if (!quoteModal) return;
   quoteModal.classList.add('is-open');
+  currentQuoteLead = lead;
+  currentQuoteUrl = pdfUrl;
   (quoteModal.querySelector('[data-quote-lead-name]') || {}).textContent = lead?.name || '-';
   (quoteModal.querySelector('[data-quote-lead-phone]') || {}).textContent = lead?.phone || '-';
   (quoteModal.querySelector('[data-quote-lead-type]') || {}).textContent = lead?.eventType || '-';
@@ -142,7 +147,7 @@ function attachQuoteModal({ lead, pdfUrl }) {
 
   const downloadBtn = quoteModal.querySelector('[data-quote-download]');
   if (downloadBtn) {
-    downloadBtn.onclick = () => { if (pdfUrl) window.open(pdfUrl, '_blank'); };
+    downloadBtn.onclick = () => triggerQuotePrint();
   }
   const copyBtn = quoteModal.querySelector('[data-copy-quote-link]');
   if (copyBtn) {
@@ -375,4 +380,60 @@ export function initDashboard(options = {}) {
       quoteModal?.classList.remove('is-open');
     });
   });
+
+  function triggerQuotePrint() {
+    if (!currentQuoteLead) return;
+    const quoteModal = document.getElementById('quote-modal');
+    const food = quoteModal?.querySelector('[data-quote-food-total]')?.textContent || '₹0';
+    const service = quoteModal?.querySelector('[data-quote-service-total]')?.textContent || '₹0';
+    const transport = quoteModal?.querySelector('[data-quote-transport-total]')?.textContent || '₹0';
+    const grand = quoteModal?.querySelector('[data-quote-grand]')?.textContent || '₹0';
+    const menuText = formatMenu(currentQuoteLead.selectedMenu);
+    const win = window.open('', '_blank');
+    if (!win) return;
+    const styles = `
+      body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
+      h1 { margin-bottom: 6px; }
+      h2 { margin-top: 24px; }
+      .grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+      .summary { border: 1px solid #ddd; border-radius: 10px; padding: 12px; margin-top: 12px; }
+      .summary div { display: flex; justify-content: space-between; margin: 4px 0; }
+      .grand { border-top: 1px solid #ddd; padding-top: 6px; font-weight: bold; }
+      .branding { margin-top: 24px; }
+    `;
+    win.document.write(`
+      <html><head><title>Quote</title><style>${styles}</style></head><body>
+        <h1>Bansuri Catering</h1>
+        <p><strong>PDF Link:</strong> ${currentQuoteUrl || 'Generated locally'}</p>
+        <div class="grid">
+          <div><strong>Name:</strong> ${currentQuoteLead.name || '-'}</div>
+          <div><strong>Phone:</strong> ${currentQuoteLead.phone || '-'}</div>
+          <div><strong>Event Type:</strong> ${currentQuoteLead.eventType || '-'}</div>
+          <div><strong>Event Date:</strong> ${currentQuoteLead.eventDate || '-'}</div>
+          <div><strong>Guests:</strong> ${currentQuoteLead.guests || '-'}</div>
+          <div><strong>Package:</strong> ${currentQuoteLead.package || '-'}</div>
+        </div>
+        <h2>Menu guidance</h2>
+        <p>${menuText || '-'}</p>
+        <h2>Totals</h2>
+        <div class="summary">
+          <div><span>Food total</span><span>${food}</span></div>
+          <div><span>Service fee</span><span>${service}</span></div>
+          <div><span>Transport</span><span>${transport}</span></div>
+          <div class="grand"><span>Grand Total</span><span>${grand}</span></div>
+        </div>
+        <div class="branding">
+          <p><strong>Bansuri Catering</strong><br/>
+          +91-70464 45444<br/>
+          bansuricatering@gmail.com<br/>
+          SHOP NO 50, THIRD FLOOR, AAKASH BUSINESS CENTER,<br/>
+          OPP. BHAGYALAXMI SOCIETY, PIPLOD<br/>
+          Surat – 395007, Gujarat</p>
+        </div>
+      </body></html>
+    `);
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 200);
+  }
 }
