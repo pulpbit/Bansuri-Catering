@@ -6,6 +6,8 @@ import { clearLeadDraft, loadLeadDraft, saveLeadDraft } from './services/store.j
 import { getMenuItems } from './data/menus.js';
 
 const STEP_LABELS = ['Basics', 'Package', 'Menu', 'Review'];
+const BASICS_ORDER = ['name', 'phone', 'eventType', 'eventDate', 'guests'];
+let externalReset = null;
 
 export function initWizard() {
   const contentRoot = $('#wizard-content');
@@ -17,9 +19,39 @@ export function initWizard() {
   let state = loadLeadDraft();
   let step = 0;
 
+  function getBasicsStage(currentState) {
+    if (Number.isFinite(currentState.basicsStage)) return currentState.basicsStage;
+    const idx = BASICS_ORDER.findIndex((key) => !currentState[key]);
+    return idx === -1 ? BASICS_ORDER.length - 1 : idx;
+  }
+
+  function setBasicsStage(nextStage) {
+    const clamped = Math.min(BASICS_ORDER.length - 1, Math.max(0, nextStage));
+    state = saveLeadDraft({ basicsStage: clamped });
+    paint();
+  }
+
   function setError(message = '') {
     const errorNode = $('#step-error');
     if (errorNode) errorNode.textContent = message;
+  }
+
+  function isBasicsFieldValid(key, value) {
+    if (!value) return false;
+    switch (key) {
+      case 'name':
+        return value.trim().length >= 2;
+      case 'phone':
+        return /^\+?[0-9\s-]{8,15}$/.test(value);
+      case 'eventType':
+        return Boolean(value);
+      case 'eventDate':
+        return Boolean(value);
+      case 'guests':
+        return Number.isFinite(Number(value)) && Number(value) >= 20;
+      default:
+        return false;
+    }
   }
 
   function paint() {
@@ -33,13 +65,23 @@ export function initWizard() {
     
     // Update navigation buttons
     if (prevBtn) {
-      prevBtn.disabled = step === 0;
-      prevBtn.onclick = () => {
-        if (step > 0) {
-          step -= 1;
-          paint();
-        }
-      };
+      if (step === 0) {
+        const basicsStage = getBasicsStage(state);
+        prevBtn.disabled = basicsStage === 0;
+        prevBtn.onclick = () => {
+          if (basicsStage > 0) {
+            setBasicsStage(basicsStage - 1);
+          }
+        };
+      } else {
+        prevBtn.disabled = step === 0;
+        prevBtn.onclick = () => {
+          if (step > 0) {
+            step -= 1;
+            paint();
+          }
+        };
+      }
     }
     
     if (nextBtn) {
@@ -83,7 +125,9 @@ export function initWizard() {
   function resetWizard() {
     state = clearLeadDraft();
     step = 0;
-    window.location.reload();
+    setError('');
+    paint();
+    window.scrollTo({ top: $('#lead-form').offsetTop - 80, behavior: 'smooth' });
   }
 
   function handleNext() {
@@ -131,12 +175,28 @@ export function initWizard() {
   }
 
   function bindDynamicEvents() {
+    const basicsStage = getBasicsStage(state);
+    const activeKey = BASICS_ORDER[Math.min(basicsStage, BASICS_ORDER.length - 1)];
+
     contentRoot.querySelectorAll('[data-field]').forEach((field) => {
+      const advanceIfValid = (event) => {
+        updateField(event.target.dataset.field, event.target.value);
+        if (step === 0 && event.target.dataset.field === activeKey && isBasicsFieldValid(activeKey, event.target.value)) {
+          setBasicsStage(basicsStage + 1);
+        }
+      };
+
       field.addEventListener('input', (event) => {
         updateField(event.target.dataset.field, event.target.value);
       });
-      field.addEventListener('change', (event) => {
-        updateField(event.target.dataset.field, event.target.value);
+
+      field.addEventListener('change', advanceIfValid);
+
+      field.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          advanceIfValid(event);
+        }
       });
     });
 
@@ -150,5 +210,28 @@ export function initWizard() {
     });
   }
 
+  document.addEventListener('updateBasicsStage', (event) => {
+    const nextStage = Number.isFinite(event.detail) ? event.detail : getBasicsStage(state) + 1;
+    setBasicsStage(nextStage);
+  });
+
+  document.addEventListener('requestAdvanceBasics', (event) => {
+    const { currentKey, nextStage } = event.detail || {};
+    const value = state[currentKey];
+    if (!isBasicsFieldValid(currentKey, value)) {
+      setError('Please complete this field before moving to the next one.');
+      return;
+    }
+    setError('');
+    setBasicsStage(Number.isFinite(nextStage) ? nextStage : getBasicsStage(state) + 1);
+  });
+
+  externalReset = resetWizard;
   paint();
+}
+
+export function resetWizardState() {
+  if (typeof externalReset === 'function') {
+    externalReset();
+  }
 }

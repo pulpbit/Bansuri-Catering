@@ -7,6 +7,9 @@ export function validateStep(step, formState) {
       if (!/^\+?[0-9\s-]{8,15}$/.test(formState.phone || '')) {
         return 'Please enter a valid phone number.';
       }
+      if (!formState.eventDate) {
+        return 'Please add your event date.';
+      }
       if (!formState.eventType) {
         return 'Please select an event type.';
       }

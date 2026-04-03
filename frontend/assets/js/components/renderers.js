@@ -11,7 +11,10 @@ function inputGroup(labelText, field) {
 export function renderStepper(stepperRoot, activeStep, steps) {
   stepperRoot.innerHTML = '';
   steps.forEach((step, idx) => {
-    const item = createElement('div', `stepper__item ${idx === activeStep ? 'is-active' : ''}`, `${idx + 1}. ${step}`);
+    const item = createElement('div', `stepper__item ${idx === activeStep ? 'is-active' : ''}`);
+    const bullet = createElement('div', 'stepper__bullet', `${idx + 1}`);
+    const label = createElement('span', 'stepper__label', step);
+    item.append(bullet, label);
     stepperRoot.append(item);
   });
 }
@@ -21,46 +24,85 @@ export function renderStep(contentRoot, step, state) {
   const section = createElement('section', 'step fade-in-up');
 
   if (step === 0) {
-    section.append(createElement('h3', '', 'Tell us about your event'));
-    const grid = createElement('div', 'grid-2');
+    section.append(createElement('h3', '', 'Let’s gather the basics (chat style)'));
 
-    const name = createElement('input');
-    name.type = 'text';
-    name.placeholder = 'Your full name';
-    name.value = state.name || '';
-    name.dataset.field = 'name';
+    const order = ['name', 'phone', 'eventType', 'eventDate', 'guests'];
+    const labels = {
+      name: 'Your full name',
+      phone: 'Best phone number',
+      eventType: 'Event type',
+      eventDate: 'Event date',
+      guests: 'Number of guests',
+    };
 
-    const phone = createElement('input');
-    phone.type = 'tel';
-    phone.placeholder = 'Phone number';
-    phone.value = state.phone || '';
-    phone.dataset.field = 'phone';
+    const derivedStage = order.findIndex((k) => !state[k]);
+    const stage = Number.isFinite(state.basicsStage) ? state.basicsStage : (derivedStage === -1 ? order.length - 1 : derivedStage);
+    const activeStage = Math.min(stage, order.length - 1);
 
-    const eventType = createElement('select');
-    eventType.dataset.field = 'eventType';
-    eventType.innerHTML = '<option value="">Select event type</option>';
-    EVENT_TYPES.forEach((item) => {
-      const option = createElement('option', '', item);
-      option.value = item;
-      option.selected = state.eventType === item;
-      eventType.append(option);
+    const chat = createElement('div', 'chat-intake');
+
+    const completedWrap = createElement('div', 'chat-history');
+    order.slice(0, activeStage).forEach((key) => {
+      if (!state[key]) return;
+      const bubble = createElement('div', 'chat-bubble is-summary');
+      bubble.innerHTML = `<strong>${labels[key]}:</strong> ${state[key]}`;
+      completedWrap.append(bubble);
     });
+    if (completedWrap.children.length) chat.append(completedWrap);
 
-    const guests = createElement('input');
-    guests.type = 'number';
-    guests.min = '20';
-    guests.step = '1';
-    guests.placeholder = 'e.g. 150';
-    guests.value = state.guests || '';
-    guests.dataset.field = 'guests';
+    const prompt = createElement('div', 'chat-bubble is-question', `Please share ${labels[order[activeStage]].toLowerCase()}:`);
+    chat.append(prompt);
 
-    grid.append(
-      inputGroup('Name', name), 
-      inputGroup('Phone', phone), 
-      inputGroup('Event Type', eventType),
-      inputGroup('Number of Guests', guests)
-    );
-    section.append(grid);
+    const inputWrap = createElement('div', 'chat-input');
+    const key = order[activeStage];
+    let field;
+    if (key === 'eventType') {
+      field = createElement('select');
+      field.dataset.field = 'eventType';
+      field.innerHTML = '<option value="">Select event type</option>';
+      EVENT_TYPES.forEach((item) => {
+        const option = createElement('option', '', item);
+        option.value = item;
+        option.selected = state.eventType === item;
+        field.append(option);
+      });
+    } else {
+      field = createElement('input');
+      field.dataset.field = key;
+      field.placeholder = labels[key];
+      field.value = state[key] || '';
+      if (key === 'phone') {
+        field.type = 'tel';
+      } else if (key === 'guests') {
+        field.type = 'number';
+        field.min = '20';
+        field.step = '1';
+      } else if (key === 'eventDate') {
+        field.type = 'date';
+      } else {
+        field.type = 'text';
+      }
+    }
+    inputWrap.append(field);
+
+    const ctaRow = createElement('div', 'chat-controls');
+    if (activeStage < order.length - 1) {
+      const nextFieldBtn = createElement('button', 'btn btn--secondary btn--compact', 'Next field');
+      nextFieldBtn.type = 'button';
+      nextFieldBtn.onclick = () => {
+        const nextStage = Math.min(order.length - 1, activeStage + 1);
+        document.dispatchEvent(new CustomEvent('requestAdvanceBasics', { detail: { currentKey: key, nextStage } }));
+      };
+      ctaRow.append(nextFieldBtn);
+    } else {
+      const doneNote = createElement('p', 'chat-done', 'All basics captured. Hit Continue to move ahead.');
+      ctaRow.append(doneNote);
+    }
+    inputWrap.append(ctaRow);
+    chat.append(inputWrap);
+
+    const helper = createElement('p', 'chat-hint', 'We’ll auto-advance as you fill each field. Continue when everything is set.');
+    section.append(chat, helper);
   }
 
   if (step === 1) {
@@ -135,6 +177,7 @@ export function renderStep(contentRoot, step, state) {
       ['Name', state.name || '-'],
       ['Phone', state.phone || '-'],
       ['Event Type', state.eventType || '-'],
+      ['Event Date', state.eventDate || '-'],
       ['Guests', state.guests || '-'],
       ['Package', formatPackageLabel(selectedPackage) || '-']
     ];

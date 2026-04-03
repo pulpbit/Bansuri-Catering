@@ -4,9 +4,13 @@ const DEFAULT_STATE = {
   name: '',
   phone: '',
   eventType: '',
+  eventDate: '',
   guests: '',
   packageId: '',
-  menu: ''
+  menu: '',
+  basicsStage: 0,
+  selectedMenuItems: {},
+  completed: false
 };
 
 export function loadLeadDraft() {
