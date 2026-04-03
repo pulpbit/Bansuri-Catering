@@ -380,14 +380,14 @@ function leadsTable(leads = []) {
   if (!leads.length) return '<p class="menu-summary-muted">No leads yet.</p>';
   const rows = leads.map((lead) => `
     <tr data-lead-id="${lead.id}">
-      <td>${lead.name || '-'}</td>
-      <td>${lead.phone || '-'}</td>
-      <td>${lead.eventType || '-'}</td>
-      <td>${lead.eventDate || '-'}</td>
-      <td>${lead.guests || '-'}</td>
-      <td>${lead.package || '-'}</td>
-      <td class="text-muted">See “View”</td>
-      <td>
+      <td data-label="Name">${lead.name || '-'}</td>
+      <td data-label="Phone">${lead.phone || '-'}</td>
+      <td data-label="Event">${lead.eventType || '-'}</td>
+      <td data-label="Date">${lead.eventDate || '-'}</td>
+      <td data-label="Guests">${lead.guests || '-'}</td>
+      <td data-label="Package">${lead.package || '-'}</td>
+      <td data-label="Menu Guidance" class="text-muted">See “View”</td>
+      <td data-label="Status">
         <div class="status-cell">
           ${renderStatusPill(lead.status)}
           <select data-status>
@@ -398,7 +398,7 @@ function leadsTable(leads = []) {
           </select>
         </div>
       </td>
-      <td class="action-cell">
+      <td data-label="Actions" class="action-cell">
         <button class="btn btn--ghost btn--compact" data-view>View</button>
         <button class="btn btn--secondary btn--compact" data-quote>Generate Quote</button>
         <button class="btn btn--ghost btn--compact danger" data-delete>Delete Lead</button>
