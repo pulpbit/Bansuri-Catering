@@ -13,12 +13,10 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: -10%; left: -10%;
-  width: 120%; height: 120%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   z-index: -1;
-  background: linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)), url('../images/floral_bg_color.png') repeat;
-  background-size: 800px;
-  animation: floralPan 100s ease-in-out infinite alternate;
+  background: linear-gradient(135deg, #fff5f7 0%, #f8f9fa 50%, #fffbf2 100%);
   pointer-events: none;
 }
 
@@ -50,20 +48,14 @@ body::before {
 
 .brand {
   text-decoration: none;
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: var(--text);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
 }
 
-.brand__dot {
-  width: 0.8rem;
-  height: 0.8rem;
-  background: var(--insta-gradient);
-  border-radius: 4px; /* Slightly squircle like Instagram */
-  box-shadow: 0 0 0 5px rgba(214, 41, 118, 0.1);
+.brand__logo {
+  height: 2.5rem;
+  width: auto;
+  display: block;
 }
 
 .hero {
