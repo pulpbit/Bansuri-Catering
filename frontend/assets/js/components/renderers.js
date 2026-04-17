@@ -23,9 +23,7 @@ export function renderStep(contentRoot, step, state) {
   contentRoot.innerHTML = '';
   const section = createElement('section', 'step fade-in-up');
 
-  if (step === 0) {
-    section.append(createElement('h3', '', 'Let’s gather the basics (chat style)'));
-
+if (step === 0) {
     const order = ['name', 'phone', 'eventType', 'eventDate', 'guests', 'message'];
     const labels = {
       name: 'Your full name',
@@ -51,7 +49,7 @@ export function renderStep(contentRoot, step, state) {
     });
     if (completedWrap.children.length) chat.append(completedWrap);
 
-    const prompt = createElement('div', 'chat-bubble is-question', `Please share ${labels[order[activeStage]].toLowerCase()}:`);
+    const prompt = createElement('div', 'chat-bubble is-question', `Let's plan your event! What's your ${labels[order[activeStage]].toLowerCase()}?`);
     chat.append(prompt);
 
     const inputWrap = createElement('div', 'chat-input');
@@ -121,7 +119,6 @@ export function renderStep(contentRoot, step, state) {
   }
 
   if (step === 1) {
-    section.append(createElement('h3', '', 'Choose one package'));
     const wrap = createElement('div', 'package-grid');
     PACKAGE_OPTIONS.forEach((pkg) => {
       const card = createElement('article', `package-card ${state.packageId === pkg.id ? 'is-selected' : ''}`);
@@ -138,7 +135,6 @@ export function renderStep(contentRoot, step, state) {
   }
 
   if (step === 2) {
-    section.append(createElement('h3', '', 'Chef curated menu for your package'));
     const selectedPackage = PACKAGE_OPTIONS.find((pkg) => pkg.id === state.packageId);
     if (!selectedPackage) {
       section.append(createElement('p', 'error-text', 'Please go back and select a package first.'));
@@ -185,7 +181,6 @@ export function renderStep(contentRoot, step, state) {
   }
 
   if (step === 3) {
-    section.append(createElement('h3', '', 'Review details before submit'));
     const selectedPackage = PACKAGE_OPTIONS.find((pkg) => pkg.id === state.packageId);
     const list = createElement('div', 'review-list');
     const rows = [
