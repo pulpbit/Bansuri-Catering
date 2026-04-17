@@ -84,6 +84,18 @@ if (step === 0) {
         field.style.border = '1px solid #ccc';
         field.style.borderRadius = '4px';
         field.dataset.field = key;
+        if (state[key]) {
+          const parts = state[key].split('-');
+          if (parts.length === 3) {
+            field.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
+          }
+        }
+        field.addEventListener('change', (e) => {
+          if (e.target.value) {
+            const [y, m, d] = e.target.value.split('-');
+            e.target.value = `${d}-${m}-${y}`;
+          }
+        });
       } else if (key === 'message') {
         field = createElement('textarea');
         field.dataset.field = key;
