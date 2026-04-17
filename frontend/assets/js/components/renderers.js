@@ -78,37 +78,12 @@ if (step === 0) {
         field.step = '1';
       } else if (key === 'eventDate') {
         field.type = 'date';
-        field.style.display = 'none';
-        
-        const dateDisplay = createElement('div');
-        dateDisplay.style.padding = '12px 16px';
-        dateDisplay.style.border = '1px solid #ccc';
-        dateDisplay.style.borderRadius = '4px';
-        dateDisplay.style.background = '#fff';
-        dateDisplay.style.cursor = 'pointer';
-        dateDisplay.style.minHeight = '20px';
-        dateDisplay.textContent = state[key] || 'Select date (dd-mm-yyyy)';
-        dateDisplay.style.color = state[key] ? '#333' : '#999';
-        
-        const hiddenDateInput = createElement('input');
-        hiddenDateInput.type = 'date';
-        
-        dateDisplay.addEventListener('click', () => hiddenDateInput.showPicker());
-        
-        hiddenDateInput.addEventListener('change', (e) => {
-          if (e.target.value) {
-            const [y, m, d] = e.target.value.split('-');
-            const formatted = `${d}-${m}-${y}`;
-            dateDisplay.textContent = formatted;
-            dateDisplay.style.color = '#333';
-            field.value = formatted;
-            field.dispatchEvent(new Event('input', { bubbles: true }));
-            field.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        });
-        
-        inputWrap.insertBefore(dateDisplay, field);
-        field = dateDisplay;
+        field.style.width = '100%';
+        field.style.padding = '12px 16px';
+        field.style.fontSize = '16px';
+        field.style.border = '1px solid #ccc';
+        field.style.borderRadius = '4px';
+        field.dataset.field = key;
       } else if (key === 'message') {
         field = createElement('textarea');
         field.dataset.field = key;
