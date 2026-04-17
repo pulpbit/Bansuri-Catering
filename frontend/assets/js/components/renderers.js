@@ -90,12 +90,17 @@ if (step === 0) {
         dateInput.type = 'date';
         dateInput.style.position = 'absolute';
         dateInput.style.opacity = '0';
-        dateInput.style.pointerEvents = 'none';
-        dateInput.style.height = '1px';
-        dateInput.style.width = '1px';
+        dateInput.style.height = '100%';
+        dateInput.style.width = '100%';
+        dateInput.style.top = '0';
+        dateInput.style.left = '0';
+        dateInput.style.cursor = 'pointer';
         inputWrap.style.position = 'relative';
         inputWrap.append(dateInput);
-        field.addEventListener('click', () => dateInput.showPicker?.());
+        field.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dateInput.showPicker?.();
+        });
         field.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -106,6 +111,8 @@ if (step === 0) {
           if (e.target.value) {
             const [y, m, d] = e.target.value.split('-');
             field.value = `${d}-${m}-${y}`;
+            field.dispatchEvent(new Event('input', { bubbles: true }));
+            field.dispatchEvent(new Event('change', { bubbles: true }));
           }
         });
         if (state[key]) {
