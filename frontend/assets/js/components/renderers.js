@@ -77,51 +77,38 @@ if (step === 0) {
         field.min = '20';
         field.step = '1';
       } else if (key === 'eventDate') {
-        const dateWrapper = createElement('div');
-        dateWrapper.style.position = 'relative';
-        dateWrapper.style.display = 'flex';
-        dateWrapper.style.flex = '1';
+        field.type = 'date';
+        field.style.display = 'none';
         
-        const visibleInput = createElement('input');
-        visibleInput.type = 'text';
-        visibleInput.placeholder = 'dd-mm-yyyy';
-        visibleInput.maxLength = 10;
-        visibleInput.readOnly = true;
-        visibleInput.style.flex = '1';
-        visibleInput.style.cursor = 'pointer';
+        const dateDisplay = createElement('div');
+        dateDisplay.style.padding = '12px 16px';
+        dateDisplay.style.border = '1px solid #ccc';
+        dateDisplay.style.borderRadius = '4px';
+        dateDisplay.style.background = '#fff';
+        dateDisplay.style.cursor = 'pointer';
+        dateDisplay.style.minHeight = '20px';
+        dateDisplay.textContent = state[key] || 'Select date (dd-mm-yyyy)';
+        dateDisplay.style.color = state[key] ? '#333' : '#999';
         
         const hiddenDateInput = createElement('input');
         hiddenDateInput.type = 'date';
-        hiddenDateInput.style.position = 'absolute';
-        hiddenDateInput.style.width = '100%';
-        hiddenDateInput.style.height = '100%';
-        hiddenDateInput.style.opacity = '0';
-        hiddenDateInput.style.cursor = 'pointer';
-        hiddenDateInput.style.top = '0';
-        hiddenDateInput.style.left = '0';
         
-        dateWrapper.appendChild(visibleInput);
-        dateWrapper.appendChild(hiddenDateInput);
+        dateDisplay.addEventListener('click', () => hiddenDateInput.showPicker());
         
         hiddenDateInput.addEventListener('change', (e) => {
           if (e.target.value) {
             const [y, m, d] = e.target.value.split('-');
-            visibleInput.value = `${d}-${m}-${y}`;
-            field.value = visibleInput.value;
-            visibleInput.dispatchEvent(new Event('input', { bubbles: true }));
-            visibleInput.dispatchEvent(new Event('change', { bubbles: true }));
+            const formatted = `${d}-${m}-${y}`;
+            dateDisplay.textContent = formatted;
+            dateDisplay.style.color = '#333';
+            field.value = formatted;
+            field.dispatchEvent(new Event('input', { bubbles: true }));
+            field.dispatchEvent(new Event('change', { bubbles: true }));
           }
         });
         
-        if (state[key]) {
-          visibleInput.value = state[key];
-          const parts = state[key].split('-');
-          if (parts.length === 3) {
-            hiddenDateInput.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-          }
-        }
-        
-        field = dateWrapper;
+        inputWrap.insertBefore(dateDisplay, field);
+        field = dateDisplay;
       } else if (key === 'message') {
         field = createElement('textarea');
         field.dataset.field = key;
