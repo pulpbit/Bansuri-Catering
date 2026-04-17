@@ -26,13 +26,14 @@ export function renderStep(contentRoot, step, state) {
   if (step === 0) {
     section.append(createElement('h3', '', 'Let’s gather the basics (chat style)'));
 
-    const order = ['name', 'phone', 'eventType', 'eventDate', 'guests'];
+    const order = ['name', 'phone', 'eventType', 'eventDate', 'guests', 'message'];
     const labels = {
       name: 'Your full name',
       phone: 'Best phone number',
       eventType: 'Event type',
       eventDate: 'Event date',
       guests: 'Number of guests',
+      message: 'Any special request or message for us',
     };
 
     const derivedStage = order.findIndex((k) => !state[k]);
@@ -78,7 +79,21 @@ export function renderStep(contentRoot, step, state) {
         field.min = '20';
         field.step = '1';
       } else if (key === 'eventDate') {
-        field.type = 'date';
+        field.type = 'text';
+        field.placeholder = 'dd-mm-yyyy';
+        field.maxLength = 10;
+        field.addEventListener('input', (e) => {
+          let val = e.target.value.replace(/[^0-9]/g, '');
+          if (val.length > 2) val = val.slice(0, 2) + '-' + val.slice(2);
+          if (val.length > 5) val = val.slice(0, 5) + '-' + val.slice(5);
+          e.target.value = val.slice(0, 10);
+        });
+      } else if (key === 'message') {
+        field = createElement('textarea');
+        field.dataset.field = key;
+        field.placeholder = labels[key];
+        field.value = state[key] || '';
+        field.rows = 3;
       } else {
         field.type = 'text';
       }

@@ -7,7 +7,7 @@ import { getMenuItems } from './data/menus.js';
 import { createLeadPublic } from './api.js';
 
 const STEP_LABELS = ['Basics', 'Package', 'Menu', 'Review'];
-const BASICS_ORDER = ['name', 'phone', 'eventType', 'eventDate', 'guests'];
+const BASICS_ORDER = ['name', 'phone', 'eventType', 'eventDate', 'guests', 'message'];
 let externalReset = null;
 
 export function initWizard() {
@@ -50,6 +50,8 @@ export function initWizard() {
         return Boolean(value);
       case 'guests':
         return Number.isFinite(Number(value)) && Number(value) >= 20;
+      case 'message':
+        return true;
       default:
         return false;
     }
@@ -160,6 +162,7 @@ export function initWizard() {
         eventType: state.eventType,
         eventDate: state.eventDate,
         guests: Number(state.guests),
+        message: state.message || '',
         package: formatPackageLabel(selectedPackage),
         selectedMenu: state.selectedMenuItems ? JSON.stringify(state.selectedMenuItems) : '',
         status: 'new',

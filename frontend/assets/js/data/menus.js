@@ -499,22 +499,20 @@ export const MENU_CATALOG = {
         "Biscoff Cheesecake"
     ]
   },
-  SOUP: {
+SOUP: {
     label: "SOUP",
     items:     [
-        "Mild & Hearty",
         "Tomato Cream Soup (Tomatoes broth with Cream & Seasoning)",
         "Almond Broccoli (Creamy Broccoli Soup with Nutty Almonds)",
         "Sweet Corn Soup (Sweet corn Kernels with Cream & Seasonings)",
         "Broccoli Corn (Creamy Broccoli Soup with Corn)",
         "Corn Spinach Soup (Sweet Corn Kernels with Spinach Leaves)",
-        "Chef’s Special (Included from Packages)",
+        "Chef's Special (Included from Packages)",
         "Thai Tom Yum Soup (Bold & Flavorful Broth with Bell Peppers)",
         "Khow Suey (Burmese Soup with Coconut Milk, Spices & Toppings)",
         "Thukpa Soup (Spicy Tibetan Soup with Noodles & Vegetables)",
         "Italian Garlic Soup (Classic Creamy Italian Soup with Herbs)",
         "Shroom Velvet Symphony (Cream of Mushroom Soup)",
-        "Pan Asian Tasty",
         "Tomato Basil (Ripe Tomato Broth with Basil & Seasonings)"
     ]
   },
@@ -760,41 +758,37 @@ export const MENU_CATALOG = {
         "Sunshine Punch (Orange Pineapple & Mint topped with Soda)"
     ]
   },
-  SOUPS: {
+SOUPS: {
     label: "soups",
     items:     [
-        "Mild & Hearty",
         "Tomato Cream Soup (Tomatoes broth with Cream & Seasoning)",
         "Almond Broccoli (Creamy Broccoli Soup with Nutty Almonds)",
         "Sweet Corn Soup (Sweet corn Kernels with Cream & Seasonings)",
         "Broccoli Corn (Creamy Broccoli Soup with Corn)",
         "Corn Spinach Soup (Sweet Corn Kernels with Spinach Leaves)",
-        "Chef’s Special (Included from Packages)",
+        "Chef's Special (Included from Packages)",
         "Thai Tom Yum Soup (Bold & Flavorful Broth with Bell Peppers)",
         "Khow Suey (Burmese Soup with Coconut Milk, Spices & Toppings)",
         "Thukpa Soup (Spicy Tibetan Soup with Noodles & Vegetables)",
         "Italian Garlic Soup (Classic Creamy Italian Soup with Herbs)",
         "Shroom Velvet Symphony (Cream of Mushroom Soup)",
-        "Pan Asian Tasty",
         "Tomato Basil (Ripe Tomato Broth with Basil & Seasonings)"
     ]
   },
-  SOUP_SPECIALS: {
+SOUP_SPECIALS: {
     label: "soup specials",
     items:     [
-        "Mild & Hearty",
         "Tomato Cream Soup (Tomatoes broth with Cream & Seasoning)",
         "Almond Broccoli (Creamy Broccoli Soup with Nutty Almonds)",
         "Sweet Corn Soup (Sweet corn Kernels with Cream & Seasonings)",
         "Broccoli Corn (Creamy Broccoli Soup with Corn)",
         "Corn Spinach Soup (Sweet Corn Kernels with Spinach Leaves)",
-        "Chef’s Special (Included from Packages)",
+        "Chef's Special (Included from Packages)",
         "Thai Tom Yum Soup (Bold & Flavorful Broth with Bell Peppers)",
         "Khow Suey (Burmese Soup with Coconut Milk, Spices & Toppings)",
         "Thukpa Soup (Spicy Tibetan Soup with Noodles & Vegetables)",
         "Italian Garlic Soup (Classic Creamy Italian Soup with Herbs)",
         "Shroom Velvet Symphony (Cream of Mushroom Soup)",
-        "Pan Asian Tasty",
         "Tomato Basil (Ripe Tomato Broth with Basil & Seasonings)"
     ]
   },
