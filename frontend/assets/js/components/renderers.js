@@ -77,27 +77,51 @@ if (step === 0) {
         field.min = '20';
         field.step = '1';
       } else if (key === 'eventDate') {
-        field.type = 'text';
-        field.placeholder = 'dd-mm-yyyy';
-        field.maxLength = 10;
-        const calBtn = createElement('span');
-        calBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
-        calBtn.style.position = 'absolute';
-        calBtn.style.right = '10px';
-        calBtn.style.top = '50%';
-        calBtn.style.transform = 'translateY(-50%)';
-        calBtn.style.cursor = 'pointer';
-        calBtn.style.color = '#888';
-        calBtn.style.pointerEvents = 'none';
-        inputWrap.style.position = 'relative';
-        inputWrap.appendChild(calBtn);
-        field.style.paddingRight = '36px';
-        field.addEventListener('focus', () => {
-          calBtn.style.display = 'none';
+        const dateWrapper = createElement('div');
+        dateWrapper.style.position = 'relative';
+        dateWrapper.style.display = 'flex';
+        dateWrapper.style.flex = '1';
+        
+        const visibleInput = createElement('input');
+        visibleInput.type = 'text';
+        visibleInput.placeholder = 'dd-mm-yyyy';
+        visibleInput.maxLength = 10;
+        visibleInput.readOnly = true;
+        visibleInput.style.flex = '1';
+        visibleInput.style.cursor = 'pointer';
+        
+        const hiddenDateInput = createElement('input');
+        hiddenDateInput.type = 'date';
+        hiddenDateInput.style.position = 'absolute';
+        hiddenDateInput.style.width = '100%';
+        hiddenDateInput.style.height = '100%';
+        hiddenDateInput.style.opacity = '0';
+        hiddenDateInput.style.cursor = 'pointer';
+        hiddenDateInput.style.top = '0';
+        hiddenDateInput.style.left = '0';
+        
+        dateWrapper.appendChild(visibleInput);
+        dateWrapper.appendChild(hiddenDateInput);
+        
+        hiddenDateInput.addEventListener('change', (e) => {
+          if (e.target.value) {
+            const [y, m, d] = e.target.value.split('-');
+            visibleInput.value = `${d}-${m}-${y}`;
+            field.value = visibleInput.value;
+            visibleInput.dispatchEvent(new Event('input', { bubbles: true }));
+            visibleInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
         });
-        field.addEventListener('blur', () => {
-          setTimeout(() => calBtn.style.display = 'block', 200);
-        });
+        
+        if (state[key]) {
+          visibleInput.value = state[key];
+          const parts = state[key].split('-');
+          if (parts.length === 3) {
+            hiddenDateInput.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
+          }
+        }
+        
+        field = dateWrapper;
       } else if (key === 'message') {
         field = createElement('textarea');
         field.dataset.field = key;
