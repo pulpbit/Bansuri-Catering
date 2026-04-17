@@ -80,12 +80,7 @@ if (step === 0) {
         field.type = 'text';
         field.placeholder = 'dd-mm-yyyy';
         field.maxLength = 10;
-        field.addEventListener('input', (e) => {
-          let val = e.target.value.replace(/[^0-9]/g, '');
-          if (val.length > 2) val = val.slice(0, 2) + '-' + val.slice(2);
-          if (val.length > 5) val = val.slice(0, 5) + '-' + val.slice(5);
-          e.target.value = val.slice(0, 10);
-        });
+        field.readOnly = true;
         const dateInput = createElement('input');
         dateInput.type = 'date';
         dateInput.style.position = 'absolute';
@@ -97,7 +92,7 @@ if (step === 0) {
         inputWrap.append(dateInput);
         const calBtn = createElement('button');
         calBtn.type = 'button';
-        calBtn.textContent = '📅';
+        calBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
         calBtn.style.position = 'absolute';
         calBtn.style.right = '8px';
         calBtn.style.top = '50%';
@@ -105,13 +100,19 @@ if (step === 0) {
         calBtn.style.border = 'none';
         calBtn.style.background = 'transparent';
         calBtn.style.cursor = 'pointer';
-        calBtn.style.fontSize = '18px';
+        calBtn.style.padding = '0';
+        calBtn.style.display = 'flex';
+        calBtn.style.alignItems = 'center';
+        calBtn.style.color = '#666';
         calBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          dateInput.showPicker?.();
+          e.stopPropagation();
+          dateInput.click();
         });
         field.style.paddingRight = '36px';
+        field.style.cursor = 'pointer';
         field.parentElement?.appendChild(calBtn);
+        field.addEventListener('click', () => dateInput.click());
         dateInput.addEventListener('input', (e) => {
           if (e.target.value) {
             const [y, m, d] = e.target.value.split('-');
@@ -124,6 +125,7 @@ if (step === 0) {
           const parts = state[key].split('-');
           if (parts.length === 3) {
             dateInput.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
+            field.value = state[key];
           }
         }
       } else if (key === 'message') {
