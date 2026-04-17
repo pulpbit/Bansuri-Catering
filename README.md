@@ -1,6 +1,7 @@
 # Bansuri-Catering
 
 ## Recent progress
+- Fixed the event date field so the native picker now writes back correctly, while the wizard stores and validates dates in `dd-mm-yyyy` format (`frontend/assets/js/components/renderers.js`, `frontend/assets/js/utils/date.js`, `frontend/assets/js/wizard.js`, `frontend/assets/js/utils/validators.js`, `frontend/assets/css/components.css`).
 - Generated `frontend/assets/js/data/menus.js` from `Package_menu.json` and re-mapped `PACKAGE_OPTIONS` so the wizard now pulls vegetarian menu suggestions directly from the catalog; `renderers.js` now reads those categories instead of inlining sample dishes.
 - Defined six packages in `frontend/assets/js/data/packages.js` with the requested highlight counts and chef-guided `menuPlan` sections for the curated trio.
 - Reworked the wizard UI so the fourth step shows chef suggestions, the review step summarizes the selected guidance, and validation no longer expects a separate menu pill (`frontend/assets/js/components/renderers.js`, `frontend/assets/js/utils/validators.js`).

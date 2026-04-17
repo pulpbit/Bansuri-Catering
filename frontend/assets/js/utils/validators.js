@@ -1,3 +1,5 @@
+import { isValidEventDate } from './date.js';
+
 export function validateStep(step, formState) {
   switch (step) {
     case 0: // Basics + Guests
@@ -7,11 +9,11 @@ export function validateStep(step, formState) {
       if (!/^\+?[0-9\s-]{8,15}$/.test(formState.phone || '')) {
         return 'Please enter a valid phone number.';
       }
-      if (!formState.eventDate) {
-        return 'Please add your event date.';
-      }
       if (!formState.eventType) {
         return 'Please select an event type.';
+      }
+      if (!isValidEventDate(formState.eventDate)) {
+        return 'Please add your event date in dd-mm-yyyy format.';
       }
       if (!Number.isFinite(Number(formState.guests)) || Number(formState.guests) < 20) {
         return 'Please enter expected guests (minimum 20).';

@@ -5,6 +5,7 @@ import { $, formatPackageLabel } from './utils/helpers.js';
 import { clearLeadDraft, loadLeadDraft, saveLeadDraft } from './services/store.js';
 import { getMenuItems } from './data/menus.js';
 import { createLeadPublic } from './api.js';
+import { isValidEventDate, normalizeEventDate } from './utils/date.js';
 
 const STEP_LABELS = ['Basics', 'Package', 'Menu', 'Review'];
 const BASICS_ORDER = ['name', 'phone', 'eventType', 'eventDate', 'guests', 'message'];
@@ -47,7 +48,7 @@ export function initWizard() {
       case 'eventType':
         return Boolean(value);
       case 'eventDate':
-        return Boolean(value);
+        return isValidEventDate(value);
       case 'guests':
         return Number.isFinite(Number(value)) && Number(value) >= 20;
       case 'message':
@@ -176,7 +177,8 @@ export function initWizard() {
   }
 
   function updateField(field, value) {
-    state = saveLeadDraft({ [field]: value });
+    const nextValue = field === 'eventDate' ? normalizeEventDate(value) || value : value;
+    state = saveLeadDraft({ [field]: nextValue });
     setError('');
   }
 

@@ -1,11 +1,63 @@
 import { EVENT_TYPES, PACKAGE_OPTIONS } from '../data/packages.js';
 import { createElement, formatPackageLabel } from '../utils/helpers.js';
 import { getMenuItems } from '../data/menus.js';
+import { normalizeEventDate, toPickerDateValue } from '../utils/date.js';
 
 function inputGroup(labelText, field) {
   const label = createElement('label', '', labelText);
   label.append(field);
   return label;
+}
+
+function createEventDateInput(value, placeholder) {
+  const wrap = createElement('div', 'date-input-wrap');
+  const field = createElement('input');
+  field.type = 'text';
+  field.dataset.field = 'eventDate';
+  field.placeholder = placeholder;
+  field.inputMode = 'numeric';
+  field.autocomplete = 'off';
+  field.maxLength = 10;
+  field.value = normalizeEventDate(value) || '';
+
+  const picker = createElement('input', 'date-input-native');
+  picker.type = 'date';
+  picker.tabIndex = -1;
+  picker.setAttribute('aria-hidden', 'true');
+  picker.value = toPickerDateValue(value);
+
+  const pickerButton = createElement('button', 'btn btn--secondary btn--compact date-input-trigger', 'Pick date');
+  pickerButton.type = 'button';
+
+  const syncFromPicker = () => {
+    const formatted = normalizeEventDate(picker.value);
+    field.value = formatted;
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    field.dispatchEvent(new Event('change', { bubbles: true }));
+  };
+
+  const syncPickerFromField = () => {
+    const formatted = normalizeEventDate(field.value);
+    field.value = formatted || field.value.trim();
+    picker.value = toPickerDateValue(formatted);
+  };
+
+  const openPicker = () => {
+    if (typeof picker.showPicker === 'function') {
+      picker.showPicker();
+      return;
+    }
+    picker.focus();
+    picker.click();
+  };
+
+  picker.addEventListener('change', syncFromPicker);
+  field.addEventListener('blur', syncPickerFromField);
+  pickerButton.addEventListener('click', openPicker);
+  field.addEventListener('click', openPicker);
+
+  wrap.append(field, pickerButton, picker);
+  return wrap;
 }
 
 export function renderStepper(stepperRoot, activeStep, steps) {
@@ -77,25 +129,7 @@ if (step === 0) {
         field.min = '20';
         field.step = '1';
       } else if (key === 'eventDate') {
-        field.type = 'date';
-        field.style.width = '100%';
-        field.style.padding = '12px 16px';
-        field.style.fontSize = '16px';
-        field.style.border = '1px solid #ccc';
-        field.style.borderRadius = '4px';
-        field.dataset.field = key;
-        if (state[key]) {
-          const parts = state[key].split('-');
-          if (parts.length === 3) {
-            field.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-          }
-        }
-        field.addEventListener('change', (e) => {
-          if (e.target.value) {
-            const [y, m, d] = e.target.value.split('-');
-            e.target.value = `${d}-${m}-${y}`;
-          }
-        });
+        field = createEventDateInput(state[key], 'dd-mm-yyyy');
       } else if (key === 'message') {
         field = createElement('textarea');
         field.dataset.field = key;

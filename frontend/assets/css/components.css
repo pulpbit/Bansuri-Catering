@@ -340,6 +340,12 @@
     width: 100%;
     justify-content: center;
   }
+  .date-input-wrap {
+    grid-template-columns: 1fr;
+  }
+  .date-input-trigger {
+    width: 100%;
+  }
 }
 
 .planner__intro.card {
@@ -464,6 +470,26 @@
 .chat-input {
   display: grid;
   gap: 0.75rem;
+}
+
+.date-input-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  position: relative;
+}
+
+.date-input-trigger {
+  white-space: nowrap;
+}
+
+.date-input-native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .chat-controls {
