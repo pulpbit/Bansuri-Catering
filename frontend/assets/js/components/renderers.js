@@ -89,24 +89,29 @@ if (step === 0) {
         const dateInput = createElement('input');
         dateInput.type = 'date';
         dateInput.style.position = 'absolute';
+        dateInput.style.width = '1px';
+        dateInput.style.height = '1px';
         dateInput.style.opacity = '0';
-        dateInput.style.height = '100%';
-        dateInput.style.width = '100%';
-        dateInput.style.top = '0';
-        dateInput.style.left = '0';
-        dateInput.style.cursor = 'pointer';
+        dateInput.style.pointerEvents = 'none';
         inputWrap.style.position = 'relative';
         inputWrap.append(dateInput);
-        field.addEventListener('click', (e) => {
-          e.stopPropagation();
+        const calBtn = createElement('button');
+        calBtn.type = 'button';
+        calBtn.textContent = '📅';
+        calBtn.style.position = 'absolute';
+        calBtn.style.right = '8px';
+        calBtn.style.top = '50%';
+        calBtn.style.transform = 'translateY(-50%)';
+        calBtn.style.border = 'none';
+        calBtn.style.background = 'transparent';
+        calBtn.style.cursor = 'pointer';
+        calBtn.style.fontSize = '18px';
+        calBtn.addEventListener('click', (e) => {
+          e.preventDefault();
           dateInput.showPicker?.();
         });
-        field.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            dateInput.showPicker?.();
-          }
-        });
+        field.style.paddingRight = '36px';
+        field.parentElement?.appendChild(calBtn);
         dateInput.addEventListener('input', (e) => {
           if (e.target.value) {
             const [y, m, d] = e.target.value.split('-');
