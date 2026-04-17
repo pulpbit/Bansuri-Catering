@@ -144,5 +144,13 @@ body::before {
   
   .card {
     padding: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .nav-wrap {
+    justify-content: center;
+  }
+  .brand__logo {
+    height: 3rem;
   }
 }

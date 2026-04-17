@@ -659,20 +659,68 @@ select:focus {
 
 .menu-suggestion-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.2rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .menu-suggestion-card {
-  background: #fff;
-  border: 1px solid var(--border);
+  background: linear-gradient(145deg, #ffffff, #faf7fc);
+  border: 1px solid rgba(214, 41, 118, 0.12);
   border-radius: var(--radius-md);
-  padding: 1.4rem;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(214, 41, 118, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-suggestion-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(214, 41, 118, 0.08);
+  border-color: rgba(214, 41, 118, 0.25);
+}
+
+.menu-suggestion-heading {
+  font-size: 1.4rem;
+  font-weight: 850;
+  color: #1a1a2e;
+  margin: 1.5rem 0 1rem;
+}
+
+.menu-suggestion__title {
+  margin: 0 0 0.8rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  border-bottom: 1.5px dashed rgba(214, 41, 118, 0.15);
+  padding-bottom: 0.5rem;
+}
+
+.menu-suggestion__description {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: -0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.menu-suggestion-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style: none;
 }
 
 .menu-suggestion-list li {
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
   font-size: 0.92rem;
+  position: relative;
+  line-height: 1.4;
+  color: #4a4d61;
+}
+
+.menu-suggestion-list li::before {
+  content: "•";
+  color: var(--primary);
+  font-weight: bold;
+  position: absolute;
+  left: -1rem;
 }
 
 .review-list {
