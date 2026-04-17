@@ -86,6 +86,34 @@ if (step === 0) {
           if (val.length > 5) val = val.slice(0, 5) + '-' + val.slice(5);
           e.target.value = val.slice(0, 10);
         });
+        const dateInput = createElement('input');
+        dateInput.type = 'date';
+        dateInput.style.position = 'absolute';
+        dateInput.style.opacity = '0';
+        dateInput.style.pointerEvents = 'none';
+        dateInput.style.height = '1px';
+        dateInput.style.width = '1px';
+        inputWrap.style.position = 'relative';
+        inputWrap.append(dateInput);
+        field.addEventListener('click', () => dateInput.showPicker?.());
+        field.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            dateInput.showPicker?.();
+          }
+        });
+        dateInput.addEventListener('input', (e) => {
+          if (e.target.value) {
+            const [y, m, d] = e.target.value.split('-');
+            field.value = `${d}-${m}-${y}`;
+          }
+        });
+        if (state[key]) {
+          const parts = state[key].split('-');
+          if (parts.length === 3) {
+            dateInput.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
+          }
+        }
       } else if (key === 'message') {
         field = createElement('textarea');
         field.dataset.field = key;
