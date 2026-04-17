@@ -80,54 +80,24 @@ if (step === 0) {
         field.type = 'text';
         field.placeholder = 'dd-mm-yyyy';
         field.maxLength = 10;
-        field.readOnly = true;
-        const dateInput = createElement('input');
-        dateInput.type = 'date';
-        dateInput.style.position = 'absolute';
-        dateInput.style.width = '1px';
-        dateInput.style.height = '1px';
-        dateInput.style.opacity = '0';
-        dateInput.style.pointerEvents = 'none';
-        inputWrap.style.position = 'relative';
-        inputWrap.append(dateInput);
-        const calBtn = createElement('button');
-        calBtn.type = 'button';
-        calBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
+        const calBtn = createElement('span');
+        calBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
         calBtn.style.position = 'absolute';
-        calBtn.style.right = '8px';
+        calBtn.style.right = '10px';
         calBtn.style.top = '50%';
         calBtn.style.transform = 'translateY(-50%)';
-        calBtn.style.border = 'none';
-        calBtn.style.background = 'transparent';
         calBtn.style.cursor = 'pointer';
-        calBtn.style.padding = '0';
-        calBtn.style.display = 'flex';
-        calBtn.style.alignItems = 'center';
-        calBtn.style.color = '#666';
-        calBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          dateInput.click();
-        });
+        calBtn.style.color = '#888';
+        calBtn.style.pointerEvents = 'none';
+        inputWrap.style.position = 'relative';
+        inputWrap.appendChild(calBtn);
         field.style.paddingRight = '36px';
-        field.style.cursor = 'pointer';
-        field.parentElement?.appendChild(calBtn);
-        field.addEventListener('click', () => dateInput.click());
-        dateInput.addEventListener('input', (e) => {
-          if (e.target.value) {
-            const [y, m, d] = e.target.value.split('-');
-            field.value = `${d}-${m}-${y}`;
-            field.dispatchEvent(new Event('input', { bubbles: true }));
-            field.dispatchEvent(new Event('change', { bubbles: true }));
-          }
+        field.addEventListener('focus', () => {
+          calBtn.style.display = 'none';
         });
-        if (state[key]) {
-          const parts = state[key].split('-');
-          if (parts.length === 3) {
-            dateInput.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-            field.value = state[key];
-          }
-        }
+        field.addEventListener('blur', () => {
+          setTimeout(() => calBtn.style.display = 'block', 200);
+        });
       } else if (key === 'message') {
         field = createElement('textarea');
         field.dataset.field = key;
