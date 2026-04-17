@@ -144,6 +144,7 @@ body::before {
   
   .card {
     padding: 2.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -151,6 +152,8 @@ body::before {
     justify-content: center;
   }
   .brand__logo {
-    height: 3rem;
+    height: 2.5rem;
+    max-width: 100%;
+    object-fit: contain;
   }
 }
