@@ -1,4 +1,4 @@
-import { login, logout, leadsApi, packagesApi, menuApi, getToken } from './api.js';
+import { login, logout, leadsApi, packagesApi, menuApi, getToken, changePassword, forgotPassword, resetPassword } from './api.js';
 import { $ } from './utils/helpers.js';
 
 let currentQuoteLead = null;
@@ -528,6 +528,54 @@ export function initDashboard(options = {}) {
     }
   });
 
+  const forgotLink = document.querySelectorAll('#forgot-password-link');
+  forgotLink.forEach((link) => {
+    link.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const email = $('#login-email').value;
+      if (!email) {
+        loginError.textContent = 'Please enter your email above first.';
+        return;
+      }
+      loginError.textContent = 'Sending reset link...';
+      try {
+        const urlBase = window.location.origin + window.location.pathname;
+        await forgotPassword(email, urlBase);
+        loginError.textContent = 'Reset link sent! Please check your email.';
+        loginError.style.color = 'green';
+      } catch (err) {
+        loginError.textContent = 'Failed to send reset link.';
+        loginError.style.color = 'red';
+      }
+    });
+  });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const resetToken = urlParams.get('reset_token');
+  if (resetToken) {
+    const resetModal = $('#reset-modal');
+    resetModal?.classList.add('is-open');
+    $('#reset-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newPwd = $('#reset-new-password').value;
+      const msg = $('#reset-msg');
+      msg.textContent = 'Updating password...';
+      try {
+        await resetPassword(resetToken, newPwd);
+        msg.textContent = 'Password reset successfully! You can now log in.';
+        msg.style.color = 'green';
+        setTimeout(() => {
+          resetModal.classList.remove('is-open');
+          window.history.replaceState({}, document.title, window.location.pathname);
+          openModal(); // show login modal
+        }, 2000);
+      } catch (err) {
+        msg.textContent = err.message || 'Failed to reset password.';
+        msg.style.color = 'red';
+      }
+    });
+  }
+
   $('[data-logout]')?.addEventListener('click', () => {
     logout();
     dashboard?.classList.add('is-hidden');
@@ -543,6 +591,27 @@ export function initDashboard(options = {}) {
       });
     });
   });
+
+  const changePwdForm = document.getElementById('change-password-form');
+  if (changePwdForm) {
+    changePwdForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const oldPwd = document.getElementById('old-password').value;
+      const newPwd = document.getElementById('new-password').value;
+      const msg = document.getElementById('password-msg');
+      msg.textContent = 'Updating...';
+      msg.style.color = 'blue';
+      try {
+        await changePassword(oldPwd, newPwd);
+        msg.textContent = 'Password updated successfully!';
+        msg.style.color = 'green';
+        changePwdForm.reset();
+      } catch (err) {
+        msg.textContent = err.message || 'Failed to update password.';
+        msg.style.color = 'red';
+      }
+    });
+  }
 
   async function loadLeads() {
     try {

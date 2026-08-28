@@ -99,12 +99,34 @@
             <input type="email" id="login-email" value="bansuricatering@gmail.com" required />
           </label>
           <label>Password
-            <input type="password" id="login-password" value="Bansuri@2026" required />
+            <input type="password" id="login-password" value="123456" required />
           </label>
           <p id="login-error" class="error-text"></p>
+          <div style="margin-bottom: 15px; text-align: right;">
+            <a href="#" id="forgot-password-link" style="font-size: 0.9rem;">Forgot Password?</a>
+          </div>
           <div class="modal__actions">
             <button class="btn btn--ghost" type="button" data-close-login>Cancel</button>
             <button class="btn btn--primary" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div class="modal" id="reset-modal" aria-hidden="true">
+      <div class="modal__backdrop"></div>
+      <div class="modal__card">
+        <header class="modal__head">
+          <h3>Reset Password</h3>
+        </header>
+        <form id="reset-form">
+          <label>New Password
+            <input type="password" id="reset-new-password" required />
+          </label>
+          <p id="reset-msg" class="error-text"></p>
+          <div class="modal__actions">
+            <button class="btn btn--primary" type="submit">Update Password</button>
           </div>
         </form>
       </div>

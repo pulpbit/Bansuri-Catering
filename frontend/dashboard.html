@@ -38,6 +38,7 @@
         </div>
         <div class="dashboard__tabs">
           <button class="dash-tab is-active" data-dash-tab="leads">Leads</button>
+          <button class="dash-tab" data-dash-tab="settings">Settings</button>
         </div>
 
         <div class="dashboard__panel" data-dash-panel="leads">
@@ -57,6 +58,25 @@
           <div id="leads-table" class="dash-table"></div>
         </div>
 
+        <div class="dashboard__panel is-hidden" data-dash-panel="settings">
+          <div class="dash-panel__head">
+            <h3>Settings</h3>
+          </div>
+          <div class="card" style="max-width: 400px; padding: 20px; background: white; border-radius: 8px;">
+            <h4 style="margin-top: 0;">Change Password</h4>
+            <form id="change-password-form">
+              <label>Old Password
+                <input type="password" id="old-password" required />
+              </label>
+              <label>New Password
+                <input type="password" id="new-password" required />
+              </label>
+              <p id="password-msg"></p>
+              <button class="btn btn--primary" type="submit" style="margin-top: 10px;">Update Password</button>
+            </form>
+          </div>
+        </div>
+
       </section>
     </main>
 
@@ -71,12 +91,34 @@
             <input type="email" id="login-email" value="bansuricatering@gmail.com" required />
           </label>
           <label>Password
-            <input type="password" id="login-password" value="Bansuri@2026" required />
+            <input type="password" id="login-password" value="123456" required />
           </label>
           <p id="login-error" class="error-text"></p>
+          <div style="margin-bottom: 15px; text-align: right;">
+            <a href="#" id="forgot-password-link" style="font-size: 0.9rem;">Forgot Password?</a>
+          </div>
           <div class="modal__actions">
             <button class="btn btn--ghost" type="button" onclick="window.location.href='/'">Cancel</button>
             <button class="btn btn--primary" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div class="modal" id="reset-modal" aria-hidden="true">
+      <div class="modal__backdrop"></div>
+      <div class="modal__card">
+        <header class="modal__head">
+          <h3>Reset Password</h3>
+        </header>
+        <form id="reset-form">
+          <label>New Password
+            <input type="password" id="reset-new-password" required />
+          </label>
+          <p id="reset-msg" class="error-text"></p>
+          <div class="modal__actions">
+            <button class="btn btn--primary" type="submit">Update Password</button>
           </div>
         </form>
       </div>

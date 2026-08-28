@@ -1,3 +1,8 @@
 Backend/node_modules/
 Backend/.wrangler/
 Backend/package-lock.json
+graphify-out/
+.dev.vars
+*.dev.vars
+Backend/.dev.vars
+
